@@ -37,7 +37,7 @@
     xkbVariant = "";
     enable = true;
   };
-  #test
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jason = {
     isNormalUser = true;
@@ -63,10 +63,22 @@
   qt5ct
   adwaita-qt
   lxappearance
+  nextcloud-client
+  feh
+  libsForQt5.qtkeychain
+  pavucontrol
+  telegram-desktop
+  neofetch
+  cmatrix
   ];
 
+  # Keyring settings
+  services.gnome.gnome-keyring.enable = true;
+  
   # Thunar settings
   services.gvfs.enable = true;
+
+  programs.file-roller.enable = true;
 
   programs.thunar.enable = true;
 
@@ -97,6 +109,8 @@
   # picom settings
   services.picom = {
   	enable = true;
+  	package = pkgs.picom-pijulius;
+  	# extraArgs = ["--animations"];
   	activeOpacity = 1;
   	inactiveOpacity = 1;
   	backend = "glx";
