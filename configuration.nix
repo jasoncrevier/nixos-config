@@ -109,8 +109,6 @@
   # picom settings
   services.picom = {
   	enable = true;
-  	package = pkgs.picom-pijulius;
-  	# extraArgs = ["--animations"];
   	activeOpacity = 1;
   	inactiveOpacity = 1;
   	backend = "glx";
