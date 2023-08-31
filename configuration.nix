@@ -37,7 +37,7 @@
     xkbVariant = "";
     enable = true;
   };
-
+  #test
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jason = {
     isNormalUser = true;
