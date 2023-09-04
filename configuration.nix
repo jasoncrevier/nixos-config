@@ -54,8 +54,8 @@
   environment.systemPackages = with pkgs; [
   micro
   librewolf
-  alacritty
-  polybar
+  #alacritty
+  #polybar
   killall
   fd
   vscode
@@ -66,55 +66,63 @@
   nextcloud-client
   feh
   libsForQt5.qtkeychain
-  pavucontrol
+  #pavucontrol
   telegram-desktop
   neofetch
   cmatrix
+  papirus-icon-theme
+  obsidian
+  catppuccin-kde
+  ];
+
+  fonts.fonts = with pkgs; [
+    cantarell-fonts
   ];
 
   # Keyring settings
   services.gnome.gnome-keyring.enable = true;
   
-  # Thunar settings
-  services.gvfs.enable = true;
-
-  programs.file-roller.enable = true;
-
-  programs.thunar.enable = true;
-
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
+  ## Thunar settings
+  #services.gvfs.enable = true;
+  #programs.file-roller.enable = true;
+  #programs.thunar.enable = true;
+  #programs.thunar.plugins = with pkgs.xfce; [
+  #  thunar-archive-plugin
+  #  thunar-volman
+  #];
   
-  services.xserver.displayManager = {
-    defaultSession = "none+i3";
-  };
+  #services.xserver.displayManager = {
+  #  defaultSession = "none+i3";
+  #};
 
   # fish settings
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 
-  # i3 settings
-  services.xserver.windowManager.i3 = {
-    enable = true;
-    extraPackages = with pkgs; [
-      rofi
-      i3status
-      i3lock
-      i3blocks
-    ];
-  };
+  # KDE Plasma settings
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
-  # picom settings
-  services.picom = {
-  	enable = true;
-  	activeOpacity = 1;
-  	inactiveOpacity = 1;
-  	backend = "glx";
-  	fade = true;
-  	fadeDelta = 5;
-  };
+  ## i3 settings
+  #services.xserver.windowManager.i3 = {
+  #  enable = true;
+  #  extraPackages = with pkgs; [
+  #    rofi
+  #    i3status
+  #    i3lock
+  #    i3blocks
+  #  ];
+  #};
+
+  ## picom settings
+  #services.picom = {
+  #	enable = true;
+  #	activeOpacity = 1;
+  #	inactiveOpacity = 1;
+  #	backend = "glx";
+  #	fade = true;
+  #	fadeDelta = 5;
+  #};
 
   # Enable OpenGL
   hardware.opengl = {
@@ -157,8 +165,8 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
