@@ -1,1 +1,7 @@
 @theme "~/.config/rofi/catppuccin-mocha.rasi"
+
+configuration {
+ icon-theme: "Papirus";
+ show-icons: true;
+ combi-hide-mode-prefix: true;
+}
