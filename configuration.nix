@@ -75,9 +75,19 @@
   catppuccin-kde
   ];
 
+  nixpkgs.config = {
+  	catppuccin-kde = {
+  	  flavour = "mocha";
+  	  accents = "blue";	
+  	};
+  };
+
   fonts.fonts = with pkgs; [
     cantarell-fonts
   ];
+  # Extra programs
+  programs.gnome-disks.enable = true;
+  services.udisks2.enable = true;
 
   # Keyring settings
   services.gnome.gnome-keyring.enable = true;
