@@ -1,21 +1,18 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ # Include the results of the hardware scan
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  #~Bootloader~
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  #~Networking~
+  networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -25,20 +22,32 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  #~Time zone~
   time.timeZone = "America/Toronto";
 
-  # Select internationalisation properties.
+  #~Locale~
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  # Configure keymap in X11
+  #~Keymap~
   services.xserver = {
     layout = "us";
     xkbVariant = "";
     enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  #~Sound~
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+  };
+
+  #~Users~
+  # Don't forget to set a password with ‘passwd’.
   users.users.jason = {
     isNormalUser = true;
     description = "Jason Crevier";
@@ -46,7 +55,7 @@
     packages = with pkgs; [];
   };
 
-  # Allow unfree packages
+  #~Unfree packages~
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
@@ -54,33 +63,25 @@
   environment.systemPackages = with pkgs; [
   micro
   librewolf
-  #alacritty
-  #polybar
   killall
   fd
   vscode
   git
   qt5ct
   adwaita-qt
-  lxappearance
   nextcloud-client
   feh
   libsForQt5.qtkeychain
-  #pavucontrol
-  telegram-desktop
   neofetch
   cmatrix
-  papirus-icon-theme
+  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
+  libappindicator-gtk3
   obsidian
-  catppuccin-kde
+  # Chat
+  element-desktop
+  telegram-desktop
+  discord
   ];
-
-  nixpkgs.config = {
-  	catppuccin-kde = {
-  	  flavour = "mocha";
-  	  accents = "blue";	
-  	};
-  };
 
   fonts.fonts = with pkgs; [
     cantarell-fonts
@@ -90,20 +91,7 @@
   services.udisks2.enable = true;
 
   # Keyring settings
-  services.gnome.gnome-keyring.enable = true;
-  
-  ## Thunar settings
-  #services.gvfs.enable = true;
-  #programs.file-roller.enable = true;
-  #programs.thunar.enable = true;
-  #programs.thunar.plugins = with pkgs.xfce; [
-  #  thunar-archive-plugin
-  #  thunar-volman
-  #];
-  
-  #services.xserver.displayManager = {
-  #  defaultSession = "none+i3";
-  #};
+  #services.gnome.gnome-keyring.enable = true;
 
   # fish settings
   programs.fish.enable = true;
@@ -112,6 +100,12 @@
   # KDE Plasma settings
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+  # Exclude some defaut KDE packages
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    oxygen
+    khelpcenter
+  ];
 
   ## i3 settings
   #services.xserver.windowManager.i3 = {
@@ -171,17 +165,6 @@
     forceFullCompositionPipeline = true;
   };
 
-  # Pipewire settings
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    #alsa.enable = true;
-    #alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
-  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
