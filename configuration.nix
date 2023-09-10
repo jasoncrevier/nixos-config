@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  #~Hardware~
   imports =
     [ # Include the results of the hardware scan
       ./hardware-configuration.nix
@@ -15,20 +16,14 @@
   networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
-  #~Time zone~
+  #~Localization~
   time.timeZone = "America/Toronto";
-
-  #~Locale~
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  #~Keymap~
+  #~Keymapping~
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -46,88 +41,7 @@
     #jack.enable = true;
   };
 
-  #~Users~
-  # Don't forget to set a password with ‘passwd’.
-  users.users.jason = {
-    isNormalUser = true;
-    description = "Jason Crevier";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
-  };
-
-  #~Unfree packages~
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  micro
-  librewolf
-  killall
-  fd
-  vscode
-  git
-  qt5ct
-  adwaita-qt
-  nextcloud-client
-  feh
-  libsForQt5.qtkeychain
-  neofetch
-  cmatrix
-  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
-  libappindicator-gtk3
-  obsidian
-  # Chat
-  element-desktop
-  telegram-desktop
-  discord
-  ];
-
-  fonts.fonts = with pkgs; [
-    cantarell-fonts
-  ];
-  # Extra programs
-  programs.gnome-disks.enable = true;
-  services.udisks2.enable = true;
-
-  # Keyring settings
-  #services.gnome.gnome-keyring.enable = true;
-
-  # fish settings
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
-
-  # KDE Plasma settings
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  # Exclude some defaut KDE packages
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    oxygen
-    khelpcenter
-  ];
-
-  ## i3 settings
-  #services.xserver.windowManager.i3 = {
-  #  enable = true;
-  #  extraPackages = with pkgs; [
-  #    rofi
-  #    i3status
-  #    i3lock
-  #    i3blocks
-  #  ];
-  #};
-
-  ## picom settings
-  #services.picom = {
-  #	enable = true;
-  #	activeOpacity = 1;
-  #	inactiveOpacity = 1;
-  #	backend = "glx";
-  #	fade = true;
-  #	fadeDelta = 5;
-  #};
-
+  #~Graphics~
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
@@ -139,13 +53,12 @@
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
-
     # Modesetting is needed most of the time
     modesetting.enable = true;
 
-	# Enable power management (do not disable this unless you have a reason to).
-	# Likely to cause problems on laptops and with screen tearing if disabled.
-	powerManagement.enable = true;
+	  # Enable power management (do not disable this unless you have a reason to).
+	  # Likely to cause problems on laptops and with screen tearing if disabled.
+	  powerManagement.enable = true;
 
     # Use the NVidia open source kernel module (which isn't “nouveau”).
     # Support is limited to the Turing and later architectures. Full list of 
@@ -155,7 +68,7 @@
     open = false;
 
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+	  # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
@@ -165,24 +78,71 @@
     forceFullCompositionPipeline = true;
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  #~Users~
+  # Don't forget to set a password with ‘passwd’.
+  users.users.jason = {
+    isNormalUser = true;
+    description = "Jason Crevier";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [];
+  };
 
-  # List services that you want to enable:
+  #~Packages~
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+  # Development
+  micro
+  vscode
+  git
+  # Web
+  librewolf
+  nextcloud-client
+  # Theme
+  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
+  qt5ct
+  adwaita-qt
+  # Chat
+  element-desktop
+  telegram-desktop
+  discord
+  # Misc
+  killall
+  fd
+  feh
+  libsForQt5.qtkeychain
+  neofetch
+  cmatrix
+  obsidian
+  kcalc
+  ];
+
+  # Extra programs
+  programs.gnome-disks.enable = true;
+  services.udisks2.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
+  # fish settings
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+
+  # KDE Plasma settings
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+  # Exclude some default KDE packages
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    oxygen
+    khelpcenter
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
