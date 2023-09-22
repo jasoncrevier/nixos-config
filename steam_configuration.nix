@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  steam_autostart = (pkgs.makeAutostartItem { name = "steam"; package = steam; });
-
-in
 {
   #~Hardware~
   imports =
@@ -34,11 +30,15 @@ in
   };
   
   #~Sound~
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  hardware.pulseaudio.extraModules = [ pkgs.pulseaudio-modules-bt ];
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    #alsa.enable = true;
+    #alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+  };
   
   #~Graphics~
   # Enable OpenGL
@@ -74,12 +74,12 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Fix screen tearing
-    # forceFullCompositionPipeline = true;
+    forceFullCompositionPipeline = true;
   };
   
   #~Users~
   # Don't forget to set a password with ‘passwd’.
-  users.users.jason = {
+  users.users.steam = {
     isNormalUser = true;
     description = "steam";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -96,16 +96,16 @@ in
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+  programs.gnome-disks.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   git
   micro
-  steam_autostart
   ];
   
-  service.getty.autologinUser = "steam";
+  services.getty.autologinUser = "steam";
 
   # Fish settings
   programs.fish.enable = true;
@@ -116,12 +116,6 @@ in
 
   # Bluetooth
   hardware.bluetooth.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm = {
