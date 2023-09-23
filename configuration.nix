@@ -15,6 +15,7 @@
   #~Networking~
   networking.hostName = "nixos"; # Define your hostname
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  services.tailscale.enable = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -95,30 +96,38 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+  # Audio
+  easyeffects
+  reaper
+  # Chat
+  discord
+  element-desktop
+  telegram-desktop
   # Development
+  git
   micro
   vscode
-  git
+  # Theme
+  adwaita-qt
+  catppuccin-cursors.mochaDark
+  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
+  qt5ct
   # Web
   librewolf
   nextcloud-client
-  # Theme
-  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
-  qt5ct
-  adwaita-qt
-  # Chat
-  element-desktop
-  telegram-desktop
-  discord
   # Misc
-  killall
+  cmatrix
+  deluge
   fd
   feh
+  google-fonts
+  inkscape
+  kcalc
+  kcolorchooser
+  killall
   libsForQt5.qtkeychain
   neofetch
-  cmatrix
   obsidian
-  kcalc
   ];
 
   # Extra programs
@@ -130,7 +139,7 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
-  # fish settings
+  # Fish settings
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
 
