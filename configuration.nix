@@ -128,6 +128,7 @@
   libsForQt5.qtkeychain
   neofetch
   obsidian
+  spotify
   ];
 
   # Extra programs
