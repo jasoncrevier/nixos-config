@@ -76,7 +76,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     # Fix screen tearing
-    forceFullCompositionPipeline = true;
+    #forceFullCompositionPipeline = true;
   };
 
   #~Users~
@@ -134,11 +134,6 @@
   # Extra programs
   programs.gnome-disks.enable = true;
   services.udisks2.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
 
   # Fish settings
   programs.fish.enable = true;
