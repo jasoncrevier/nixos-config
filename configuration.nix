@@ -5,6 +5,7 @@
   imports =
     [ # Include the results of the hardware scan
       ./hardware-configuration.nix
+      <musnix>
     ];
 
   #~Bootloader~
@@ -84,7 +85,7 @@
   users.users.jason = {
     isNormalUser = true;
     description = "Jason Crevier";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
     packages = with pkgs; [];
   };
 
@@ -99,6 +100,8 @@
   # Audio
   easyeffects
   reaper
+  yabridge
+  yabridgectl
   # Chat
   discord
   element-desktop
@@ -129,11 +132,15 @@
   neofetch
   obsidian
   spotify
+  wineWowPackages.staging
+  winetricks
   ];
 
   # Extra programs
   programs.gnome-disks.enable = true;
   services.udisks2.enable = true;
+  programs.kdeconnect.enable = true;
+  musnix.enable = true;
 
   # Fish settings
   programs.fish.enable = true;
