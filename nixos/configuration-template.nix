@@ -8,19 +8,23 @@
       # Add any of the nix files from this repo you want to import
       # here as well. For example, if you want to add steam to
       # this system, uncomment:
-      ./steam.nix
-      ./gnome.nix
-      ./tailscale.nix
+      #./steam.nix
     ];
 
   #~Bootloader~
-
+  # You likely want to keep whatever the installer
+  # set here. This is where you can switch bootloaders
+  # later if you need to.
+  # Grub:
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.device = "/dev/nvme0n1";
+  #boot.loader.grub.useOSProber = true;
   # Systemd:
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
 
   #~Networking~
-  networking.hostName = "thinkpad"; # Define your hostname -- this is important for flakes
+  networking.hostName = "nixos"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -38,7 +42,6 @@
   };
 
   #~Sound~
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

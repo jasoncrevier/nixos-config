@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
   # Audio
   reaper
+  mixxx
   yabridge
   yabridgectl
   # Chat

@@ -16,6 +16,7 @@
     nixosConfigurations = {
       thinkpad = nixpkgs.lib.nixosSystem {
         inherit system;
+        inherit pkgs;
         modules = [
           ./nixos/configuration.nix
         ];
@@ -23,13 +24,13 @@
     };
 
     homeConfigurations = {
-        jason = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            ./home-manager/home.nix
-          ];
-        };
+      jason = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./home-manager/home.nix
+        ];
       };
+    };
   };
 }
 
