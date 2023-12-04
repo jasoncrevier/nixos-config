@@ -21,6 +21,13 @@
           ./nixos/configuration.nix
         ];
       };
+      office = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit pkgs;
+        modules = [
+          ./nixos/configuration.nix
+        ];
+      };
     };
 
     homeConfigurations = {
