@@ -8,4 +8,7 @@
   environment.systemPackages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
   ];
+  environment.gnome.excludePackages = (with pkgs; [
+    kgx
+  ]);
 }

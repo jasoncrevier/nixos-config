@@ -4,23 +4,19 @@
   imports =
     [ # Include the results of the hardware scan
       ./hardware-configuration.nix
-
-      # Add any of the nix files from this repo you want to import
-      # here as well. For example, if you want to add steam to
-      # this system, uncomment:
       ./steam.nix
-      ./gnome.nix
+      ./plasma.nix
+      ./nvidia.nix
       ./tailscale.nix
     ];
 
   #~Bootloader~
-
   # Systemd:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   #~Networking~
-  networking.hostName = "thinkpad"; # Define your hostname -- this is important for flakes
+  networking.hostName = "office"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -38,7 +34,6 @@
   };
 
   #~Sound~
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -62,10 +57,13 @@
   users.users.jason = {
     isNormalUser = true;
     description = "Jason Crevier";
-    # Use this to add the user to different groups as needed.
-    # You probably want to keep networkmanager and wheel
-    extraGroups = [ "networkmanager" "wheel" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
+  
+  # Enable basic applications
+  environment.systemPackages = with pkgs; [
+    git
+  ];  
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
