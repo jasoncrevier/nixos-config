@@ -3,7 +3,7 @@
 {
   imports =
     [ # Include the results of the hardware scan
-      ./hardware-configuration.nix
+      ./thinkpad-hardware-configuration.nix
 
       # Add any of the nix files from this repo you want to import
       # here as well. For example, if you want to add steam to

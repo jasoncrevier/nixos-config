@@ -3,7 +3,7 @@
 {
   imports =
     [ # Include the results of the hardware scan
-      ./hardware-configuration.nix
+      ./office-hardware-configuration.nix
       ./steam.nix
       ./plasma.nix
       ./nvidia.nix

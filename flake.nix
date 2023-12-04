@@ -18,14 +18,14 @@
         inherit system;
         inherit pkgs;
         modules = [
-          ./nixos/configuration.nix
+          ./nixos/thinkpad-configuration.nix
         ];
       };
       office = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
         modules = [
-          ./nixos/configuration.nix
+          ./nixos/office-configuration.nix
         ];
       };
     };
