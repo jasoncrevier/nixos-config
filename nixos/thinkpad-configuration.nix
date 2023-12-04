@@ -62,10 +62,18 @@
   users.users.jason = {
     isNormalUser = true;
     description = "Jason Crevier";
+    shell = pkgs.fish;
     # Use this to add the user to different groups as needed.
     # You probably want to keep networkmanager and wheel
     extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
+
+  # Enable basic applications
+  environment.systemPackages = with pkgs; [
+    git
+  ];
+
+  programs.fish.enable = true;
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

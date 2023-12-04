@@ -63,7 +63,9 @@
   # Enable basic applications
   environment.systemPackages = with pkgs; [
     git
-  ];  
+  ];
+
+  programs.fish.enable = true;
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

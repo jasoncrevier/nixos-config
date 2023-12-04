@@ -90,6 +90,13 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
+  };
+
   # Don't change this (I think)
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 }
