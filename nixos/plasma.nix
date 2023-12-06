@@ -14,4 +14,5 @@
 
   # Extra programs
   programs.gnome-disks.enable = true; # I just like gnome-disks
+  programs.kdeconnect.enable = true;
 }
