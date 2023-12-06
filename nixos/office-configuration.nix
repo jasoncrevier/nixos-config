@@ -55,6 +55,7 @@
   #~Users~
   # Don't forget to set a password with ‘passwd’.
   users.users.jason = {
+    shell = pkgs.fish;
     isNormalUser = true;
     description = "Jason Crevier";
     extraGroups = [ "networkmanager" "wheel" ];
