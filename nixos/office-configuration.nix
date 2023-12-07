@@ -8,6 +8,7 @@
       ./plasma.nix
       ./nvidia.nix
       ./tailscale.nix
+      ./flatpak.nix
     ];
 
   #~Bootloader~
