@@ -38,6 +38,7 @@
   #obsidian
   spotify
   tilix
+  vlc
   wineWowPackages.staging
   winetricks
     # # Adds the 'hello' command to your environment. It prints a friendly
