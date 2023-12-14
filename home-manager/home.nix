@@ -36,6 +36,7 @@
   killall
   neofetch
   #obsidian
+  ollama
   spotify
   tilix
   vlc
