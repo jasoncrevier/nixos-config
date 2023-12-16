@@ -10,7 +10,12 @@
   outputs = { nixpkgs, home-manager,  ... }:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+    pkgs = import nixpkgs { 
+      inherit system; 
+      config.allowUnfree = true;
+      # Workaround to get Obsidian working until it's updated. Not a good idea to have this.
+      config.permittedInsecurePackages = [ "electron-25.9.0" ]; 
+    };
   in
   {
     nixosConfigurations = {
@@ -40,4 +45,3 @@
     };
   };
 }
-

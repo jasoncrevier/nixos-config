@@ -35,7 +35,7 @@
   inkscape   
   killall
   neofetch
-  #obsidian
+  obsidian
   ollama
   spotify
   tilix
