@@ -43,6 +43,21 @@
   winetricks
   ];
 
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+    '';
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      (catppuccin.catppuccin-vsc.override { accent = "teal"; })
+      bbenoist.nix
+    ];
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -74,20 +89,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-    '';
-  };
-
-  programs.vscode = {
-  enable = true;
-  extensions = with pkgs.vscode-extensions; [
-    (catppuccin.catppuccin-vsc.override { accent = "teal"; })
-  ];
-};
 
   # Don't change this (I think)
   home.stateVersion = "24.05";
