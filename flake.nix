@@ -5,13 +5,16 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin-vsc.url = "github:catppuccin/vscode";
   };
 
-  outputs = { nixpkgs, home-manager,  ... }:
+  outputs = { nixpkgs, home-manager, catppuccin-vsc, ... }:
+
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs { 
-      inherit system; 
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [catppuccin-vsc.overlays.default];
       config.allowUnfree = true;
       # Workaround to get Obsidian working until it's updated. Not a good idea to have this.
       config.permittedInsecurePackages = [ "electron-25.9.0" ]; 
