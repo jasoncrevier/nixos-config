@@ -15,6 +15,7 @@
     libsForQt5.discover
     libsForQt5.packagekit-qt
     libportal-qt5
+    krdc
   ];
   # Extra programs
   programs.gnome-disks.enable = true; # I just like gnome-disks

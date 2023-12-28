@@ -6,6 +6,7 @@
       ./office-hardware-configuration.nix
       ./steam.nix
       ./plasma.nix
+      #./gnome.nix
       ./nvidia.nix
       ./tailscale.nix
       ./flatpak.nix
@@ -35,6 +36,7 @@
   };
 
   #~Sound~
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
