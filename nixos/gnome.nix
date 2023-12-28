@@ -7,6 +7,7 @@
   services.xserver.desktopManager.gnome.enable = true;
   environment.systemPackages = with pkgs; [
     gnomeExtensions.tray-icons-reloaded
+    remmina
   ];
   environment.gnome.excludePackages = (with pkgs; [
     kgx
