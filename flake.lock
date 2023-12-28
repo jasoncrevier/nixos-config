@@ -61,6 +61,7 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "5f64a12a728902226210bf01d25ec6cbb9d9265b",
+        "rev": "5f64a12a728902226210bf01d25ec6cbb9d9265b",
         "type": "github"
       },
       "original": {
