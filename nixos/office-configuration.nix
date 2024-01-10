@@ -24,6 +24,19 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Enable firewall and open SSH port
+  networking.firewall = {
+  enable = true;
+  allowedTCPPorts = [ 80 443 22 ];
+  allowedUDPPorts = [ 80 443 22 ];
+  };
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = true;
+  };
+
   #~Localization~
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";
@@ -40,12 +53,16 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
-    #alsa.enable = true;
+    alsa.enable = true;
     #alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
   };
+
+  #~Musnix~
+  musnix.enable = true;
+  musnix.kernel.packages = true;
 
   #~Graphics~
   # Enable OpenGL
@@ -61,7 +78,7 @@
     shell = pkgs.fish;
     isNormalUser = true;
     description = "Jason Crevier";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
   
   # Enable basic applications
