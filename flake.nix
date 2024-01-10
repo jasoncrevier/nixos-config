@@ -5,10 +5,11 @@
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    musnix.url = "github:musnix/musnix";
     catppuccin-vsc.url = "github:catppuccin/vscode";
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin-vsc, ... }:
+  outputs = { nixpkgs, home-manager, catppuccin-vsc, musnix, ... }:
 
   let
     system = "x86_64-linux";
@@ -33,6 +34,7 @@
         inherit system;
         inherit pkgs;
         modules = [
+          musnix.nixosModules.musnix
           ./nixos/office-configuration.nix
         ];
       };
