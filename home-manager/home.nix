@@ -15,7 +15,6 @@
   element-desktop
   telegram-desktop
   # Development
-  git
   micro
   # Graphics
   gimp-with-plugins
@@ -44,6 +43,17 @@
   wineWowPackages.staging
   winetricks
   ];
+
+  programs.git = {
+    enable = true;
+    userName = "Jason Crevier";
+    userEmail = "jason@jasoncrevier.com";
+  };
+
+  programs.nix-index = {
+    enable=true;
+    enableBashIntegration = true;
+  };
 
   programs.fish = {
     enable = true;
