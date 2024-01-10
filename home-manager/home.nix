@@ -17,6 +17,9 @@
   # Development
   git
   micro
+  # Graphics
+  gimp-with-plugins
+  inkscape
   # Theme
   catppuccin-cursors.mochaDark
   (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
@@ -30,8 +33,7 @@
   deluge
   fd
   feh
-  gnome3.gnome-tweaks
-  inkscape   
+  gnome3.gnome-tweaks   
   killall
   neofetch
   obsidian
