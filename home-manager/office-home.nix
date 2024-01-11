@@ -1,105 +1,36 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+    [
+      ./ai.nix
+      ./audio.nix
+      ./chat.nix
+      ./graphics.nix
+    ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";
 
   home.packages = with pkgs; [
-  # Audio
-  reaper
-  mixxx
-  yabridge
-  yabridgectl
-  # Chat
-  discord
-  element-desktop
-  telegram-desktop
-  # Development
-  micro
-  # Graphics
-  gimp-with-plugins
-  inkscape
   # Theme
   catppuccin-cursors.mochaDark
   (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
   (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
-  gradience
   # Web
   firefox
   nextcloud-client
   # Misc
-  cmatrix
   deluge
   fd
-  feh
-  gnome3.gnome-tweaks   
+  feh 
   killall
   neofetch
   obsidian
-  ollama
   spotify
-  tilix
   vlc
   wineWowPackages.staging
   winetricks
   ];
-
-  dconf.settings = {
-    "org/gnome/shell" = {
-      favorite-apps = [
-        "firefox.desktop"
-        "com.gexperts.Tilix.desktop"
-        "code.desktop"
-        "org.gnome.Nautilus.desktop"
-        "obsidian.desktop"
-        "org.telegram.desktop.desktop"
-        "element-desktop.desktop"
-        "discord.desktop"
-        "spotify.desktop"
-      ];
-      disable-user-extensions = false;
-      enabled-extensions = [
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-      ];
-    };
-    "org/gnome/interface" = {
-      icon-theme = "Papirus-Dark";
-      gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
-    };
-    "org/gnome/desktop/interface" = {
-      enable-hot-corners = false;
-      text-scaling-factor = 1.2;
-      clock-format = "12h";
-    };
-    "org/gtk/settings/file-chooser" = {
-      clock-format = "12h";
-    };
-    "org/gnome/mutter" = {
-      dynamic-workspaces = true;
-    };
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Catppuccin-Mocha-Standard-Teal-Dark";
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      name = "terminal";
-      command = "tilix";
-      binding = "<Control><Alt>t";
-    };
-  };
-
-  gtk = {
-    enable = true;
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
 
   programs.git = {
     enable = true;

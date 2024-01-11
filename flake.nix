@@ -41,10 +41,16 @@
     };
 
     homeConfigurations = {
-      jason = home-manager.lib.homeManagerConfiguration {
+      "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/home.nix
+          ./home-manager/thinkpad-home.nix
+        ];
+      };
+      "jason@toffice" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./home-manager/office-home.nix
         ];
       };
     };
