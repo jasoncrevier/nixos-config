@@ -2,9 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    reaper
-    mixxx
-    yabridge
-    yabridgectl
+  firefox
+  nextcloud-client
   ];
 }

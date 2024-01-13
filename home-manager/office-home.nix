@@ -6,56 +6,19 @@
       ./ai.nix
       ./audio.nix
       ./chat.nix
+      ./fish.nix
+      ./git.nix
       ./graphics.nix
+      ./misc.nix
+      ./vscode.nix
+      ./web.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";
 
-  home.packages = with pkgs; [
-  # Theme
-  catppuccin-cursors.mochaDark
-  (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
-  (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
-  # Web
-  firefox
-  nextcloud-client
-  # Misc
-  deluge
-  fd
-  feh 
-  killall
-  neofetch
-  obsidian
-  spotify
-  vlc
-  wineWowPackages.staging
-  winetricks
-  ];
-
-  programs.git = {
-    enable = true;
-    userName = "Jason Crevier";
-    userEmail = "jason@jasoncrevier.com";
-  };
-
   programs.nix-index = {
     enable=true;
     enableBashIntegration = true;
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-    '';
-  };
-
-  programs.vscode = {
-    enable = true;
-    extensions = with pkgs.vscode-extensions; [
-      (catppuccin.catppuccin-vsc.override { accent = "teal"; })
-      bbenoist.nix
-    ];
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

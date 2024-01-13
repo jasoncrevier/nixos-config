@@ -6,7 +6,6 @@
       ./office-hardware-configuration.nix
       ./steam.nix
       ./plasma.nix
-      #./gnome.nix
       ./nvidia.nix
       ./tailscale.nix
       ./flatpak.nix
@@ -34,7 +33,7 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    passwordAuthentication = true;
+    settings.PasswordAuthentication = true;
   };
 
   #~Localization~
