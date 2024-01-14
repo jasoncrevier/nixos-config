@@ -84,8 +84,10 @@
   environment.systemPackages = with pkgs; [
     git
   ];
-
   programs.fish.enable = true;
+
+  # Remove the manual
+  documentation.nixos.enable = false;
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
