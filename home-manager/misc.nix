@@ -2,9 +2,11 @@
 
 {
   home.packages = with pkgs; [
-    catppuccin-cursors.mochaDark
-    (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
-    (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
+    obsidian
+    spotify
+    vlc
+    wineWowPackages.staging
+    winetricks
   ];
 
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed
