@@ -16,20 +16,20 @@
     remmina
   ];
   environment.gnome.excludePackages = (with pkgs; [
-    kgx
-    gnome.gnome-music
+    epiphany
     gnome-connections
-    gnome.gnome-maps
     gnome-text-editor
-    gnome.gnome-weather
+    gnome-tour
+    gnome.geary
     gnome.gnome-characters
     gnome.gnome-clocks
-    gnome.gnome-nettool
-    gnome-tour
     gnome.gnome-font-viewer
-    epiphany
-    gnome.yelp
-    gnome.geary
+    gnome.gnome-maps
+    gnome.gnome-music
+    gnome.gnome-nettool
+    gnome.gnome-weather
     gnome.totem
+    gnome.yelp
+    kgx
   ]);
 }
