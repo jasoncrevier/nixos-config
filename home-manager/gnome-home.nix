@@ -9,17 +9,6 @@
 
 dconf.settings = {
     "org/gnome/shell" = {
-      favorite-apps = [
-        "firefox.desktop"
-        "com.gexperts.Tilix.desktop"
-        "code.desktop"
-        "org.gnome.Nautilus.desktop"
-        "obsidian.desktop"
-        "org.telegram.desktop.desktop"
-        "element-desktop.desktop"
-        "discord.desktop"
-        "spotify.desktop"
-      ];
       disable-user-extensions = false;
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
