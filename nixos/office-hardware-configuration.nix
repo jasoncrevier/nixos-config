@@ -4,43 +4,46 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd = {
+      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      kernelModules = [ ];
+    };
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+  };
 
-  fileSystems."/mnt/Games_HDD" =
-    { device = "/dev/disk/by-uuid/8575ae67-7e62-4f00-bb00-63022d128831";
+  fileSystems = {
+
+    "/mnt/Games_HDD" = {
+      device = "/dev/disk/by-uuid/8575ae67-7e62-4f00-bb00-63022d128831";
       fsType = "ext4";
     };
-  
-  fileSystems."/mnt/Games_SSD" =
-    { device = "/dev/disk/by-uuid/9cf976f6-754f-474b-bc49-56dd5705b640";
+    
+    "/mnt/Games_SSD" = { 
+      device = "/dev/disk/by-uuid/9cf976f6-754f-474b-bc49-56dd5705b640";
       fsType = "ext4";
     };
-  
-  fileSystems."/mnt/Main_storage" =
-    { device = "/dev/disk/by-uuid/c765f3f4-c218-4baa-ab51-20edd0b67454";
+    
+    "/mnt/Main_storage" = {
+      device = "/dev/disk/by-uuid/c765f3f4-c218-4baa-ab51-20edd0b67454";
       fsType = "ext4";
     };
-  
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7ee727c6-bdc9-40ec-9898-dac97930b43e";
+    
+    "/" = {
+      device = "/dev/disk/by-uuid/7ee727c6-bdc9-40ec-9898-dac97930b43e";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4FAD-0E88";
+    "/boot" = {
+      device = "/dev/disk/by-uuid/4FAD-0E88";
       fsType = "vfat";
     };
+  };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/50eaf3dd-ac35-4c57-bdaf-270c6a573cda"; }
-    ];
+  swapDevices = [{ device = "/dev/disk/by-uuid/50eaf3dd-ac35-4c57-bdaf-270c6a573cda"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -9,6 +9,7 @@
       # here as well. For example, if you want to add steam to
       # this system, uncomment:
       #./steam.nix
+      ./common.nix
     ];
 
   #~Bootloader~
@@ -27,22 +28,6 @@
   networking.hostName = "nixos"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  #~Localization~
-  time.timeZone = "America/Toronto";
-  i18n.defaultLocale = "en_CA.UTF-8";
-
-  #~Keymapping~
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    enable = true;
-  };
-
-  #~Sound~
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     #alsa.enable = true;
@@ -50,14 +35,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-  };
-
-  #~Graphics~
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   #~Users~
@@ -69,9 +46,6 @@
     # You probably want to keep networkmanager and wheel
     #extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
-
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

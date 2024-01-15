@@ -27,6 +27,7 @@
         inherit system;
         inherit pkgs;
         modules = [
+          musnix.nixosModules.musnix
           ./nixos/thinkpad-configuration.nix
         ];
       };

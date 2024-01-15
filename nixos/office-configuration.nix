@@ -2,54 +2,22 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan
-      ./office-hardware-configuration.nix
-      ./steam.nix
-      ./plasma.nix
-      ./nvidia.nix
-      ./tailscale.nix
+    [
+      ./common.nix
       ./flatpak.nix
+      #./musnix.nix
+      ./nvidia.nix
+      ./office-hardware-configuration.nix
+      ./plasma.nix
+      ./steam.nix
+      ./tailscale.nix
     ];
-
-  #~Bootloader~
-  # Systemd:
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   #~Networking~
   networking.hostName = "office"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Enable firewall and open SSH port
-  networking.firewall = {
-  enable = true;
-  allowedTCPPorts = [ 80 443 22 ];
-  allowedUDPPorts = [ 80 443 22 ];
-  };
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = true;
-  };
-
-  #~Localization~
-  time.timeZone = "America/Toronto";
-  i18n.defaultLocale = "en_CA.UTF-8";
-
-  #~Keymapping~
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    enable = true;
-  };
-
   #~Sound~
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -59,38 +27,14 @@
     jack.enable = true;
   };
 
-  #~Musnix~
-  musnix.enable = true;
-  musnix.kernel.packages = true;
-
-  #~Graphics~
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   #~Users~
   # Don't forget to set a password with ‘passwd’.
   users.users.jason = {
-    shell = pkgs.fish;
     isNormalUser = true;
     description = "Jason Crevier";
+    shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
-  
-  # Enable basic applications
-  environment.systemPackages = with pkgs; [
-    git
-  ];
-  programs.fish.enable = true;
-
-  # Remove the manual
-  documentation.nixos.enable = false;
-
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

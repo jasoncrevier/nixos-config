@@ -1,4 +1,4 @@
-# Flatpak settings
+# Enable Flatpak
 
 { pkgs, config, ... }:
 

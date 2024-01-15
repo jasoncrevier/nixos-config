@@ -2,60 +2,29 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan
-      ./thinkpad-hardware-configuration.nix
-
-      # Add any of the nix files from this repo you want to import
-      # here as well. For example, if you want to add steam to
-      # this system, uncomment:
-      ./steam.nix
+    [
+      ./common.nix
       ./gnome.nix
+      ./steam.nix
       ./tailscale.nix
+      ./thinkpad-hardware-configuration.nix
     ];
-
-  #~Bootloader~
-
-  # Systemd:
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   #~Networking~
   networking.hostName = "thinkpad"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  #~Localization~
-  time.timeZone = "America/Toronto";
-  i18n.defaultLocale = "en_CA.UTF-8";
-
-  #~Keymapping~
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    enable = true;
-  };
-
   #~Sound~
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     #alsa.enable = true;
     #alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
 
-  #~Graphics~
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  musnix.enable = true;
+  musnix.kernel.packages = true;
 
   #~Users~
   # Don't forget to set a password with ‘passwd’.
@@ -63,22 +32,8 @@
     isNormalUser = true;
     description = "Jason Crevier";
     shell = pkgs.fish;
-    # Use this to add the user to different groups as needed.
-    # You probably want to keep networkmanager and wheel
     extraGroups = [ "networkmanager" "wheel" "audio" ];
   };
-
-  # Enable basic applications
-  environment.systemPackages = with pkgs; [
-    git
-  ];
-  programs.fish.enable = true;
-
-  # Remove the manual
-  documentation.nixos.enable = false;
-
-  # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
