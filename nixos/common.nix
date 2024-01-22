@@ -47,7 +47,7 @@
     catppuccin-plymouth
   ];
   programs.fish.enable = true;
-  
+
   # Remove the manual
   documentation.nixos.enable = false;
 

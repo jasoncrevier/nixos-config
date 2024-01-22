@@ -14,6 +14,13 @@
   networking.hostName = "thinkpad"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # For SSH
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 443 22 ];
+    allowedUDPPorts = [ 80 443 22 ];
+  };
+
   #~Sound~
   services.pipewire = {
     enable = true;
