@@ -44,8 +44,9 @@
   #~Housekeeping~
   # Enable basic applications
   environment.systemPackages = with pkgs; [
-    git
     catppuccin-plymouth
+    git
+    mc
     tmux
   ];
   programs.fish.enable = true;
