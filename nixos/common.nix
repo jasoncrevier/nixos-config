@@ -45,6 +45,7 @@
   environment.systemPackages = with pkgs; [
     git
     catppuccin-plymouth
+    tmux
   ];
   programs.fish.enable = true;
 
