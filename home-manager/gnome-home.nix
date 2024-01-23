@@ -12,6 +12,7 @@ dconf.settings = {
       disable-user-extensions = false;
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "just-perfection-desktop@just-perfection"
       ];
     };
     "org/gnome/interface" = {
@@ -39,6 +40,9 @@ dconf.settings = {
     };
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui = "<Shift><Super>s";
+    };
+    "org/gnome/shell/extensions/just-perfection" = {
+      panel-size = 27;
     };
   };
 
