@@ -5,19 +5,20 @@
     [
       ./common.nix
       ./flatpak.nix
-      #./musnix.nix
+      ./musnix.nix
       ./nvidia.nix
       ./office-hardware-configuration.nix
       ./plasma.nix
       ./steam.nix
       ./tailscale.nix
+      ./ssh.nix
     ];
 
   #~Networking~
   networking.hostName = "office"; # Define your hostname -- this is important for flakes
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  
-  # For InvokeAI and SSH
+
+  # For SSH and InvokeAI
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [  80 443 22 9090 ];
