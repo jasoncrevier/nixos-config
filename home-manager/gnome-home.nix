@@ -21,7 +21,6 @@ dconf.settings = {
     };
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
-      text-scaling-factor = 1.25;
       clock-format = "12h";
     };
     "org/gtk/settings/file-chooser" = {
