@@ -20,6 +20,7 @@ dconf.settings = {
     };
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
+      text-scaling-factor = 1.25;
       clock-format = "12h";
     };
     "org/gtk/settings/file-chooser" = {
@@ -35,6 +36,9 @@ dconf.settings = {
       name = "terminal";
       command = "tilix";
       binding = "<Control><Alt>t";
+    };
+    "org/gnome/shell/keybindings" = {
+      show-screenshot-ui = "<Shift><Super>s";
     };
   };
 
