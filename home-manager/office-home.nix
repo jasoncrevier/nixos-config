@@ -12,6 +12,7 @@
       ./misc.nix
       ./vscode.nix
       ./web.nix
+      ./theme.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";
