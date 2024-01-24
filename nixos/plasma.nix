@@ -16,8 +16,6 @@
       libsForQt5.packagekit-qt
       libportal-qt5
       krdc
-      kontact
-      korganizer
     ];
     plasma5.excludePackages = with pkgs.libsForQt5; [
       elisa
