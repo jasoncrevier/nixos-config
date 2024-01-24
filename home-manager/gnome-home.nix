@@ -29,9 +29,6 @@ dconf.settings = {
     "org/gnome/mutter" = {
       dynamic-workspaces = true;
     };
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Catppuccin-Mocha-Standard-Teal-Dark";
-    };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "terminal";
       command = "tilix";
