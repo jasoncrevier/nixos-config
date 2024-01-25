@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     catppuccin-cursors.mochaDark
     (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
+    (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
   ];
 
   #~Fish~
@@ -32,10 +33,10 @@
     };
     #iconTheme.name = "Papirus-Dark";
     #iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "Catppuccin-Mocha-Teal-dark";
-    theme.package = pkgs.catppuccin-gtk.override {
-      accents = [ "lavender" ];
-      variant = "mocha";
-    };
+    #theme.name = "Catppuccin-Mocha-Teal-dark";
+    #theme.package = pkgs.catppuccin-gtk.override {
+    #  accents = [ "lavender" ];
+    #  variant = "mocha";
+    #};
   };
 }
