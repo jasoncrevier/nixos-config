@@ -13,7 +13,7 @@
   
   #~Gnome/GTK~
   # Pick this theme manually in Gradience
-  home.file."/.config/catppuccin-mocha-gradience-theme.json".source = ./catppuccin-mocha-gradience-theme;
+  home.file."/.config/presets/user/catppuccin-mocha.json".source = ./catppuccin-mocha-gradience-theme;
   dconf.settings = {
     "org/gnome/shell/extensions/user-theme" = {
       name = "Catppuccin-Mocha-Standard-Teal-Dark";

@@ -1,5 +1,5 @@
 {
-    "name": "Catppuccin Mocha",
+    "name": "catppuccin-mocha-gradience",
     "variables": {
         "accent_color": "rgb(116, 199, 236)",
         "accent_bg_color": "rgb(137, 180, 250)",
@@ -101,7 +101,7 @@
         }
     },
     "custom_css": {
-        "gtk4": "",
+        "gtk4": ".placessidebar {\nbackground-color: #1e1e2e;\n}\n.navigation-sidebar {\nbackground-color: #1e1e2e;\n} \n.top-bar {\nbackground: #1e1e2e;\n} \n",
         "gtk3": ""
     },
     "plugins": {}

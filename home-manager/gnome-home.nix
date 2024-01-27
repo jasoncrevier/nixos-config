@@ -5,6 +5,7 @@
   gradience
   gnome3.gnome-tweaks
   tilix
+  gnomeExtensions.just-perfection
   ];
 
 dconf.settings = {

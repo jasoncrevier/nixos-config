@@ -56,4 +56,11 @@
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Fix for command-not-found
+  programs.nix-index = {
+    #enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+  };
 }
