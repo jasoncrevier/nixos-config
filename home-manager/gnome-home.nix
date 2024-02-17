@@ -6,6 +6,7 @@
   gnome3.gnome-tweaks
   tilix
   gnomeExtensions.just-perfection
+  gnomeExtensions.gsnap
   ];
 
 dconf.settings = {
@@ -14,6 +15,7 @@ dconf.settings = {
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "just-perfection-desktop@just-perfection"
+        "gSnap@micahosborne"
       ];
     };
     "org/gnome/interface" = {
@@ -40,6 +42,10 @@ dconf.settings = {
     };
     "org/gnome/shell/extensions/just-perfection" = {
       panel-size = 27;
+    };
+    "org/gnome/shell/extensions/gsnap" = {
+      show-icon = false;
+      use-modifer = true;
     };
   };
 }

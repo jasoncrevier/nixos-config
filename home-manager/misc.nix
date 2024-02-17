@@ -5,6 +5,7 @@
     bottles
     neofetch
     obsidian
+    onlyoffice-bin
     spotify
     vlc
     winetricks
