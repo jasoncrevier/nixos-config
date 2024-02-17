@@ -2,8 +2,9 @@
 
 {
   home.packages = with pkgs; [
-    reaper
     mixxx
+    reaper
+    sfizz
     yabridge
     yabridgectl
   ];

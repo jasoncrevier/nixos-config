@@ -2,12 +2,13 @@
 
 {
   home.packages = with pkgs; [
+    bottles
     neofetch
     obsidian
     spotify
     vlc
-    wineWowPackages.staging
     winetricks
+    wineWowPackages.staging
   ];
 
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed
