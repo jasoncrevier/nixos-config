@@ -41,6 +41,10 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   
+  #~Bluetooth~
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   #~Housekeeping~
   # Enable basic applications
   environment.systemPackages = with pkgs; [
