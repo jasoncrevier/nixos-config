@@ -21,7 +21,7 @@
     gnome.excludePackages = (with pkgs; [
       epiphany
       gnome-connections
-      #gnome-text-editor
+      gnome-text-editor
       gnome-tour
       gnome.geary
       gnome.gnome-characters
