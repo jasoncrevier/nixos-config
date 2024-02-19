@@ -25,7 +25,7 @@
   #~Keymapping~
   services.xserver = {
     layout = "us";
-    xkbVariant = "";
+    xkb.variant = "";
     enable = true;
   };
 
