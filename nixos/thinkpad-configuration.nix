@@ -4,7 +4,7 @@
   imports =
     [
       ./common.nix
-      ./gnome.nix
+      ./plasma.nix
       ./steam.nix
       ./tailscale.nix
       ./thinkpad-hardware-configuration.nix

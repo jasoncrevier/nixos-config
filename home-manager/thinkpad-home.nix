@@ -7,7 +7,6 @@
       ./chat.nix
       ./fish.nix
       ./git.nix
-      ./gnome-home.nix
       ./graphics.nix
       ./misc.nix
       ./theme.nix

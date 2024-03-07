@@ -33,10 +33,10 @@
     };
     #iconTheme.name = "Papirus-Dark";
     #iconTheme.package = pkgs.papirus-icon-theme;
-    #theme.name = "Catppuccin-Mocha-Teal-dark";
-    #theme.package = pkgs.catppuccin-gtk.override {
-    #  accents = [ "lavender" ];
-    #  variant = "mocha";
-    #};
+    theme.name = "Catppuccin-Mocha-Teal-dark";
+    theme.package = pkgs.catppuccin-gtk.override {
+      accents = [ "teal" ];
+      variant = "mocha";
+    };
   };
 }
