@@ -33,12 +33,12 @@
     };
     
     "/" = {
-      device = "/dev/disk/by-uuid/7ee727c6-bdc9-40ec-9898-dac97930b43e";
+      device = "/dev/disk/by-uuid/42bb5750-e2c5-48a3-ba39-36eb31a94bdd";
       fsType = "ext4";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/4FAD-0E88";
+      device = "/dev/disk/by-uuid/6C1E-47B7";
       fsType = "vfat";
     };
   };
