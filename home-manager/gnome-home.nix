@@ -65,7 +65,7 @@ dconf.settings = {
     "com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d" = {
       background-transparency-percent = 10;
     };
-    "com/gexperts/Tilix/" = {
+    "com/gexperts/Tilix" = {
       terminal-title-show-when-single = false;
       window-style = "disable-csd-hide-toolbar";
     };
