@@ -27,7 +27,7 @@ dconf.settings = {
       enable-hot-corners = false;
       clock-format = "12h";
       cursor-theme = "Catppuccin-Mocha-Dark-Cursors";
-      icon-theme = "Papirus";
+      icon-theme = "Papirus-Dark";
       gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -57,8 +57,17 @@ dconf.settings = {
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
     };
-    "org/gnome/shell/extensions/user-theme" = {
+    "org/gnomeStandard/shell/extensions/user-theme" = {
       name = "Catppuccin-Mocha-Standard-Teal-Dark";
+    };
+    
+    #Tilix
+    "com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d" = {
+      background-transparency-percent = 10;
+    };
+    "com/gexperts/Tilix/" = {
+      terminal-title-show-when-single = false;
+      window-style = "disable-csd-hide-toolbar";
     };
   };
 
@@ -67,7 +76,7 @@ dconf.settings = {
     enable = true;
     iconTheme.name = "Papirus-Dark";
     iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "Catppuccin-Mocha-Teal-dark";
+    theme.name = "Catppuccin-Mocha-Standard-Teal-Dark";
     theme.package = pkgs.catppuccin-gtk.override {
       accents = [ "teal" ];
       variant = "mocha";
