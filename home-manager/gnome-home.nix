@@ -21,10 +21,17 @@ dconf.settings = {
     "org/gnome/interface" = {
       icon-theme = "Papirus-Dark";
       gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
+      color-scheme = "prefer-dark";
     };
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
       clock-format = "12h";
+      cursor-theme = "Catppuccin-Mocha-Dark-Cursors";
+      icon-theme = "Papirus";
+      gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
+    };
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
     };
     "org/gtk/settings/file-chooser" = {
       clock-format = "12h";
@@ -47,6 +54,12 @@ dconf.settings = {
       show-icon = false;
       use-modifer = true;
     };
+    "org/gnome/tweaks" = {
+      show-extensions-notice = false;
+    };
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Catppuccin-Mocha-Standard-Teal-Dark";
+    };
   };
 
   #~Theme~
@@ -63,9 +76,4 @@ dconf.settings = {
 
   # Pick this theme manually in Gradience
   home.file."/.config/presets/user/catppuccin-mocha.json".source = ./catppuccin-mocha-gradience-theme;
-  dconf.settings = {
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Catppuccin-Mocha-Standard-Teal-Dark";
-    };
-  };
 }
