@@ -10,6 +10,7 @@
       ./git.nix
       ./graphics.nix
       ./misc.nix
+      ./plasma-home.nix
       ./vscode.nix
       ./web.nix
       ./theme.nix
