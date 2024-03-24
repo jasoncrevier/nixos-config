@@ -48,4 +48,24 @@ dconf.settings = {
       use-modifer = true;
     };
   };
+
+  #~Theme~
+  gtk = {
+    enable = true;
+    iconTheme.name = "Papirus-Dark";
+    iconTheme.package = pkgs.papirus-icon-theme;
+    theme.name = "Catppuccin-Mocha-Teal-dark";
+    theme.package = pkgs.catppuccin-gtk.override {
+      accents = [ "teal" ];
+      variant = "mocha";
+    };
+  };
+
+  # Pick this theme manually in Gradience
+  home.file."/.config/presets/user/catppuccin-mocha.json".source = ./catppuccin-mocha-gradience-theme;
+  dconf.settings = {
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Catppuccin-Mocha-Standard-Teal-Dark";
+    };
+  };
 }
