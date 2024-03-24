@@ -10,9 +10,9 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-    # plymouth.enable = true;
+    plymouth.enable = true;
     initrd.systemd.enable = true;
-    # kernelParams = ["quiet"];
+    kernelParams = ["quiet"];
   };
 
   #~Localization~
@@ -24,7 +24,7 @@
 
   #~Keymapping~
   services.xserver = {
-    layout = "us";
+    xkb.layout = "us";
     xkb.variant = "";
     enable = true;
   };
@@ -51,9 +51,14 @@
     catppuccin-plymouth
     git
     mc
-    tmux
   ];
   programs.fish.enable = true;
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set -g mouse on
+    '';
+  };
 
   # Remove the manual
   documentation.nixos.enable = false;
