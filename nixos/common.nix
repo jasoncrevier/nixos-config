@@ -10,9 +10,9 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-    plymouth.enable = true;
+    #plymouth.enable = true;
     initrd.systemd.enable = true;
-    kernelParams = ["quiet"];
+    #kernelParams = ["quiet"];
   };
 
   #~Localization~
