@@ -19,7 +19,7 @@
       overlays = [catppuccin-vsc.overlays.default];
       config.allowUnfree = true;
       # Workaround to get Obsidian working until it's updated. Not a good idea to have this.
-      config.permittedInsecurePackages = [ "electron-25.9.0" ]; 
+      #config.permittedInsecurePackages = [ "electron-25.9.0" ]; 
     };
   in
   {
