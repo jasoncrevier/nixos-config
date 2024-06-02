@@ -6,7 +6,7 @@
   # Enable SDDM and Plasma
   services = {
     displayManager.sddm.enable = true;
-    xserver.desktopManager.plasma5.enable = true;
+    xserver.desktopManager.plasma6.enable = true;
   };
   
   # Exclude some default KDE packages
@@ -19,7 +19,7 @@
       kolourpaint
       kwrited
     ];
-    plasma5.excludePackages = with pkgs.libsForQt5; [
+    plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
       oxygen
       khelpcenter
