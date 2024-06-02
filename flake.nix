@@ -10,7 +10,7 @@
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin-vsc, musnix, vscode-server, ... }:
+  outputs = { nixpkgs, home-manager, catppuccin-vsc, musnix, vscode-server, ... }@inputs:
 
   let
     system = "x86_64-linux";
@@ -18,8 +18,6 @@
       inherit system;
       overlays = [catppuccin-vsc.overlays.default];
       config.allowUnfree = true;
-      # Workaround to get Obsidian working until it's updated. Not a good idea to have this.
-      #config.permittedInsecurePackages = [ "electron-25.9.0" ]; 
     };
   in
   {

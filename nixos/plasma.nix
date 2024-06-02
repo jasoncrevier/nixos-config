@@ -13,6 +13,7 @@
   environment = {
     systemPackages = with pkgs; [
       libsForQt5.discover
+      libsForQt5.kalk
       libsForQt5.packagekit-qt
       libportal-qt5
       krdc

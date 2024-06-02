@@ -6,7 +6,6 @@
   gnome3.gnome-tweaks
   tilix
   gnomeExtensions.just-perfection
-  gnomeExtensions.gsnap
   ];
 
 dconf.settings = {
@@ -15,15 +14,14 @@ dconf.settings = {
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "just-perfection-desktop@just-perfection"
-        "gSnap@micahosborne"
       ];
     };
     "org/gnome/interface" = {
       icon-theme = "Papirus-Dark";
       gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
-      color-scheme = "prefer-dark";
     };
     "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
       enable-hot-corners = false;
       clock-format = "12h";
       cursor-theme = "Catppuccin-Mocha-Dark-Cursors";
