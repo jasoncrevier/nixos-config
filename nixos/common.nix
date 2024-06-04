@@ -37,10 +37,6 @@
     driSupport32Bit = true;
   };
   
-  #~Sound~
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  
   #~Bluetooth~
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
