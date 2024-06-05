@@ -5,8 +5,8 @@
 {
   # Enable SDDM and Plasma
   services = {
-    displayManager.sddm.enable = true;
-    xserver.desktopManager.plasma6.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    desktopManager.plasma6.enable = true;
   };
   
   # Exclude some default KDE packages
