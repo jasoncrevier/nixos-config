@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-  firefox
-  nextcloud-client
+    nextcloud-client
+    (wrapFirefox (firefox-unwrapped.override { pipewireSupport = true;}) {})
   ];
 }
