@@ -24,7 +24,7 @@ dconf.settings = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
       clock-format = "12h";
-      cursor-theme = "Catppuccin-Mocha-Dark-Cursors";
+      cursor-theme = "catppuccin-mocha-dark-cursors";
       icon-theme = "Papirus-Dark";
       gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
     };
