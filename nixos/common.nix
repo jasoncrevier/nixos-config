@@ -37,10 +37,6 @@
     driSupport32Bit = true;
   };
   
-  #~Sound~
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  
   #~Bluetooth~
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -58,6 +54,23 @@
     extraConfig = ''
       set -g mouse on
     '';
+  };
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "widget.use-xdg-desktop-portal.file-picker" = 1;
+    };
+  };
+
+  # Enable edg desktop integration
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
   };
 
   # Remove the manual
