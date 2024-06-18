@@ -18,7 +18,6 @@
       libportal-qt5
       krdc
       kolourpaint
-      kwrited
     ];
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
