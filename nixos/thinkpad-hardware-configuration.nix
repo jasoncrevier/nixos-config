@@ -15,12 +15,12 @@
   boot.kernelParams = [ "noresume" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/881862c9-ac21-4b35-95a1-f2a0b4528f5d";
+    { device = "/dev/disk/by-uuid/7fe5dd99-6d02-4ed9-8589-7c4afdf02199";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/38CC-7F9A";
+    { device = "/dev/disk/by-uuid/7BC2-0A2A";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

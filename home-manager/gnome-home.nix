@@ -18,7 +18,7 @@ dconf.settings = {
     };
     "org/gnome/interface" = {
       icon-theme = "Papirus-Dark";
-      gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
+      gtk-theme = "catppuccin-mocha-teal-standard+default";
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -26,7 +26,7 @@ dconf.settings = {
       clock-format = "12h";
       cursor-theme = "catppuccin-mocha-dark-cursors";
       icon-theme = "Papirus-Dark";
-      gtk-theme = "Catppuccin-Mocha-Standard-Teal-Dark";
+      gtk-theme = "catppuccin-mocha-teal-standard+default";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
@@ -56,7 +56,7 @@ dconf.settings = {
       show-extensions-notice = false;
     };
     "org/gnomeStandard/shell/extensions/user-theme" = {
-      name = "Catppuccin-Mocha-Standard-Teal-Dark";
+      name = "catppuccin-mocha-teal-standard+default";
     };
     
     #Tilix
@@ -74,7 +74,7 @@ dconf.settings = {
     enable = true;
     iconTheme.name = "Papirus-Dark";
     iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "Catppuccin-Mocha-Standard-Teal-Dark";
+    theme.name = "catppuccin-mocha-teal-standard+default";
     theme.package = pkgs.catppuccin-gtk.override {
       accents = [ "teal" ];
       variant = "mocha";
@@ -82,5 +82,5 @@ dconf.settings = {
   };
 
   # Pick this theme manually in Gradience
-  home.file."/.config/presets/user/catppuccin-mocha.json".source = ./catppuccin-mocha-gradience-theme;
+  home.file."/.config/presets/user/catppuccin-mocha.json".source = ./catppuccin-mocha-gradience-theme.json;
 }
