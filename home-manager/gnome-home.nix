@@ -46,7 +46,7 @@ dconf.settings = {
       show-screenshot-ui = "<Shift><Super>s";
     };
     "org/gnome/shell/extensions/just-perfection" = {
-      panel-size = 27;
+      panel-size = 28;
     };
     "org/gnome/shell/extensions/gsnap" = {
       show-icon = false;
