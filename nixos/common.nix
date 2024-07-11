@@ -13,6 +13,7 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
+    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   #~Localization~
@@ -60,17 +61,6 @@
       "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
   };
-
-  # Enable edg desktop integration
-  #xdg = {
-  #  portal = {
-  #    enable = true;
-  #    extraPortals = with pkgs; [
-  #      xdg-desktop-portal-wlr
-  #      xdg-desktop-portal-gtk
-  #    ];
-  #  };
-  #};
 
   # Remove the manual
   documentation.nixos.enable = false;
