@@ -8,6 +8,7 @@
     obsidian
     onlyoffice-bin
     spotify
+    soulseekqt
     vlc
     winetricks
     wineWowPackages.staging
