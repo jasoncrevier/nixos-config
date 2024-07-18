@@ -20,19 +20,19 @@
     ];
     gnome.excludePackages = (with pkgs; [
       epiphany
+      geary
       gnome-connections
+      gnome-font-viewer
       gnome-tour
-      gnome.geary
       gnome.gnome-characters
       gnome.gnome-clocks
-      gnome.gnome-font-viewer
       gnome.gnome-maps
       gnome.gnome-music
       gnome.gnome-nettool
       gnome.gnome-weather
-      gnome.totem
-      gnome.yelp
       kgx
+      totem
+      yelp
     ]);
   };
 }
