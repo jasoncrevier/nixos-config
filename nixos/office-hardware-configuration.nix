@@ -11,7 +11,7 @@
       availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
       kernelModules = [ ];
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ "kvm-amd" "nvidia.NVreg_EnableGpuFirmware=0"]; # Fix for nvidia stuttering in KDE. Should be fixed in future driver update. (24-07-16)
     extraModulePackages = [ ];
   };
 
