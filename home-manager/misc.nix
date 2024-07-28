@@ -5,6 +5,7 @@
     bitwarden-desktop
     bottles
     neofetch
+    kdePackages.kasts
     obsidian
     onlyoffice-bin
     spotify
