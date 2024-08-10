@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     mixxx
-    qjackctl
+    qpwgraph
     reaper
     sfizz
     yabridge

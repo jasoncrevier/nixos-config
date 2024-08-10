@@ -4,10 +4,12 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     bottles
+    freetube
     neofetch
     kdePackages.kasts
     obsidian
     onlyoffice-bin
+    plex-media-player
     spotify
     soulseekqt
     vlc

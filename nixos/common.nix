@@ -28,6 +28,7 @@
     xkb.layout = "us";
     xkb.variant = "";
     enable = true;
+    videoDrivers = [ "amdgpu" ];
   };
 
   #~Graphics~

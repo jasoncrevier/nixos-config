@@ -7,7 +7,6 @@
       ./flatpak.nix
       ./games.nix
       ./musnix.nix
-      ./nvidia.nix
       ./office-hardware-configuration.nix
       ./plasma.nix
       ./ssh.nix
@@ -42,12 +41,6 @@
     description = "Jason Crevier";
     shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
-  };
-
-  # Enable Docker with Nvidia
-  virtualisation.docker = {
-    enable = true;
-    enableNvidia = true;
   };
 
   # Enable binary cache for nixified-ai
