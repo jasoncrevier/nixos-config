@@ -1,0 +1,18 @@
+[Desktop Entry]
+Comment[en_CA]=
+Comment=
+Exec=heynote
+GenericName[en_CA]=Heynote
+GenericName=Heynote
+Icon=/home/jason/nixos-config/heynote.ico
+MimeType=
+Name[en_CA]=Heynote
+Name=Heynote
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Categories=Utility;TextEditor;Development;

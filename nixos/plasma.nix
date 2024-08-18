@@ -16,6 +16,7 @@
       libsForQt5.kalk
       libsForQt5.packagekit-qt
       libportal-qt5
+      kcolorchooser
       krdc
       kolourpaint
     ];

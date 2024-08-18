@@ -47,8 +47,10 @@
   environment.systemPackages = with pkgs; [
     catppuccin-plymouth
     git
+    (callPackage ../pkgs/heynote.nix {})
     mc
   ];
+
   programs.fish.enable = true;
   programs.tmux = {
     enable = true;
