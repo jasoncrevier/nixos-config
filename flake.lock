@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1722939363,
-        "narHash": "sha256-qNHJzxdVf8uoV686fmK7DaTztALCyTh7erP/lYb60hg=",
+        "lastModified": 1722824506,
+        "narHash": "sha256-tCR37ajHB89kx5qjwgQVRMtO3VuH7iRNy00qVcwKtQ4=",
         "owner": "catppuccin",
         "repo": "vscode",
-        "rev": "2d7388ffe7321f588b2f54e2ffaab9fb7c9dde14",
+        "rev": "67f4146babb2f8624de0a2096a651bcc8a223e0d",
         "type": "github"
       },
       "original": {
