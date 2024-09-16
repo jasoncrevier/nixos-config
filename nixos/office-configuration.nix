@@ -40,7 +40,7 @@
     isNormalUser = true;
     description = "Jason Crevier";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" ];
   };
 
   # Enable binary cache for nixified-ai
