@@ -24,12 +24,12 @@
       gnome-connections
       gnome-font-viewer
       gnome-tour
-      gnome.gnome-characters
-      gnome.gnome-clocks
-      gnome.gnome-maps
-      gnome.gnome-music
-      gnome.gnome-nettool
-      gnome.gnome-weather
+      gnome-characters
+      gnome-clocks
+      gnome-maps
+      gnome-nettool
+      gnome-music
+      gnome-weather
       kgx
       totem
       yelp
