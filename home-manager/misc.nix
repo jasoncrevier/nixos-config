@@ -6,12 +6,13 @@
     bottles
     freetube
     neofetch
+    nicotine-plus
     kdePackages.kasts
     obsidian
     onlyoffice-bin
     plex-media-player
     spotify
-    soulseekqt
+    #soulseekqt
     vlc
     winetricks
     wineWowPackages.staging
