@@ -11,7 +11,6 @@
   environment.systemPackages = with pkgs; [
     heroic
     lutris
-    optifine
     prismlauncher
   ];
 }
