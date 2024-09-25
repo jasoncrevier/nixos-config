@@ -37,7 +37,8 @@
     enable = true;
     enable32Bit = true;
   };
-  
+  programs.gamemode.enable = true;
+
   #~Bluetooth~
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -63,6 +64,8 @@
       "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
   };
+
+  programs.adb.enable = true;
 
   # Remove the manual
   documentation.nixos.enable = false;

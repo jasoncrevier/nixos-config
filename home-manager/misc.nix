@@ -10,9 +10,7 @@
     kdePackages.kasts
     obsidian
     onlyoffice-bin
-    plex-media-player
     spotify
-    #soulseekqt
     vlc
     winetricks
     wineWowPackages.staging
