@@ -5,7 +5,6 @@
     [
       ./common.nix
       ./gnome.nix
-      ./steam.nix
       ./tailscale.nix
       ./surface-hardware-configuration.nix
     ];

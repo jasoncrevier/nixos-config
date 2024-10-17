@@ -5,11 +5,11 @@
     [
       ./common.nix
       ./flatpak.nix
-      ./games.nix
       ./musnix.nix
       ./office-hardware-configuration.nix
       ./plasma.nix
       ./ssh.nix
+      ./steam.nix
       ./tailscale.nix
     ];
 
