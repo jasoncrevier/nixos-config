@@ -4,8 +4,8 @@
   imports =
     [
       ./common.nix
-      ./games.nix
       ./gnome.nix
+      ./steam.nix
       ./tailscale.nix
       ./thinkpad-hardware-configuration.nix
     ];

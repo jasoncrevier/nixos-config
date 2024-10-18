@@ -6,6 +6,7 @@
       ./audio.nix
       ./chat.nix
       ./fish.nix
+      ./games.nix
       ./git.nix
       ./gnome-home.nix
       ./graphics.nix
