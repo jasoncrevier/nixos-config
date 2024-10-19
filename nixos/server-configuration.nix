@@ -1,3 +1,5 @@
+# Configuration for my home server
+
 { config, pkgs, ... }:
 
 {

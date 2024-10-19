@@ -1,3 +1,5 @@
+# Template for setting up new machines
+
 { config, pkgs, ... }:
 
 {

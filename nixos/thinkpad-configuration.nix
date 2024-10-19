@@ -1,3 +1,5 @@
+# Configuration for my Thinkpad
+
 { config, pkgs, ... }:
 
 {

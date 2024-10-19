@@ -1,4 +1,6 @@
-# Config shared between machines
+# This config houses most of the basic 
+# applications and configurations that are 
+# shared between my machines
 
 { config, pkgs, ... }:
 
@@ -37,6 +39,8 @@
     enable = true;
     enable32Bit = true;
   };
+  
+  # Enable GameMode: optimizations for gaming
   programs.gamemode.enable = true;
 
   #~Bluetooth~
@@ -44,13 +48,14 @@
   hardware.bluetooth.powerOnBoot = true;
 
   #~Housekeeping~
-  # Enable basic applications
+  # Enable some basic applications:
+  # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
     git
   ];
-
+  
   programs.fish.enable = true;
-
+  
   programs.tmux = {
     enable = true;
     extraConfig = ''
@@ -74,8 +79,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Fix for command-not-found
+  # I don't really understand it
+  # but it works on some machines.
+  # On others, nix-index just crashes
+  # the terminal.
   programs.nix-index = {
-    #enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
   };

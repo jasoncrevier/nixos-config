@@ -1,3 +1,5 @@
+# Configuration for my office workstation
+
 { config, pkgs, ... }:
 
 {
@@ -42,10 +44,6 @@
     shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" ];
   };
-
-  # Enable binary cache for nixified-ai
-  nix.settings.trusted-substituters = ["https://ai.cachix.org"];
-  nix.settings.trusted-public-keys = ["ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
