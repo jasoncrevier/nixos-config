@@ -8,9 +8,10 @@ nixos-config
 ├── .config
 │   └── presets
 ├── .local
-│   ├── applications
-│   ├── color-schemes
-│   └── konsole
+│   └── presets
+│      ├── applications
+│      ├── color-schemes
+│      └── konsole
 ├── home-manager
 ├── nixos
 └── pkgs
