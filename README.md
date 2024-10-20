@@ -28,6 +28,18 @@ nixos-config
 
 ## Devices
 ### Thinkpad
+Specs:
+- Model: Lenovo ThinkPad T470
+- Processor: Intel® Core™ i5-7300U
+- Graphics: Intel® HD Graphics 620
+- Memory: 16 GB
+- Storage: 256 GB
+
+System:
+- Desktop environment: Gnome 46
+- Window manager: Wayland
+- Shell: fish
+- Theme: Catppuccin Mocha
 
 <details>
 <summary>Screenshots</summary>
