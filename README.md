@@ -48,3 +48,10 @@ System:
 ![Gnome in use](./screenshots/gnome-in-use.png)
 ![Gnome overview](./screenshots/gnome-overview.png)
 </details>
+### Office workstation
+
+<details>
+<summary>Screenshots</summary>
+
+![Plasma](./screenshots/plasma.png)
+</details>
