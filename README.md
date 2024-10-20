@@ -8,11 +8,13 @@ nixos-config
 ├── .config
 │   └── presets
 ├── .local
-│   └── presets
+│   └── share
 │      ├── applications
 │      ├── color-schemes
 │      └── konsole
 ├── home-manager
+│   └── device-configs
 ├── nixos
+│   └── device-configs
 └── pkgs
 ```
