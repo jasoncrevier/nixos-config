@@ -4,14 +4,14 @@ A lot of it is still very noob-ish, so if you stumble on this repo and have any 
 
 # Folder structure:
 ```console
-nixos-config\
-├── .config\
-│   └── presets\
-├── .local\
-│   ├── applications\
-│   ├── color-schemes\
-│   └── konsole\
-├── home-manager\
-├── nixos\
+nixos-config
+├── .config
+│   └── presets
+├── .local
+│   ├── applications
+│   ├── color-schemes
+│   └── konsole
+├── home-manager
+├── nixos
 └── pkgs
 ```
