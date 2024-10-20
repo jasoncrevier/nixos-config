@@ -3,7 +3,7 @@ This is where I store the config files and dotfiles for my NixOS setup. I'm new 
 A lot of it is still very noob-ish, so if you stumble on this repo and have any advice, I'd love to hear it!
 
 # Folder structure:
-
+```console
 nixos-config\
 ├── .config\
 │   └── presets\
@@ -13,4 +13,5 @@ nixos-config\
 │   └── konsole\
 ├── home-manager\
 ├── nixos\
-└── pkgs\
+└── pkgs
+```
