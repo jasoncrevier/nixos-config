@@ -32,8 +32,8 @@ Specs:
 - Model: Lenovo ThinkPad T470
 - Processor: Intel® Core™ i5-7300U
 - Graphics: Intel® HD Graphics 620
-- Memory: 16 GB
-- Storage: 256 GB
+- Memory: 16GB
+- Storage: 256GB
 
 System:
 - Desktop environment: Gnome 46
@@ -48,7 +48,19 @@ System:
 ![Gnome in use](./screenshots/gnome-in-use.png)
 ![Gnome overview](./screenshots/gnome-overview.png)
 </details>
+
 ### Office workstation
+Specs:
+- Processor: AMD Ryzen 7 5800X
+- Graphics: Radeon 6600
+- Memory: 16GB
+- Storage: 256GB + 256GB + 1TB + 1TB
+
+System:
+- Desktop environment: Plasma 6
+- Window manager: Wayland
+- Shell: fish
+- Theme: Catppuccin Mocha
 
 <details>
 <summary>Screenshots</summary>
