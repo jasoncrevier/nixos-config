@@ -27,30 +27,24 @@
         inherit pkgs;
         modules = [
           musnix.nixosModules.musnix
-          ./nixos/thinkpad-configuration.nix
+          ./nixos/device-configs/thinkpad-configuration.nix
         ];
       };
-      surface = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit pkgs;
-        modules = [
-          musnix.nixosModules.musnix
-          ./nixos/surface-configuration.nix
-        ];
-      };
+
       office = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
         modules = [
           musnix.nixosModules.musnix
-          ./nixos/office-configuration.nix
+          ./nixos/device-configs/office-configuration.nix
         ];
       };
+
       nixos-server = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
         modules = [
-          ./nixos/server-configuration.nix
+          ./nixos/device-configs/server-configuration.nix
           vscode-server.nixosModules.default
           ({config, pkgs, ... }: {
             services.vscode-server.enable = true;
@@ -63,25 +57,21 @@
       "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/thinkpad-home.nix
+          ./home-manager/device-configs/thinkpad-home.nix
         ];
       };
-      "jason@surface" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          ./home-manager/surface-home.nix
-        ];
-      };
+
       "jason@office" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/office-home.nix
+          ./home-manager/device-configs/office-home.nix
         ];
       };
+
       "jason@nixos-server" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/server-home.nix
+          ./home-manager/device-configs/server-home.nix
         ];
       };
     };

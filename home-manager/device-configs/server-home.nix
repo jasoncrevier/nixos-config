@@ -3,17 +3,9 @@
 {
   imports =
     [
-      ./audio.nix
-      ./chat.nix
-      ./fish.nix
-      ./games.nix
-      ./git.nix
-      ./graphics.nix
-      ./misc.nix
-      ./plasma-home.nix
-      ./vscode.nix
-      ./web.nix
-      ./theme.nix
+      ../ai.nix
+      ../fish.nix
+      ../git.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";

@@ -16,9 +16,6 @@
     wineWowPackages.staging
   ];
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed
   # an issue I was having so I'll work on understanding it later.
   programs.nix-index = {
