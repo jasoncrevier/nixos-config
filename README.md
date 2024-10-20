@@ -31,6 +31,7 @@ nixos-config
 
 <details>
 <summary>Screenshots</summary>
+
 ![Gnome menu](./screenshots/gnome-menu.png)
 ![Gnome in use](./screenshots/gnome-in-use.png)
 ![Gnome overview](./screenshots/gnome-overview.png)
