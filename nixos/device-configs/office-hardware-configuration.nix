@@ -14,28 +14,18 @@
 
   fileSystems = {
 
-    "/mnt/Games_HDD" = {
-      device = "/dev/disk/by-uuid/8575ae67-7e62-4f00-bb00-63022d128831";
-      fsType = "ext4";
-    };
-
     "/mnt/Games_SSD" = {
       device = "/dev/disk/by-uuid/9cf976f6-754f-474b-bc49-56dd5705b640";
       fsType = "ext4";
     };
 
-    "/mnt/Main_storage" = {
-      device = "/dev/disk/by-uuid/c765f3f4-c218-4baa-ab51-20edd0b67454";
-      fsType = "ext4";
-    };
-
     "/" = {
-      device = "/dev/disk/by-uuid/a22f94c0-9605-4df3-90d8-da1271d927bf";
+      device = "/dev/disk/by-uuid/7c9db782-85d0-417a-8682-60cb4296b843";
       fsType = "ext4";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/C9C5-B882";
+      device = "/dev/disk/by-uuid/172C-B05B";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

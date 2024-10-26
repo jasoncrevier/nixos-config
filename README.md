@@ -41,7 +41,7 @@ System:
 - Shell: fish
 - Theme: Catppuccin Mocha
 
-<details>
+<details open>
 <summary>Screenshots</summary>
 
 ![Gnome menu](./screenshots/gnome-menu.png)
@@ -62,7 +62,7 @@ System:
 - Shell: fish
 - Theme: Catppuccin Mocha
 
-<details>
+<details open>
 <summary>Screenshots</summary>
 
 ![Plasma](./screenshots/plasma.png)
