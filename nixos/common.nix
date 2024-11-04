@@ -52,6 +52,8 @@
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
     git
+    cifs-utils
+    samba
   ];
   
   programs.fish.enable = true;

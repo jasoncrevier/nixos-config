@@ -19,6 +19,16 @@
       fsType = "ext4";
     };
 
+    "/mnt/Storage_SSD" = {
+      device = "/dev/disk/by-uuid/b91872ab-4b4d-41df-a327-8ba7e4639776";
+      fsType = "ext4";
+    };
+
+    "/mnt/Storage_HDD" = {
+      device = "/dev/disk/by-uuid/97edc4de-2734-4bb4-9784-b3ba1fd84d4c";
+      fsType = "ext4";
+    };
+
     "/" = {
       device = "/dev/disk/by-uuid/7c9db782-85d0-417a-8682-60cb4296b843";
       fsType = "ext4";
