@@ -47,11 +47,21 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  #~Users~
+  users.users.jason = {
+    isNormalUser = true;
+    description = "Jason Crevier";
+    shell = pkgs.fish;
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" ];
+  };
+
   #~Housekeeping~
   # Enable some basic applications:
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
     git
+    cifs-utils
+    samba
   ];
   
   programs.fish.enable = true;
@@ -87,4 +97,7 @@
     enableBashIntegration = true;
     enableFishIntegration = true;
   };
+
+  system.stateVersion = "23.05";
+
 }
