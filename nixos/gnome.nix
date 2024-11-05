@@ -35,4 +35,10 @@
       yelp
     ]);
   };
+
+  # Global patch -- using to fix blurry electron apps when using fractional scaling
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
 }
