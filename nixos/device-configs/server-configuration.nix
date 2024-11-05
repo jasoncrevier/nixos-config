@@ -17,5 +17,4 @@
 
   #~Hostname~
   networking.hostName = "nixos-server";
-
 }

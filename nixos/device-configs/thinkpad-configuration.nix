@@ -18,5 +18,4 @@
 
   #~Hostname~
   networking.hostName = "thinkpad";
-
 }
