@@ -19,19 +19,10 @@
 
   #~Networking~
   networking.hostName = "office";
-  # For SSH and InvokeAI
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [  80 443 22 9090 ];
-    allowedUDPPorts = [ 80 443 22 9090 ];
-  };
-
-  #~Sound~
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
+    allowedTCPPorts = [  80 443 22 ];
+    allowedUDPPorts = [ 80 443 22 ];
   };
 
   #~Users~

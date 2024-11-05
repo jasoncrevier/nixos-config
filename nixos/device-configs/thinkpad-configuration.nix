@@ -9,6 +9,7 @@
       
       ../common.nix
       ../gnome.nix
+      ../musnix.nix
       ../steam.nix
       ../syncthing.nix
       ../tailscale.nix
@@ -22,18 +23,6 @@
     allowedTCPPorts = [ 80 443 22 ];
     allowedUDPPorts = [ 80 443 22 ];
   };
-
-  #~Sound~
-  hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
-
-  musnix.enable = true;
-  musnix.kernel.packages = true;
 
   #~Users~
   users.users.jason = {
