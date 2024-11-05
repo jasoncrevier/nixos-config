@@ -10,6 +10,7 @@
       ../common.nix
       ../gnome.nix
       ../steam.nix
+      ../syncthing.nix
       ../tailscale.nix
     ];
 
