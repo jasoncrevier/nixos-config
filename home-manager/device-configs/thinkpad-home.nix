@@ -11,7 +11,6 @@
       ../gnome.nix
       ../graphics.nix
       ../misc.nix
-      ../syncthing.nix
       ../theme.nix
       ../vscode.nix
       ../web.nix
