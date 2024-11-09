@@ -13,6 +13,7 @@
       ../plasma.nix
       ../ssh.nix
       ../steam.nix
+      ../sunshine.nix
       ../syncthing.nix
       ../tailscale.nix
     ];
