@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     heroic
     lutris
+    moonlight-qt
     prismlauncher
   ];
 }
