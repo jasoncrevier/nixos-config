@@ -9,6 +9,7 @@ kscreen-doctor \
     output.HDMI-A-1.enable \
     output.HDMI-A-1.mode.1920x1080@75 \
     output.HDMI-A-1.position.1080,420 \
+    output.HDMI-A-1.scale.1 \
     output.DP-2.enable \
     output.DP-2.mode.1920x1080@75 \
     output.DP-2.position.3000,420
