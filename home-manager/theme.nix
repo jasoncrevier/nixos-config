@@ -2,7 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    catppuccin-cursors.mochaDark
+    # Removing temp due to build error
+    #catppuccin-cursors.mochaDark
   ];
 
   #~Fish~

@@ -25,7 +25,8 @@ dconf.settings = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
       clock-format = "12h";
-      cursor-theme = "catppuccin-mocha-dark-cursors";
+      # Removing temp due to build error
+      #cursor-theme = "catppuccin-mocha-dark-cursors";
       icon-theme = "Papirus-Dark";
       gtk-theme = "catppuccin-mocha-teal-standard";
     };
