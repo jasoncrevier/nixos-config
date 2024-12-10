@@ -12,7 +12,7 @@
   # Exclude some default KDE packages
   environment = {
     systemPackages = with pkgs; [
-      libsForQt5.discover
+      #libsForQt5.discover #Build error 12-04-24
       libsForQt5.kalk
       libsForQt5.packagekit-qt
       libportal-qt5
