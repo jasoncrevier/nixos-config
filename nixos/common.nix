@@ -98,6 +98,13 @@
     enableFishIntegration = true;
   };
 
+  # Automatically collect garbage
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   system.stateVersion = "23.05";
 
 }
