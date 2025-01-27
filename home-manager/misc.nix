@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     bitwarden-desktop
-    bottles
+    #bottles
     freetube
     neofetch
     nicotine-plus
