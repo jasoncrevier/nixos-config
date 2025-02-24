@@ -7,6 +7,7 @@
     qpwgraph
     reaper
     sfizz
+    vital
     yabridge
     yabridgectl
   ];

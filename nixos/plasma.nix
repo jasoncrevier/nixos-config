@@ -12,13 +12,13 @@
   # Exclude some default KDE packages
   environment = {
     systemPackages = with pkgs; [
-      #libsForQt5.discover #Build error 12-04-24
       libsForQt5.kalk
       libsForQt5.packagekit-qt
       libportal-qt5
-      kcolorchooser
-      krdc
-      kolourpaint
+      kdePackages.discover
+      kdePackages.kcolorchooser
+      kdePackages.krdc
+      kdePackages.kolourpaint
     ];
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
