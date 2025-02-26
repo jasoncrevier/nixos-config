@@ -59,6 +59,7 @@
   # Enable some basic applications:
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
+    arp-scan
     git
     cifs-utils
     samba
