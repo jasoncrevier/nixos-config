@@ -7,6 +7,7 @@
     [
       ./office-hardware-configuration.nix
 
+      ../audio.nix
       ../common.nix
       ../flatpak.nix
       ../musnix.nix

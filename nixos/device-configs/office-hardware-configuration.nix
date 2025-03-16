@@ -14,13 +14,13 @@
 
   fileSystems = {
 
-    "/mnt/Games_SSD" = {
-      device = "/dev/disk/by-uuid/9cf976f6-754f-474b-bc49-56dd5705b640";
+    "/mnt/Storage_SSD" = {
+      device = "/dev/disk/by-uuid/6d20d237-a5db-4cc4-aed4-bd75affac80c";
       fsType = "ext4";
     };
-
-    "/mnt/Storage_SSD" = {
-      device = "/dev/disk/by-uuid/b91872ab-4b4d-41df-a327-8ba7e4639776";
+    
+    "/mnt/Gaming_SSD" = {
+      device = "/dev/disk/by-uuid/2ddb6b4b-f630-4763-9e0c-b678168e41d4";
       fsType = "ext4";
     };
 

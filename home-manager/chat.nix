@@ -5,6 +5,7 @@
   discord
   element-desktop
   mumble
+  nextcloud-talk-desktop
   signal-desktop
   telegram-desktop
   ];
