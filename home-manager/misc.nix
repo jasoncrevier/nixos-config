@@ -3,9 +3,9 @@
 {
   home.packages = with pkgs; [
     bitwarden-desktop
-    #bottles
     chromium
     freetube
+    (callPackage ../pkgs/heynote.nix {})
     neofetch
     nicotine-plus
     kdePackages.kasts

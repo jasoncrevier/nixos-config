@@ -12,9 +12,9 @@
   # Exclude some default KDE packages
   environment = {
     systemPackages = with pkgs; [
-      libsForQt5.kalk
-      libsForQt5.packagekit-qt
-      libportal-qt5
+      kdePackages.kalk
+      kdePackages.packagekit-qt
+      libportal-qt6
       kdePackages.discover
       kdePackages.kcolorchooser
       kdePackages.krdc
