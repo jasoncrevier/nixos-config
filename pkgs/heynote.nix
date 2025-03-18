@@ -34,7 +34,7 @@
     meta = with lib; {
       description = "A dedicated scratchpad for developers";
       homepage = "https://heynote.com/";
-      license = licenses.mit;
+      license = with licenses; [ mit commons-clause ];
       maintainers = with maintainers; [ jasoncrevier ];
       platforms = platforms.x86_64;
     };
