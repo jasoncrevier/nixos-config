@@ -1,4 +1,4 @@
-{ lib, appimageTools, fetchurl, desktop-file-utils }:
+{ lib, appimageTools, fetchurl, desktop-file-utils, nix-update-script }:
 
   let
     pname = "heynote";
@@ -30,6 +30,8 @@
       --set-key Comment --set-value "Heynote" \
       --delete-original $out/heynote.desktop
     '';
+
+    passthru.updateScript = nix-update-script { };
 
     meta = with lib; {
       description = "A dedicated scratchpad for developers";
