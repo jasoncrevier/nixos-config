@@ -26,6 +26,7 @@
         inherit pkgs;
         modules = [
           musnix.nixosModules.musnix
+          catppuccin.nixosModules.catppuccin
           ./nixos/device-configs/thinkpad-configuration.nix
         ];
       };
@@ -57,6 +58,7 @@
       "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+          catppuccin.homeManagerModules.catppuccin
           ./home-manager/device-configs/thinkpad-home.nix
         ];
       };
