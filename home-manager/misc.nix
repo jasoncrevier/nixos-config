@@ -6,6 +6,7 @@
     chromium
     freetube
     (callPackage ../pkgs/heynote.nix {})
+    micro
     neofetch
     nicotine-plus
     kdePackages.kasts

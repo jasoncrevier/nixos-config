@@ -8,7 +8,7 @@
     displayManager.sddm.wayland.enable = true;
     desktopManager.plasma6.enable = true;
   };
-  
+
   # Exclude some default KDE packages
   environment = {
     systemPackages = with pkgs; [

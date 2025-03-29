@@ -14,6 +14,7 @@
       ../steam.nix
       ../syncthing.nix
       ../tailscale.nix
+      ../theme/nix
     ];
 
   #~Hostname~

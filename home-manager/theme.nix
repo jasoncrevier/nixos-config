@@ -2,11 +2,15 @@
 
 {
   home.packages = with pkgs; [
-    # Removing temp due to build error
-    #catppuccin-cursors.mochaDark
+    catppuccin-cursors.mochaDark
   ];
-
-  #~Fish~
-  # Run: fish_config theme save "Catppuccin Mocha"
-  home.file."/.config/fish/themes/Catppuccin Mocha.theme".source = ./catpuccin-mocha-fish-theme;
+  
+  catppuccin = {
+    flavor = "mocha";
+    accent = "teal";
+    enable = true;
+  };
+  ##~Fish~
+  ## Run: fish_config theme save "Catppuccin Mocha"
+  #home.file."/.config/fish/themes/Catppuccin Mocha.theme".source = ./catpuccin-mocha-fish-theme;
 }

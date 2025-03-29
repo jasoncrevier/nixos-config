@@ -4,7 +4,6 @@
   programs.vscode = {
     enable = true;
     profiles.default.extensions = with pkgs.vscode-extensions; [
-      (catppuccin.catppuccin-vsc.override { accent = "teal"; })
       bbenoist.nix
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {

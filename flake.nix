@@ -6,17 +6,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     musnix.url = "github:musnix/musnix";
-    catppuccin-vsc.url = "github:catppuccin/vscode";
+    catppuccin.url = "github:catppuccin/nix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin-vsc, musnix, vscode-server, ... }@inputs:
+  outputs = { nixpkgs, home-manager, catppuccin, musnix, vscode-server, ... }@inputs:
 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [catppuccin-vsc.overlays.default];
       config.allowUnfree = true;
     };
   in
@@ -36,6 +35,7 @@
         inherit pkgs;
         modules = [
           musnix.nixosModules.musnix
+          catppuccin.nixosModules.catppuccin
           ./nixos/device-configs/office-configuration.nix
         ];
       };
@@ -64,6 +64,7 @@
       "jason@office" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+          catppuccin.homeManagerModules.catppuccin
           ./home-manager/device-configs/office-home.nix
         ];
       };
