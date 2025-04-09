@@ -8,7 +8,8 @@
     reaper
     sfizz
     vital
-    yabridge
-    yabridgectl
+    # Broken -- 04-05-2024 -- needs Wine update
+    #yabridge
+    #yabridgectl
   ];
 }

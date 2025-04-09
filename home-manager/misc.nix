@@ -5,7 +5,7 @@
     bitwarden-desktop
     chromium
     freetube
-    (callPackage ../pkgs/heynote.nix {})
+    heynote
     micro
     neofetch
     nicotine-plus
@@ -13,6 +13,7 @@
     obsidian
     onlyoffice-bin
     spotify
+    supersonic-wayland
     vlc
     winetricks
     wineWowPackages.staging
