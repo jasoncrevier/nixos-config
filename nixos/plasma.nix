@@ -9,7 +9,7 @@
     desktopManager.plasma6.enable = true;
   };
 
-  # Exclude some default KDE packages
+  # Exclude some default KDE packages and add some additional ones
   environment = {
     systemPackages = with pkgs; [
       kdePackages.kalk
