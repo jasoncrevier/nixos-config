@@ -5,8 +5,7 @@
   discord
   element-desktop
   mumble
-  nextcloud-talk-desktop
-  signal-desktop
+  signal-desktop-bin
   telegram-desktop
   ];
 }

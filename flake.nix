@@ -58,7 +58,7 @@
       "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          catppuccin.homeManagerModules.catppuccin
+          catppuccin.homeModules.catppuccin
           ./home-manager/device-configs/thinkpad-home.nix
         ];
       };

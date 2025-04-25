@@ -14,7 +14,7 @@
     systemPackages = with pkgs; [
       kdePackages.kalk
       kdePackages.packagekit-qt
-      libportal-qt6
+      #libportal-qt6 #Broken 19-04-25
       kdePackages.discover
       kdePackages.kcolorchooser
       kdePackages.krdc

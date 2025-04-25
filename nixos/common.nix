@@ -63,6 +63,7 @@
     git
     cifs-utils
     samba
+    wl-clipboard
   ];
   
   programs.fish.enable = true;
