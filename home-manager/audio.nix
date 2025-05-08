@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     bitwig-studio
-    #mixxx #Broken 19-04-24
+    mixxx
     qpwgraph
     reaper
     sfizz

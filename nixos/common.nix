@@ -60,8 +60,9 @@
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
     arp-scan
-    git
     cifs-utils
+    git
+    ipscan
     samba
     wl-clipboard
   ];
