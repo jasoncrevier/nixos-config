@@ -60,10 +60,7 @@
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
     arp-scan
-<<<<<<< HEAD
-=======
     bat
->>>>>>> b750c041c15c2d6f9bf7f696d23a302404376773
     cifs-utils
     git
     ipscan
