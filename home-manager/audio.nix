@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     bitwig-studio
+    cardinal
     mixxx
     qpwgraph
     reaper
