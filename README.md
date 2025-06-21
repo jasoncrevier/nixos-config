@@ -29,17 +29,17 @@ nixos-config
 ## Devices
 ### Thinkpad
 Specs:
-- Model: Lenovo ThinkPad T470
-- Processor: Intel® Core™ i5-7300U
-- Graphics: Intel® HD Graphics 620
-- Memory: 16GB
-- Storage: 256GB
+- Model: **Lenovo ThinkPad T470**
+- Processor: **Intel® Core™ i5-7300U**
+- Graphics: **Intel® HD Graphics 620**
+- Memory: **16GB**
+- Storage: **256GB**
 
 System:
-- Desktop environment: Gnome 46
-- Window manager: Wayland
-- Shell: fish
-- Theme: Catppuccin Mocha
+- Desktop environment: **Gnome 46**
+- Window manager: **Wayland**
+- Shell: **fish**
+- Theme: **Catppuccin Mocha**
 
 <details open>
 <summary>Screenshots</summary>
@@ -51,16 +51,16 @@ System:
 
 ### Office workstation
 Specs:
-- Processor: AMD Ryzen 7 5800X
-- Graphics: Radeon 6600
-- Memory: 16GB
-- Storage: 256GB + 256GB + 1TB + 1TB
+- Processor: **AMD Ryzen 7 5800X**
+- Graphics: **Radeon 6600**
+- Memory: **16GB**
+- Storage: **256GB + 256GB + 1TB + 1TB**
 
 System:
-- Desktop environment: Plasma 6
-- Window manager: Wayland
-- Shell: fish
-- Theme: Catppuccin Mocha
+- Desktop environment: **Plasma 6**
+- Window manager: **Wayland**
+- Shell: **fish**
+- Theme: **Catppuccin Mocha**
 
 <details open>
 <summary>Screenshots</summary>
