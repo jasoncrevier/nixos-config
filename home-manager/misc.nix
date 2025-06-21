@@ -6,14 +6,15 @@
     chromium
     freetube
     heynote
+    jellyfin-media-player
+    kdePackages.kasts
     micro
     neofetch
     nicotine-plus
-    kdePackages.kasts
     obsidian
     onlyoffice-bin
     spotify
-    supersonic-wayland
+    supersonic
     vlc
     winetricks
     wineWowPackages.staging
