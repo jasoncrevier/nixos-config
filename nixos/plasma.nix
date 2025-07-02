@@ -11,19 +11,19 @@
 
   # Exclude some default KDE packages and add some additional ones
   environment = {
-    systemPackages = with pkgs; [
-      kdePackages.kalk
-      kdePackages.packagekit-qt
-      #libportal-qt6 #Broken 19-04-25
-      kdePackages.discover
-      kdePackages.kcolorchooser
-      kdePackages.krdc
-      kdePackages.kolourpaint
+    systemPackages = with pkgs.kdePackages; [
+      discover
+      kalk
+      kcolorchooser
+      kolourpaint
+      korganizer
+      krdc
+      packagekit-qt
     ];
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
-      oxygen
       khelpcenter
+      oxygen
     ];
   };
   
