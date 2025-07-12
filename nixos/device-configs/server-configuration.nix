@@ -7,13 +7,13 @@
     ./server-hardware-configuration.nix
 
     ../common.nix
+    ../nvidia.nix
+    ../plasma.nix
     ../ssh.nix
+    ../steam.nix
+    ../sunshine.nix
     ../tailscale.nix
   ];
-
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
 
   #~Hostname~
   networking.hostName = "nixos-server";

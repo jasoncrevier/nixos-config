@@ -18,6 +18,7 @@
       ../syncthing.nix
       ../tailscale.nix
       ../theme.nix
+      ../workstation.nix
     ];
 
   #~Hostname~
