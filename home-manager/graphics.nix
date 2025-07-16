@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-  gimp
+  #gimp Broken 15-7-25
   inkscape
   ];
 }
