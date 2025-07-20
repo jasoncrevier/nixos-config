@@ -6,6 +6,8 @@
       ../ai.nix
       ../fish.nix
       ../git.nix
+      ../plasma.nix
+      ../vscode.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";
