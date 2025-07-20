@@ -41,15 +41,11 @@
         ];
       };
 
-      nixos-server = nixpkgs.lib.nixosSystem {
+      nix-server = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit pkgs;
         modules = [
-          ./nixos/device-configs/server-configuration.nix
-          vscode-server.nixosModules.default
-          ({config, pkgs, ... }: {
-            services.vscode-server.enable = true;
-          })
+          ./nixos/device-configs/nix-server-configuration.nix
         ];
       };
     };
@@ -71,10 +67,10 @@
         ];
       };
 
-      "jason@nixos-server" = home-manager.lib.homeManagerConfiguration {
+      "jason@nix-server" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home-manager/device-configs/server-home.nix
+          ./home-manager/device-configs/nix-server-home.nix
         ];
       };
     };

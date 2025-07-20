@@ -20,6 +20,11 @@
       ../workstation.nix
     ];
 
+  # Enable Wayland for SDDM
+  services = {
+    displayManager.sddm.wayland.enable = true;
+  };
+
   #~Hostname~
   networking.hostName = "thinkpad";
 }
