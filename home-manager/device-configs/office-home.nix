@@ -14,6 +14,7 @@
       ../plasma.nix
       ../vscode.nix
       ../web.nix
+      ../wine.nix
       ../theme.nix
     ];
   home.username = "jason";

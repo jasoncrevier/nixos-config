@@ -7,6 +7,7 @@
     [
       ./office-hardware-configuration.nix
 
+      ../amd.nix
       ../audio.nix
       ../common.nix
       ../flatpak.nix
@@ -18,6 +19,7 @@
       ../syncthing.nix
       ../tailscale.nix
       ../theme.nix
+      ../workstation.nix
     ];
 
   # Enable Wayland for SDDM

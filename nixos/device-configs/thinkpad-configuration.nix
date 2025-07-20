@@ -8,13 +8,16 @@
       ./thinkpad-hardware-configuration.nix
       
       ../common.nix
-      ../gnome.nix
+      ../flatpak.nix
+      ../intel.nix
       ../musnix.nix
+      ../plasma.nix
       ../ssh.nix
       ../steam.nix
       ../syncthing.nix
       ../tailscale.nix
       ../theme.nix
+      ../workstation.nix
     ];
 
   # Enable Wayland for SDDM

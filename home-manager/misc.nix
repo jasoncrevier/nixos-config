@@ -16,8 +16,6 @@
     spotify
     supersonic
     vlc
-    winetricks
-    wineWowPackages.staging
   ];
 
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed

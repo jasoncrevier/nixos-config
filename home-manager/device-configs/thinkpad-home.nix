@@ -8,12 +8,13 @@
       ../fish.nix
       ../games.nix
       ../git.nix
-      ../gnome.nix
       ../graphics.nix
       ../misc.nix
+      ../plasma.nix
       ../theme.nix
       ../vscode.nix
       ../web.nix
+      ../wine.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";
