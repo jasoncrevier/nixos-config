@@ -11,15 +11,19 @@
 
   # Exclude some default KDE packages and add some additional ones
   environment = {
-    systemPackages = with pkgs.kdePackages; [
+    systemPackages = with pkgs; [
+      adwaita-icon-theme
+    ] 
+    ++ (with pkgs.kdePackages; [
       discover
+      filelight
       kalk
       kcolorchooser
       kolourpaint
       korganizer
       krdc
       packagekit-qt
-    ];
+    ]);
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
       khelpcenter

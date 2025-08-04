@@ -9,7 +9,7 @@
     heroic
     lutris
     moonlight-qt
-    #prismlauncher Broken 15-7-25
+    prismlauncher
     protonup-qt
   ];
 }
