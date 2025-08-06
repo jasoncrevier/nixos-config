@@ -121,9 +121,17 @@ ForegroundNormal=205, 214, 244
 ForegroundPositive=166, 227, 161
 ForegroundVisited=203, 166, 247
 
+[DirSelect Dialog]
+DirSelectDialog Size=720,960
+History Items[$e]=file:$HOME/nixos-config,file:$HOME/Desktop,file:$HOME/nixos-config,file:///run/media/jason/Files/Music,file:///run/media/jason/Files/Music/Simian Mobile Disco,file:///run/media/jason/Files/Music/2016 - Various Artists - OWSLA Worldwide Broadcast,file:///run/media/jason/Files/Music/Alice Longyu Gao,file:$HOME/Desktop/clipping,file:$HOME/Desktop/clipping,file:$HOME/Desktop,file:$HOME/Desktop,smb://192.168.3.101/media/Music,file:$HOME/nixos-config,file:$HOME/Github projects/nixpkgs,file:$HOME/nixos-config,file:///mnt/Storage_HDD/Nextcloud/Jekyll site testing/website,file:$HOME/nixos-config,file:$HOME/Desktop,file:$HOME/Desktop,file:$HOME/nixos-config,file:$HOME/Github projects/nixpkgs,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/Github projects/nixpkgs,file:$HOME/nixos-config,file:$HOME/nixos-config,file:$HOME/Github projects,file:$HOME/Github projects,file:$HOME/nixos-config,file:///mnt/Storage_HDD/Nextcloud/Heynote buffers,file:$HOME/nixos-config,file:$HOME/Github projects/server-config,file:///run/media/jason/Gaming_SSD,file:///mnt/Storage_HDD/Nextcloud/Jekyll site/website,file:///mnt/Storage_HDD/Nextcloud,file:///mnt/Storage_SSD/Nextcloud
+Splitter State=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x8a\x00\x00\x02\xa8\x00\xff\xff\xff\xff\x01\x00\x00\x00\x01\x00
+
 [General]
 ColorScheme=Catppuccin Mocha Teal
 ColorSchemeHash=2ef8a9f7238e072ca91b0eb590f49ded650c76bd
+
+[Icons]
+Theme=breeze
 
 [KDE]
 SingleClick=false
@@ -140,7 +148,7 @@ Show Full Path=false
 Show Inline Previews=true
 Show Preview=false
 Show Speedbar=true
-Show hidden files=false
+Show hidden files=true
 Sort by=Name
 Sort directories first=true
 Sort hidden files last=false
