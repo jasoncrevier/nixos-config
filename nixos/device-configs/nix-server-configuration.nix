@@ -17,7 +17,7 @@
 
   # Autologin
   services.displayManager.autoLogin = {
-    enable = false;
+    enable = true;
     user = "jason";
   };
 
