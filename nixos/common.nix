@@ -30,6 +30,7 @@
     xkb.layout = "us";
     xkb.variant = "";
     enable = true;
+    wacom.enable = true;
   };
 
   #~Graphics~

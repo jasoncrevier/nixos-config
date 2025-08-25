@@ -12,6 +12,7 @@
       ../graphics.nix
       ../misc.nix
       ../plasma.nix
+      ../video.nix
       ../vscode.nix
       ../web.nix
       ../wine.nix
