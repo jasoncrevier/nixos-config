@@ -6,7 +6,7 @@
     chromium
     freetube
     heynote
-    jellyfin-media-player
+    #jellyfin-media-player Broken 28-08-25
     kdePackages.kasts
     micro
     neofetch
@@ -15,7 +15,9 @@
     onlyoffice-bin
     spotify
     supersonic
+    tutanota-desktop
     vlc
+    #(callPackage ../pkgs/amplitude.nix {})
   ];
 
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed

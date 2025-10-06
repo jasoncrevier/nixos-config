@@ -1,0 +1,68 @@
+{ appimageTools
+, fetchurl
+, lib
+, nix-update-script
+, ...
+}:
+
+let
+  pname = "amplitude_soundboard";
+  version = "2.11.0";
+
+  src = fetchurl {
+    url = "https://github.com/dan0v/AmplitudeSoundboard/releases/download/${version}/Amplitude_Soundboard-x86_64.AppImage";
+    sha256 = "sha256-va6QIDI9pXgYvjAQaBHm2kfrUeIEm1x+IudauqXgph0=";
+  };
+
+  # Extract contents so we can install .desktop & icons
+  contents = appimageTools.extractType2 { inherit pname version src; };
+in
+appimageTools.wrapType2 {
+  inherit pname version src;
+
+  # Ensure needed runtime libraries are available inside FHS env
+  extraPkgs = pkgs: with pkgs; [
+    icu
+    zlib
+    fontconfig
+  ];
+
+  extraInstallCommands = ''
+    mkdir -p $out/share/applications $out/share/icons
+
+    if compgen -G "${contents}/*.desktop" > /dev/null; then
+      desktop_out="$out/share/applications/${pname}.desktop"
+      install -Dm444 $(ls ${contents}/*.desktop | head -n1) "$desktop_out"
+
+      substituteInPlace "$desktop_out" \
+        --replace-fail 'Exec=AppRun' 'Exec=${pname} %U' || true \
+        --replace-fail 'Exec=amplitude_soundboard' 'Exec=${pname} %U' || true \
+        --replace-fail 'Icon=app' 'Icon=${pname}' || true
+    fi
+
+    if [ -d "${contents}/usr/share/icons" ]; then
+      cp -r ${contents}/usr/share/icons $out/share/
+    else
+      for size in 512 256 128 64 48 32; do
+        if ls ${contents}/*''${size}*.png >/dev/null 2>&1; then
+          install -Dm444 $(ls ${contents}/*''${size}*.png | head -n1) \
+            $out/share/icons/hicolor/''${size}x''${size}/apps/${pname}.png
+        fi
+      done
+      if [ -f "${contents}/.DirIcon" ]; then
+        install -Dm444 ${contents}/.DirIcon \
+          $out/share/icons/hicolor/256x256/apps/${pname}.png
+      fi
+    fi
+  '';
+
+  passthru.updateScript = nix-update-script { };
+
+  meta = with lib; {
+    description = "Amplitude Soundboard (prebuilt AppImage)";
+    homepage = "https://amplitude-soundboard.dan0v.com/";
+    license = licenses.mit;
+    maintainers = [ maintainers.jasoncrevier ];
+    platforms = platforms.linux;
+  };
+}

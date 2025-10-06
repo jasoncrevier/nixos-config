@@ -21,6 +21,8 @@
       kcolorchooser
       kolourpaint
       korganizer
+      kdepim-addons
+      kdepim-runtime
       krdc
       packagekit-qt
     ]);
