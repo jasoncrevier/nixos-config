@@ -10,10 +10,6 @@
     user = "jason";
     group = "wheel";
     dataDir = "/home/jason/syncthing";
-    settings = {
-        devices = {
-            "Tower" = { id = "RNAGDUN-OK6H2AR-KYHHFVM-267VUXN-ZP2RMUU-72LSU54-2ANRCUH-EMAFIQL"; };
-            };
-        };
-    };
+    configDir = "/home/jason/.config/syncthing";
+  };
 }

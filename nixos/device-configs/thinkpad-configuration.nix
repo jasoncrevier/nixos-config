@@ -6,6 +6,7 @@
   imports =
     [
       ./thinkpad-hardware-configuration.nix
+      ./thinkpad-syncthing.nix
       
       ../common.nix
       ../flatpak.nix

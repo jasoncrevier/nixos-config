@@ -6,6 +6,7 @@
   imports =
     [
       ./office-hardware-configuration.nix
+      ./office-syncthing.nix
 
       ../amd.nix
       ../audio.nix
