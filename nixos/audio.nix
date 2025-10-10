@@ -10,7 +10,7 @@
     jack.enable = true;
   };
   #programs.noisetorch.enable = true;
-    environment.systemPackages = with pkgs; [
-      easyeffects
+  environment.systemPackages = with pkgs; [
+    easyeffects
   ];
 }

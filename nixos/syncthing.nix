@@ -12,4 +12,7 @@
     dataDir = "/home/jason/syncthing";
     configDir = "/home/jason/.config/syncthing";
   };
+  environment.systemPackages = with pkgs; [
+    syncthingtray
+  ];
 }
