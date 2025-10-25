@@ -3,7 +3,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Jason Crevier";
-    userEmail = "jason@jasoncrevier.com";
+    settings = {
+      user = {
+        name = "Jason Crevier";
+        email = "jason@jasoncrevier.com";
+      };
+    };
   };
 }
