@@ -64,11 +64,17 @@
     cifs-utils
     git
     ipscan
+    qmk
     samba
     unrar
+    via
     wl-clipboard
   ];
   
+  hardware.keyboard.qmk.enable = true;
+
+  services.udev.packages = [ pkgs.via ];
+
   programs.fish.enable = true;
   
   programs.tmux = {

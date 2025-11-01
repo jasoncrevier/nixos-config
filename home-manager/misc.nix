@@ -13,10 +13,10 @@
     nicotine-plus
     notify-client
     obsidian
-    onlyoffice-bin
+    onlyoffice-desktopeditors
     spotify
     supersonic
-    #tutanota-desktop
+    tutanota-desktop
     vlc
     #(callPackage ../pkgs/amplitude.nix {})
   ];
