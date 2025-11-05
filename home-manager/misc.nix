@@ -6,7 +6,6 @@
     chromium
     freetube
     heynote
-    #jellyfin-media-player Broken 28-08-25
     kdePackages.kasts
     micro
     neofetch

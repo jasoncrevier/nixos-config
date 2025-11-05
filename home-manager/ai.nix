@@ -1,7 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-  ollama
-  ];
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+  services.open-webui.enable = true;
 }
