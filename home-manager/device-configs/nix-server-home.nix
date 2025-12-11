@@ -3,7 +3,6 @@
 {
   imports =
     [
-      ../ai.nix
       ../fish.nix
       ../games.nix
       ../git.nix

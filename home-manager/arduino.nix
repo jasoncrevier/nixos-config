@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    winetricks
-    wineWowPackages.waylandFull
+    arduino-ide
+    python3
   ];
 }

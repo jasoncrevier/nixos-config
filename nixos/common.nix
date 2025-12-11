@@ -52,7 +52,7 @@
     isNormalUser = true;
     description = "Jason Crevier";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" "dialout" "uucp" ];
   };
 
   #~Housekeeping~
@@ -63,7 +63,7 @@
     bat
     cifs-utils
     git
-    ipscan
+    libimobiledevice
     qmk
     samba
     unrar
@@ -74,6 +74,8 @@
   hardware.keyboard.qmk.enable = true;
 
   services.udev.packages = [ pkgs.via ];
+
+  services.usbmuxd.enable = true;
 
   programs.fish.enable = true;
   
