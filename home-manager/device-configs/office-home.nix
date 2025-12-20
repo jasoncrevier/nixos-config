@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ../ai.nix
+      ../arduino.nix
       ../audio.nix
       ../chat.nix
       ../fish.nix
