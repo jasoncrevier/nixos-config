@@ -5,9 +5,11 @@
 {
   imports = [ 
     ./nix-server-hardware-configuration.nix
-
+    
+    ../ai.nix
     ../nvidia.nix
     ../common.nix
+    ../docker.nix
     ../plasma.nix
     ../ssh.nix
     ../steam.nix
@@ -31,4 +33,17 @@
 
   #~Hostname~
   networking.hostName = "nix-server";
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 80 81 2052 3000 9443 8083 ];
+    allowedUDPPortRanges = [
+      { from = 80; to = 81; }
+      { from = 2052; to = 2052; }
+      { from = 3000; to = 3000; }
+      { from = 9443; to = 9443; }
+      { from = 8083; to = 8083; }
+    ];
+  };
+
 }
