@@ -13,14 +13,16 @@
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
+      mariadb
     ] 
     ++ (with pkgs.kdePackages; [
+      akonadi
       discover
       filelight
       kalk
       kcolorchooser
       kolourpaint
-      korganizer
+      kontact
       kdepim-addons
       kdepim-runtime
       krdc
@@ -33,6 +35,13 @@
     ];
   };
   
+  programs.kde-pim.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  };
+
   # Extra programs
   programs = {
     gnome-disks.enable = true; # I just like gnome-disks
