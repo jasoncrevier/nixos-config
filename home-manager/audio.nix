@@ -10,7 +10,7 @@
     reaper
     sfizz
     vital
-    yabridge
-    yabridgectl
+    #yabridge - Broken 05-01-26
+    #yabridgectl - Broken 05-01-26
   ];
 }

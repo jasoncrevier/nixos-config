@@ -70,6 +70,11 @@
     via
     wl-clipboard
   ];
+
+fonts.packages = with pkgs; [
+  ibm-plex
+];
+
   
   hardware.keyboard.qmk.enable = true;
 
