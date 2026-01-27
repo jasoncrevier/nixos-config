@@ -59,6 +59,7 @@
   # Enable some basic applications:
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
+    android-tools
     arp-scan
     bat
     cifs-utils
@@ -71,9 +72,21 @@
     wl-clipboard
   ];
 
-fonts.packages = with pkgs; [
-  ibm-plex
-];
+  fonts.packages = with pkgs; [
+    ibm-plex
+    noto-fonts-color-emoji
+  ];
+
+  fonts.fontconfig = {
+    enable = true;
+    useEmbeddedBitmaps = true;
+    defaultFonts = {
+      serif = [ "IBM Plex Serif" "Noto Color Emoji" ];
+      sansSerif = [ "IBM Plex Sans" "Noto Color Emoji" ];
+      monospace = [ "IBM Plex Mono" "Noto Color Emoji" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
 
   
   hardware.keyboard.qmk.enable = true;
@@ -97,8 +110,6 @@ fonts.packages = with pkgs; [
       "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
   };
-
-  programs.adb.enable = true;
 
   # Remove the manual
   documentation.nixos.enable = false;
