@@ -71,6 +71,23 @@
     via
     wl-clipboard
   ];
+
+  fonts.packages = with pkgs; [
+    ibm-plex
+    noto-fonts-color-emoji
+  ];
+
+  fonts.fontconfig = {
+    enable = true;
+    useEmbeddedBitmaps = true;
+    defaultFonts = {
+      serif = [ "IBM Plex Serif" "Noto Color Emoji" ];
+      sansSerif = [ "IBM Plex Sans" "Noto Color Emoji" ];
+      monospace = [ "IBM Plex Mono" "Noto Color Emoji" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
+  };
+
   
   hardware.keyboard.qmk.enable = true;
 
