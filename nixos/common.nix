@@ -59,6 +59,7 @@
   # Enable some basic applications:
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
+    android-tools
     arp-scan
     bat
     cifs-utils
@@ -92,8 +93,6 @@
       "widget.use-xdg-desktop-portal.file-picker" = 1;
     };
   };
-
-  programs.adb.enable = true;
 
   # Remove the manual
   documentation.nixos.enable = false;
