@@ -8,6 +8,8 @@
     openFirewall = true;
     settings = {
       MusicFolder = "/mnt/Media/Music";
+      Address = "0.0.0.0";
+      Port = 4533;
     };
   };
 }
