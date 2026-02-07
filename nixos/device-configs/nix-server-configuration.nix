@@ -11,6 +11,7 @@
     ../common.nix
     ../docker.nix
     ../jellyfin.nix
+    ../navidrome.nix
     ../plasma.nix
     ../ssh.nix
     ../steam.nix
@@ -24,8 +25,13 @@
     user = "jason";
   };
 
-  # Enable Wayland for SDDM
-  services.displayManager.sddm.wayland.enable = true;
+  # Disable Wayland for SDDM
+  services = {
+    displayManager.sddm.wayland.enable = false;
+  };
+
+  # Use X11 instead of Wayland
+  services.displayManager.defaultSession = "plasmax11";
 
   #~Hostname~
   networking.hostName = "nix-server";
