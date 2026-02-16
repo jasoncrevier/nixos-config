@@ -6,5 +6,6 @@
   mumble
   signal-desktop-bin
   telegram-desktop
+  zulip
   ];
 }
