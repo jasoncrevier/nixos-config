@@ -32,12 +32,12 @@
 
 stdenv.mkDerivation rec {
   pname = "bitwig-studio-unwrapped";
-  version = "6.0-beta-13";
+  version = "6.0-beta-15";
 
   src = fetchurl {
     name = "bitwig-studio-${version}.deb";
-    url = "https://www.bitwig.com/dl/Bitwig%20Studio/6.0%20Beta%2013/installer_linux/";
-    hash = "sha256-qiwm++qGrYIHSpqx824VtVp/OE/1JRjGhfkOBRcLjB4=";
+    url = "https://www.bitwig.com/dl/Bitwig%20Studio/6.0%20Beta%2015/installer_linux/";
+    hash = "sha256-c/2lZLjz3ms5gqzY9/AFZdOQee15R4lmnS5juNB+3HA=";
   };
 
   nativeBuildInputs = [
