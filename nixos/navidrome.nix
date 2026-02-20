@@ -10,7 +10,7 @@
       MusicFolder = "/mnt/Media/Music";
       Address = "0.0.0.0";
       Port = 4533;
-      Scanner.Schedule = "1h";
+      Scanner.Schedule = 0 * * * *;
       Sannder.PurgeMissing = "always";
     };
   };
