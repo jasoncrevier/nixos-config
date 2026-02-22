@@ -38,6 +38,9 @@
   # Enable VS Code server
   services.vscode-server.enable = true;
 
+  # Enable VS Code server
+  services.vscode-server.enable = true;
+
   #~Hostname~
   networking.hostName = "nix-server";
 

@@ -6,6 +6,7 @@
     profiles.default = {
       userSettings = {
         "editor.fontFamily" = "IBM Plex Mono";
+        "remote.SSH.useLocalServer" = false;
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
