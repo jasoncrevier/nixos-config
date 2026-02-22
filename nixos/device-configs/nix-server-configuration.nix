@@ -33,6 +33,9 @@
   # Use X11 instead of Wayland
   services.displayManager.defaultSession = "plasmax11";
 
+  # Enable VS Code server
+  services.vscode-server.enable = true;
+
   #~Hostname~
   networking.hostName = "nix-server";
 
