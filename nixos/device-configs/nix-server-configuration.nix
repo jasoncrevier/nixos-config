@@ -11,6 +11,7 @@
     ../common.nix
     ../docker.nix
     ../jellyfin.nix
+    ../linkwarden.nix
     ../navidrome.nix
     ../plasma.nix
     ../ssh.nix
@@ -32,6 +33,9 @@
 
   # Use X11 instead of Wayland
   services.displayManager.defaultSession = "plasmax11";
+  
+  # Enable VS Code server
+  services.vscode-server.enable = true;
 
   # Enable VS Code server
   services.vscode-server.enable = true;
