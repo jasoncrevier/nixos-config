@@ -11,9 +11,13 @@
     musnix.url = "github:musnix/musnix";
     catppuccin.url = "github:catppuccin/nix";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, nixpkgs-master, home-manager, catppuccin, musnix, vscode-server, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-master, home-manager, catppuccin, musnix, vscode-server, sops-nix, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -64,8 +68,14 @@
 
         nix-server = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
-            { nixpkgs.config.allowUnfree = true; }
+            sops-nix.nixosModules.sops
+            vscode-server.nixosModules.default
+            {
+              nixpkgs.config.allowUnfree = true;
+              services.vscode-server.enable = true;
+            }
             ./nixos/device-configs/nix-server-configuration.nix
           ];
         };
