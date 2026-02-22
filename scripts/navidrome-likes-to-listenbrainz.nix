@@ -18,7 +18,7 @@ let
     # --------------------------------------------------
     DB_PATH = "${dbPath}"
     TOKEN_FILE = "${tokenFile}"
-    LOOKBACK_DAYS = 7
+    LOOKBACK_MINUTES = 35 
     FEEDBACK_URL = "https://api.listenbrainz.org/1/feedback/recording-feedback"
     REQUEST_DELAY = 0.25
     MAX_RETRIES = 6
@@ -103,8 +103,8 @@ let
             token = f.read().strip()
 
         now_utc = datetime.now(timezone.utc)
-        start_dt = now_utc - timedelta(days=LOOKBACK_DAYS)
-        end_dt = now_utc + timedelta(days=1)
+        start_dt = now_utc - timedelta(minutes=LOOKBACK_MINUTES)
+        end_dt = now_utc + timedelta(minutes=5) # Small future buffer
 
         start_str = start_dt.strftime('%Y-%m-%d %H:%M:%S')
         end_str = end_dt.strftime('%Y-%m-%d %H:%M:%S')
@@ -113,6 +113,7 @@ let
             print(f"Error: Database not found at {DB_PATH}")
             return
 
+        print(f"Checking for stars between {start_str} and {end_str}...")
         rows = query_loved_tracks(DB_PATH, start_str, end_str)
         print(f"Found {len(rows)} starred tracks.")
 
@@ -144,11 +145,8 @@ in
     description = "Run Navidrome to ListenBrainz sync every 30 mins";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      # Run 1 minute after the system/timer starts (Startup)
       OnBootSec = "1min";
-      # Run 30 minutes after the last time the service was started (Interval)
       OnUnitActiveSec = "30min";
-      # Ensure it still triggers if the server was off during a scheduled slot
       Persistent = true;
     };
   };
