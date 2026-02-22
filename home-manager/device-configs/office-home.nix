@@ -12,11 +12,11 @@
       ../graphics.nix
       ../misc.nix
       ../plasma.nix
+      ../theme.nix
       ../video.nix
       ../vscode.nix
       ../web.nix
       ../wine.nix
-      ../theme.nix
     ];
   home.username = "jason";
   home.homeDirectory = "/home/jason";

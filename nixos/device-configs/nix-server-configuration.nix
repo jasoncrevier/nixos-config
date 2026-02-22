@@ -7,18 +7,19 @@
     ./nix-server-hardware-configuration.nix
     
     ../ai.nix
-    ../nvidia.nix
     ../common.nix
     ../docker.nix
     ../jellyfin.nix
     ../linkwarden.nix
     ../navidrome.nix
-    ../navidrome-likes-to-listenbrainz.nix
+    ../nvidia.nix
     ../plasma.nix
     ../ssh.nix
     ../steam.nix
     ../sunshine.nix
     ../tailscale.nix
+
+    .../scripts/navidrome-likes-to-listenbrainz.nix
   ];
 
   # Autologin
