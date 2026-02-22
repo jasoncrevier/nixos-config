@@ -9,12 +9,6 @@
     linkwarden_nextauth = {
       owner = "linkwarden";
     };
-    admin_email = {
-      owner = "linkwarden";
-    };
-    admin_password = {
-      owner = "linkwarden";
-    };
   };
   services.linkwarden = {
     enable = true;

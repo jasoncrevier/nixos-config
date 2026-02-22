@@ -13,6 +13,7 @@
     ../jellyfin.nix
     ../linkwarden.nix
     ../navidrome.nix
+    ../navidrome-likes-to-listenbrainz.nix
     ../plasma.nix
     ../ssh.nix
     ../steam.nix
