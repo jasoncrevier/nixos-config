@@ -19,7 +19,7 @@
     ../sunshine.nix
     ../tailscale.nix
 
-    .../scripts/navidrome-likes-to-listenbrainz.nix
+    ../../scripts/navidrome-likes-to-listenbrainz.nix
   ];
 
   # Autologin
@@ -36,9 +36,6 @@
   # Use X11 instead of Wayland
   services.displayManager.defaultSession = "plasmax11";
   
-  # Enable VS Code server
-  services.vscode-server.enable = true;
-
   # Enable VS Code server
   services.vscode-server.enable = true;
 
