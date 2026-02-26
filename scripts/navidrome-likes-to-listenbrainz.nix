@@ -11,14 +11,14 @@ let
     import requests
     import time
     import os
-    from datetime import datetime, timedelta, timezone
+    from datetime import datetime, timedelta
 
     # --------------------------------------------------
     # CONFIG
     # --------------------------------------------------
     DB_PATH = "${dbPath}"
     TOKEN_FILE = "${tokenFile}"
-    LOOKBACK_MINUTES = 35 
+    LOOKBACK_MINUTES = 35
     FEEDBACK_URL = "https://api.listenbrainz.org/1/feedback/recording-feedback"
     REQUEST_DELAY = 0.25
     MAX_RETRIES = 6
@@ -102,9 +102,10 @@ let
         with open(TOKEN_FILE, 'r') as f:
             token = f.read().strip()
 
-        now_utc = datetime.now(timezone.utc)
-        start_dt = now_utc - timedelta(minutes=LOOKBACK_MINUTES)
-        end_dt = now_utc + timedelta(minutes=5) # Small future buffer
+        # Using local time to match Navidrome's DB storage
+        now = datetime.now()
+        start_dt = now - timedelta(minutes=LOOKBACK_MINUTES)
+        end_dt = now + timedelta(minutes=5)
 
         start_str = start_dt.strftime('%Y-%m-%d %H:%M:%S')
         end_str = end_dt.strftime('%Y-%m-%d %H:%M:%S')
