@@ -1,8 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Pull the master branch specifically for the yabridge fix
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,22 +15,13 @@
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-master, home-manager, catppuccin, musnix, vscode-server, sops-nix, ... }@inputs:
+  outputs = { nixpkgs, home-manager, catppuccin, musnix, vscode-server, sops-nix, ... }@inputs:
     let
       system = "x86_64-linux";
-
-      # Define the overlay to swap yabridge
-      yabridge-overlay = final: prev: {
-        yabridge = (import nixpkgs-master {
-          inherit system;
-          config.allowUnfree = true;
-        }).yabridge;
-      };
 
       nixpkgs-config = {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ yabridge-overlay ];
       };
 
       pkgs-hm = import nixpkgs nixpkgs-config;
@@ -42,9 +31,7 @@
         thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            # Apply nixpkgs config and overlay via a module to avoid scope issues
             {
-              nixpkgs.overlays = [ yabridge-overlay ];
               nixpkgs.config.allowUnfree = true;
             }
             musnix.nixosModules.musnix
@@ -57,7 +44,6 @@
           inherit system;
           modules = [
             {
-              nixpkgs.overlays = [ yabridge-overlay ];
               nixpkgs.config.allowUnfree = true;
             }
             musnix.nixosModules.musnix
