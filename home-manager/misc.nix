@@ -5,6 +5,7 @@
     bitwarden-desktop
     bottles
     chromium
+    feishin
     freetube
     heynote
     kdePackages.kasts
@@ -14,8 +15,6 @@
     notify-client
     obsidian
     onlyoffice-desktopeditors
-    spotify
-    supersonic
     tutanota-desktop
     vlc
     #(callPackage ../pkgs/amplitude.nix {})

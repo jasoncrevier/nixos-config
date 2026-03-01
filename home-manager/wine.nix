@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
     winetricks
-    wineWowPackages.waylandFull
+    wineWow64Packages.stable
   ];
 }

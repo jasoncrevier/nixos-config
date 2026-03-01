@@ -16,7 +16,7 @@
       ../plasma.nix
       ../ssh.nix
       ../steam.nix
-      # Broken ../sunshine.nix 
+      ../sunshine.nix 
       ../syncthing.nix
       ../tailscale.nix
       ../theme.nix
