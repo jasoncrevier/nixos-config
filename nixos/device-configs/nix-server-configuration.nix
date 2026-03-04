@@ -20,6 +20,7 @@
     ../tailscale.nix
 
     ../../scripts/navidrome-likes-to-listenbrainz.nix
+    ../../scripts/thought-record-notification.nix
   ];
 
   # Autologin
