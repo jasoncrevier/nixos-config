@@ -12,7 +12,6 @@
     micro
     neofetch
     nicotine-plus
-    notify-client
     obsidian
     onlyoffice-desktopeditors
     tutanota-desktop

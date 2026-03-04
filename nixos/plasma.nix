@@ -20,6 +20,7 @@
       discover
       filelight
       kalk
+      kamoso
       kcolorchooser
       kolourpaint
       kontact
