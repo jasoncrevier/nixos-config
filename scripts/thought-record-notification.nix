@@ -12,6 +12,7 @@ let
       TOKEN=$(cat "${ntfyTokenFile}")
       
       curl \
+        -H "Tags: warning, computer" \
         -H "Authorization: Bearer $TOKEN" \
         -H "Title: Any thoughts to record?" \
         -H "Click: ${obsidianUri}" \
