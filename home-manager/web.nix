@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    newsflash
     nextcloud-client
   ];
 }
