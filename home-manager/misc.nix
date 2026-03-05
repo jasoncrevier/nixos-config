@@ -10,7 +10,6 @@
     heynote
     kdePackages.kasts
     micro
-    neofetch
     nicotine-plus
     obsidian
     onlyoffice-desktopeditors
