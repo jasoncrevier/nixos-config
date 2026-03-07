@@ -30,6 +30,7 @@
       nixosConfigurations = {
         thinkpad = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             {
               nixpkgs.config.allowUnfree = true;
@@ -42,6 +43,7 @@
 
         office = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules = [
             {
               nixpkgs.config.allowUnfree = true;
@@ -70,6 +72,7 @@
       homeConfigurations = {
         "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs-hm;
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             catppuccin.homeModules.catppuccin
             ./home-manager/device-configs/thinkpad-home.nix
@@ -78,6 +81,7 @@
 
         "jason@office" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs-hm;
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             catppuccin.homeModules.catppuccin
             ./home-manager/device-configs/office-home.nix
@@ -86,6 +90,7 @@
 
         "jason@nix-server" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs-hm;
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             ./home-manager/device-configs/nix-server-home.nix
           ];
