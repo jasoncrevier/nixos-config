@@ -17,16 +17,19 @@
     "/mnt/Storage_SSD" = {
       device = "/dev/disk/by-uuid/6d20d237-a5db-4cc4-aed4-bd75affac80c";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
     
     "/mnt/Gaming_SSD" = {
       device = "/dev/disk/by-uuid/2ddb6b4b-f630-4763-9e0c-b678168e41d4";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
 
     "/mnt/Storage_HDD" = {
       device = "/dev/disk/by-uuid/97edc4de-2734-4bb4-9784-b3ba1fd84d4c";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
 
     "/" = {
