@@ -19,11 +19,13 @@
     "/mnt/Games_HDD" = {
       device = "/dev/disk/by-uuid/8575ae67-7e62-4f00-bb00-63022d128831";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
 
     "/mnt/Main_storage" = {
       device = "/dev/disk/by-uuid/c765f3f4-c218-4baa-ab51-20edd0b67454";
       fsType = "ext4";
+      options = [ "nofail" "x-systemd.device-timeout=5s" ];
     };
 
     "/" = {
