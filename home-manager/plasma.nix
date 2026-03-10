@@ -8,16 +8,12 @@
 
   programs.plasma = {
     enable = true;
-    configFile."kdeglobals" = {
-      "KDE"."SingleClick" = false;
-      "Icons"."Theme" = "Papirus-Dark";
-      "General"."ColorScheme" = "Catppuccin Mocha Teal";
-    };
     workspace = {
       colorScheme = "Catppuccin Mocha Teal";
-      cursor.theme = "Catppuccin-Mocha-Dark-Cursors";
+      cursor.theme = "catppuccin-mocha-dark-cursors";
       iconTheme = "Papirus-Dark";
-      lookAndFeel = "Catppuccin-Mocha-Teal";
+      lookAndFeel = "org.kde.breezedark.desktop";
+      theme = "default";
     };
   };
 }
