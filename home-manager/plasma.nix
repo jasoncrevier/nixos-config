@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
     (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
-    (catppuccin-kde.override { flavour = [ "mocha" ]; accents = [ "teal" ]; })
+    #(catppuccin-kde.override { flavour = [ "mocha" ]; accents = [ "teal" ]; })
   ];
 
   programs.plasma = {
@@ -22,5 +22,9 @@
   programs.konsole = {
     enable = true;
     defaultProfile = "Catppuccin";
+    profiles.Catppuccin.colorScheme = "CatppuccinMochaTeal";
+    customColorSchemes = {
+      CatppuccinMochaTeal = ../misc/Catppuccin-Mocha-Konsole.colorscheme;
+    }; 
   };
 }
