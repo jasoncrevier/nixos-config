@@ -27,4 +27,10 @@
 
   #~Hostname~
   networking.hostName = "thinkpad";
+
+  environment = {
+    systemPackages = with pkgs; [
+      libinput
+    ];
+  };
 }
