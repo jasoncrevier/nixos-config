@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     bitwarden-desktop
-    bottles
     chromium
     feishin
     freetube
@@ -15,7 +14,6 @@
     onlyoffice-desktopeditors
     tutanota-desktop
     vlc
-    #(callPackage ../pkgs/amplitude.nix {})
   ];
 
   # Fix for "command-not-found being" found. Beyond my understanding but it fixed
