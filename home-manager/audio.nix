@@ -13,4 +13,5 @@
     yabridge
     yabridgectl
   ];
+  home.file.".vst3/Vital.vst3".source = "${pkgs.vital}/lib/vst3/Vital.vst3";
 }

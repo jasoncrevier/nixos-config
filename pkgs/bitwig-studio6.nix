@@ -26,18 +26,23 @@
   wrapGAppsHook3,
   xcb-imdkit,
   xdg-utils,
-  xorg,
+  libxcb,
+  libxcursor,
+  libx11,
+  libxtst,
+  libxcb-util,
+  libxcb-wm,
   zlib,
 }:
 
 stdenv.mkDerivation rec {
   pname = "bitwig-studio-unwrapped";
-  version = "6.0-beta-15";
+  version = "6.0";
 
   src = fetchurl {
     name = "bitwig-studio-${version}.deb";
-    url = "https://www.bitwig.com/dl/Bitwig%20Studio/6.0%20Beta%2015/installer_linux/";
-    hash = "sha256-c/2lZLjz3ms5gqzY9/AFZdOQee15R4lmnS5juNB+3HA=";
+    url = "https://www.bitwig.com/dl/Bitwig%20Studio/6.0/installer_linux/";
+    hash = "sha256-jrCTgaxfeWhfKwLeKLmqTQWS7RVbVnHqJ0InCipmm8k=";
   };
 
   nativeBuildInputs = [
@@ -64,10 +69,10 @@ stdenv.mkDerivation rec {
     # libjpeg8 is required for converting jpeg's to colour palettes
     libjpeg
     libnghttp2
-    xorg.libxcb
-    xorg.libXcursor
-    xorg.libX11
-    xorg.libXtst
+    libxcb
+    libxcursor
+    libx11
+    libxtst
     libxkbcommon
     libudev-zero
     pango
@@ -75,8 +80,8 @@ stdenv.mkDerivation rec {
     (lib.getLib stdenv.cc.cc)
     vulkan-loader
     xcb-imdkit
-    xorg.xcbutil
-    xorg.xcbutilwm
+    libxcb-util
+    libxcb-wm
     zlib
   ];
 

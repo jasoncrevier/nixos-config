@@ -17,7 +17,6 @@
       ../steam.nix
       ../syncthing.nix
       ../tailscale.nix
-      ../theme.nix
       ../workstation.nix
     ];
 
@@ -28,4 +27,10 @@
 
   #~Hostname~
   networking.hostName = "thinkpad";
+
+  environment = {
+    systemPackages = with pkgs; [
+      libinput
+    ];
+  };
 }

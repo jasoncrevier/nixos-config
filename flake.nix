@@ -45,6 +45,19 @@
           ];
         };
 
+        surface = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+            musnix.nixosModules.musnix
+            catppuccin.nixosModules.catppuccin
+            ./nixos/device-configs/surface-configuration.nix
+          ];
+        };
+
         office = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -79,7 +92,18 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
             catppuccin.homeModules.catppuccin
+            inputs.plasma-manager.homeModules.plasma-manager
             ./home-manager/device-configs/thinkpad-home.nix
+          ];
+        };
+
+        "jason@surface" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs-hm;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            catppuccin.homeModules.catppuccin
+            inputs.plasma-manager.homeModules.plasma-manager
+            ./home-manager/device-configs/surface-home.nix
           ];
         };
 

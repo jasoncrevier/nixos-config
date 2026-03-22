@@ -4,20 +4,27 @@
   home.packages = with pkgs; [
     (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
     (catppuccin-gtk.override { accents = [ "teal" ]; variant = "mocha"; })
+    #(catppuccin-kde.override { flavour = [ "mocha" ]; accents = [ "teal" ]; })
   ];
 
   programs.plasma = {
     enable = true;
-    configFile."kdeglobals" = {
-      "KDE"."SingleClick" = false;
-      "Icons"."Theme" = "Papirus-Dark";
-      "General"."ColorScheme" = "Catppuccin Mocha Teal";
-    };
     workspace = {
-      colorScheme = "Catppuccin Mocha Teal";
-      cursor.theme = "Catppuccin-Mocha-Dark-Cursors";
+      colorScheme = "CatppuccinMochaTeal";
+      cursor.theme = "catppuccin-mocha-dark-cursors";
       iconTheme = "Papirus-Dark";
-      lookAndFeel = "Catppuccin-Mocha-Teal";
+      theme = "CatppuccinMochaTeal";
+      windowDecorations.library = "org.kde.breeze";
+      windowDecorations.theme = "Breeze";
     };
+  };
+
+  programs.konsole = {
+    enable = true;
+    defaultProfile = "Catppuccin";
+    profiles.Catppuccin.colorScheme = "CatppuccinMochaTeal";
+    customColorSchemes = {
+      CatppuccinMochaTeal = ../misc/Catppuccin-Mocha-Konsole.colorscheme;
+    }; 
   };
 }
