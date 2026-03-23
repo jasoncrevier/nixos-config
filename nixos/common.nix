@@ -116,11 +116,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Fix for command-not-found
-  # I don't really understand it
-  # but it works on some machines.
-  # On others, nix-index just crashes
-  # the terminal.
   programs.nix-index = {
+    enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
   };

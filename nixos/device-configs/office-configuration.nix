@@ -28,9 +28,8 @@
   #~Hostname~
   networking.hostName = "office";
 
+  # Script to ensure monitor layout in sddm matched plasma
   system.activationScripts.sddmCopyDisplayConfig = {
-  # We use a high priority to make sure this runs late in the activation process.
-  # The name must be unique, like 'sddmCopyDisplayConfig'.
   text = ''
     # Define the source and destination paths
     SOURCE_FILE="/home/jason/.config/kwinoutputconfig.json"
