@@ -15,7 +15,6 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
-    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   #~Localization~
@@ -87,7 +86,6 @@
       emoji = [ "Noto Color Emoji" ];
     };
   };
-
   
   hardware.keyboard.qmk.enable = true;
 
