@@ -121,6 +121,8 @@
           pkgs = pkgs-hm;
           extraSpecialArgs = { inherit inputs; };
           modules = [
+            catppuccin.homeModules.catppuccin
+            inputs.plasma-manager.homeModules.plasma-manager
             ./home-manager/device-configs/nix-server-home.nix
           ];
         };
