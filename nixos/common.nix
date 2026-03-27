@@ -15,7 +15,6 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
-    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   #~Localization~
@@ -87,7 +86,6 @@
       emoji = [ "Noto Color Emoji" ];
     };
   };
-
   
   hardware.keyboard.qmk.enable = true;
 
@@ -118,11 +116,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Fix for command-not-found
-  # I don't really understand it
-  # but it works on some machines.
-  # On others, nix-index just crashes
-  # the terminal.
   programs.nix-index = {
+    enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
   };
