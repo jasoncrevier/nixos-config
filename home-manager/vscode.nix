@@ -5,7 +5,6 @@
     enable = true;
     profiles.default = {
       userSettings = {
-        "editor.fontFamily" = "IBM Plex Mono";
         "remote.SSH.useLocalServer" = false;
         "terminal.integrated.shellIntegration.enabled" = false;
       };
