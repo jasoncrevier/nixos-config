@@ -9,5 +9,8 @@
         email = "jason@jasoncrevier.com";
       };
     };
+    signing = {
+      format = null;
+    };
   };
 }

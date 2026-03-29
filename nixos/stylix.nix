@@ -22,6 +22,8 @@
     };
     polarity = "dark";
 
+    opacity.terminal = 0.8;
+
     cursor = {
       package = pkgs.catppuccin-cursors.mochaDark;
       name = "catppuccin-mocha-dark-cursors";
@@ -35,7 +37,7 @@
       };
       sansSerif = {
         package = pkgs.ibm-plex;
-        name = "IBM Plex Sans";
+        name = "IBM Plex Sans Light";
       };
       serif = {
         package = pkgs.ibm-plex;
@@ -44,6 +46,10 @@
       emoji = {
         package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
+      };
+      sizes = {
+        applications = 11;
+        terminal = 13;
       };
     };
   };

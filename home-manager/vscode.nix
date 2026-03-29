@@ -1,10 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.vscode = {
     enable = true;
     profiles.default = {
       userSettings = {
+        "editor.fontSize" = lib.mkForce 14;
+        "terminal.integrated.fontSize" = lib.mkForce 14;
         "remote.SSH.useLocalServer" = false;
         "terminal.integrated.shellIntegration.enabled" = false;
       };
