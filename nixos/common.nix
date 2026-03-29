@@ -15,7 +15,7 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
-    kernelPackages = pkgs.linuxPackages_zen;
+    #kernelPackages = pkgs.linuxPackages_zen;
   };
 
   #~Localization~

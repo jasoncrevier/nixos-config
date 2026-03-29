@@ -30,7 +30,7 @@
       gnome-nettool
       gnome-music
       gnome-weather
-      kgx
+      gnome-console
       totem
       yelp
     ]);

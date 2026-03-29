@@ -5,7 +5,8 @@
   gnome-tweaks
   gnomeExtensions.just-perfection
   gnomeExtensions.pop-shell
-  gradience
+  gnomeExtensions.user-themes
+  #gradience
   tilix
   ];
 
@@ -74,8 +75,8 @@ dconf.settings = {
   #~Theme~
   gtk = {
     enable = true;
-    iconTheme.name = "Papirus-Dark";
-    iconTheme.package = pkgs.papirus-icon-theme;
+    #iconTheme.name = "Papirus-Dark";
+    #iconTheme.package = pkgs.papirus-icon-theme;
     theme.name = "catppuccin-mocha-teal-standard";
     theme.package = pkgs.catppuccin-gtk.override {
       accents = [ "teal" ];
