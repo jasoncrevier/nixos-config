@@ -15,7 +15,6 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
-    #kernelPackages = pkgs.linuxPackages_zen;
   };
 
   #~Localization~
@@ -72,23 +71,9 @@
     wl-clipboard
   ];
 
-  fonts.packages = with pkgs; [
-    ibm-plex
-    noto-fonts-color-emoji
-  ];
+  # Enable font discovery and management
+  fonts.fontconfig.enable = true;
 
-  fonts.fontconfig = {
-    enable = true;
-    useEmbeddedBitmaps = true;
-    defaultFonts = {
-      serif = [ "IBM Plex Serif" "Noto Color Emoji" ];
-      sansSerif = [ "IBM Plex Sans" "Noto Color Emoji" ];
-      monospace = [ "IBM Plex Mono" "Noto Color Emoji" ];
-      emoji = [ "Noto Color Emoji" ];
-    };
-  };
-
-  
   hardware.keyboard.qmk.enable = true;
 
   services.udev.packages = [ pkgs.via ];
@@ -118,11 +103,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Fix for command-not-found
-  # I don't really understand it
-  # but it works on some machines.
-  # On others, nix-index just crashes
-  # the terminal.
   programs.nix-index = {
+    enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
   };

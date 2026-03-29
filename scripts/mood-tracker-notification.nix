@@ -3,18 +3,18 @@
 let
   ntfyTokenFile = config.sops.secrets.ntfy_token.path;
 
-  obsidianUri = "obsidian://advanced-uri?vault=Journal&filepath=Thought%20records/Untitled&commandname=Templates:%20Insert%20template";
+  obsidianUri = "obsidian://advanced-uri?vault=Journal&commandname=Mood%20Tracker:%20Open%20Tracker";
 
   thoughtRecordScript = pkgs.writeShellApplication {
-    name = "send-thought-record-notification";
+    name = "send-mood-tracker-notification";
     runtimeInputs = [ pkgs.curl ];
     text = ''
       TOKEN=$(cat "${ntfyTokenFile}")
       
       curl \
-        -H "Tags: notebook" \
+        -H "Tags: performing_arts" \
         -H "Authorization: Bearer $TOKEN" \
-        -H "Title: Any thoughts to record?" \
+        -H "Title: How are you feeling?" \
         -H "Click: ${obsidianUri}" \
         -d "Tap to open Obsidian." \
         https://ntfy.nullspace.lol/misc
@@ -24,8 +24,8 @@ in
 {
   sops.secrets.ntfy_token.owner = "jason";
 
-  systemd.services.obsidian-thought-notifier = {
-    description = "Send daily ntfy notification for recording thoughts";
+  systemd.services.obsidian-mood-notifier = {
+    description = "Send daily ntfy notification for tracking mood";
     serviceConfig = {
       Type = "oneshot";
       User = "jason";
@@ -33,7 +33,7 @@ in
     };
   };
 
-  systemd.timers.obsidian-thought-notifier = {
+  systemd.timers.obsidian-mood-notifier = {
     description = "Run once daily at a random time between 9am and 5pm EST";
     wantedBy = [ "timers.target" ];
     timerConfig = {
