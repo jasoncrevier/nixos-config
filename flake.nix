@@ -29,9 +29,13 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tinted-theming = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, ... }@inputs:
+  outputs = { nixpkgs, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, tinted-theming, ... }@inputs:
     let
       system = "x86_64-linux";
 
