@@ -5,7 +5,8 @@
   gnome-tweaks
   gnomeExtensions.just-perfection
   gnomeExtensions.pop-shell
-  gradience
+  gnomeExtensions.user-themes
+  #gradience
   tilix
   ];
 
@@ -18,17 +19,11 @@ dconf.settings = {
       ];
     };
     "org/gnome/interface" = {
-      icon-theme = "Papirus-Dark";
-      gtk-theme = "catppuccin-mocha-teal-standard";
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
       enable-hot-corners = false;
       clock-format = "12h";
-      # Removing temp due to build error
-      #cursor-theme = "catppuccin-mocha-dark-cursors";
-      icon-theme = "Papirus-Dark";
-      gtk-theme = "catppuccin-mocha-teal-standard";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
@@ -68,18 +63,6 @@ dconf.settings = {
     "com/gexperts/Tilix" = {
       terminal-title-show-when-single = false;
       window-style = "disable-csd-hide-toolbar";
-    };
-  };
-
-  #~Theme~
-  gtk = {
-    enable = true;
-    iconTheme.name = "Papirus-Dark";
-    iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "catppuccin-mocha-teal-standard";
-    theme.package = pkgs.catppuccin-gtk.override {
-      accents = [ "teal" ];
-      variant = "mocha";
     };
   };
 

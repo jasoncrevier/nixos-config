@@ -21,7 +21,7 @@ nixos-config
 ```
 - `nixos-config`: Includes the main flake for all the NixOS devices in my fleet, my wallpaper, and all the sub-directories below.
 - `home-manager`: Separate config files for `home-manager`. A main config file for each device that import any of the other config files from the folder that are relevant to that machine.
-- `misc`: A handful of files to copy to the home directory after install. They're mostly for theming. I'll eventually add them to `home-manager` or use something like `stylix` to handling theming declaratively.
+- `misc`: Legacy directory for manual config files. Most of this has been moved to Home Manager or handled by Stylix.
 - `nixos`: Separate `configuration.nix` files for each device. They each import their relevant `hardware-configuration.nix` and any of the other config files from the folder that are relevant to that machine. Most machines will import `common.nix` which contains basic applications and configs like enabling `systemd-boot`, setting the time zone, installing `git`, etc.
 - `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos.
 

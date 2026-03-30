@@ -19,6 +19,7 @@
     ../sunshine.nix
     ../tailscale.nix
 
+    ../../scripts/mood-tracker-notification.nix
     ../../scripts/navidrome-likes-to-listenbrainz.nix
     ../../scripts/thought-record-notification.nix
   ];
