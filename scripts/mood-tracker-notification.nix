@@ -29,7 +29,7 @@ in
     serviceConfig = {
       Type = "oneshot";
       User = "jason";
-      ExecStart = "${thoughtRecordScript}/bin/send-thought-record-notification";
+      ExecStart = "${thoughtRecordScript}/bin/send-mood-tracker-notification";
     };
   };
 

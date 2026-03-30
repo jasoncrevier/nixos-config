@@ -5,7 +5,8 @@
   gnome-tweaks
   gnomeExtensions.just-perfection
   gnomeExtensions.pop-shell
-  gradience
+  gnomeExtensions.user-themes
+  #gradience
   tilix
   ];
 
