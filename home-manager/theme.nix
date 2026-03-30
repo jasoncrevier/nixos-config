@@ -4,14 +4,17 @@
   home.packages = with pkgs; [
     catppuccin-cursors.mochaDark
   ];
-  
+
   catppuccin = {
     flavor = "mocha";
     accent = "teal";
     enable = true;
+    cursors.enable = false; # Let Stylix handle cursors to avoid conflicts
+    vscode.profiles.default.enable = false; # Let Stylix handle VS Code to avoid conflicts
   };
-  programs.fish.shellInit = ''
-    fish_config theme choose "Catppuccin Mocha"
-  '';
-  home.file."/.config/fish/themes/Catppuccin Mocha.theme".source = ./catppuccin-mocha-fish-theme;
+
+  gtk = {
+    enable = true;
+    gtk4.theme = config.gtk.theme;
+  };
 }

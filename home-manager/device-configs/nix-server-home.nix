@@ -7,6 +7,7 @@
       ../games.nix
       ../git.nix
       ../plasma.nix
+      ../theme.nix
       ../vscode.nix
     ];
   home.username = "jason";
