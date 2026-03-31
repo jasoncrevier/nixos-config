@@ -29,18 +29,16 @@ in
     serviceConfig = {
       Type = "oneshot";
       User = "jason";
-      ExecStart = "${thoughtRecordScript}/bin/send-thought-record-notification";
+      ExecStart = "${thoughtRecordScript}/bin/send-mood-tracker-notification";
     };
   };
 
   systemd.timers.obsidian-mood-notifier = {
-    description = "Run once daily at a random time between 9am and 5pm EST";
+    description = "Run three times daily at random intervals (9-12, 12-3, 3-6)";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      # Start the window at 09:00:00 US Eastern time
-      OnCalendar = "9:00:00";
-      # Add an 8-hour random delay (8 hours = 28800 seconds)
-      RandomizedDelaySec = "28800";
+      OnCalendar = [ "09:00:00" "12:00:00" "15:00:00" ];
+      RandomizedDelaySec = "10800"; # 3 hours
       # Ensure it runs if the machine was off at 9am
       Persistent = true;
     };

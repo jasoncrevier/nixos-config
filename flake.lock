@@ -77,8 +77,11 @@
       "locked": {
         "lastModified": 1774799062,
         "narHash": "sha256-U9RGxFsLeKivD1+7sVXj5TltHGfB4m/dkn3dENT2fSM=",
+        "lastModified": 1774799062,
+        "narHash": "sha256-U9RGxFsLeKivD1+7sVXj5TltHGfB4m/dkn3dENT2fSM=",
         "owner": "catppuccin",
         "repo": "nix",
+        "rev": "948a8ee84858d053b83f01c8c168f9f4347937e6",
         "rev": "948a8ee84858d053b83f01c8c168f9f4347937e6",
         "type": "github"
       },
@@ -246,6 +249,7 @@
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
+        "rev": "8110df5ad7abf5d4c0f6fb0f8f978390e77f9685",
         "type": "github"
       },
       "original": {
@@ -310,6 +314,7 @@
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
+        "tinted-theming": "tinted-theming",
         "vscode-server": "vscode-server"
       }
     },
@@ -438,6 +443,22 @@
         "owner": "tinted-theming",
         "repo": "schemes",
         "rev": "2800e2b8ac90f678d7e4acebe4fa253f602e05b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "type": "github"
+      }
+    },
+    "tinted-theming": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772661346,
+        "narHash": "sha256-4eu3LqB9tPqe0Vaqxd4wkZiBbthLbpb7llcoE/p5HT0=",
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "rev": "13b5b0c299982bb361039601e2d72587d6846294",
         "type": "github"
       },
       "original": {
