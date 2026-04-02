@@ -18,7 +18,7 @@
       };
       sansSerif = {
         package = pkgs.ibm-plex;
-        name = "IBM Plex Sans Light";
+        name = "IBM Plex Sans";
       };
       serif = {
         package = pkgs.ibm-plex;
@@ -29,8 +29,7 @@
         name = "Noto Color Emoji";
       };
       sizes = {
-        applications = 11;
-        terminal = 13;
+        applications = 12;
       };
     };
   };
