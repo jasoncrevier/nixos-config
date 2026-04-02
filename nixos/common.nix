@@ -15,6 +15,7 @@
     plymouth.enable = true;
     initrd.systemd.enable = true;
     kernelParams = ["quiet"];
+    kernelModules = [ "ntsync" ];
   };
 
   #~Localization~
