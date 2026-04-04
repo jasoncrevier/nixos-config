@@ -5,15 +5,17 @@
     enable = true;
     profiles.default = {
       userSettings = {
-        "editor.fontSize" = lib.mkForce 12;
-        "terminal.integrated.fontSize" = lib.mkForce 12;
+        "workbench.colorTheme" = "Catppuccin Mocha";
+        "catppuccin.accentColor" = "teal";
+        "editor.fontSize" = lib.mkForce 13;
+        "terminal.integrated.fontSize" = lib.mkForce 13;
         "remote.SSH.useLocalServer" = false;
         "terminal.integrated.shellIntegration.enabled" = false;
-        "window.zoomLevel" = 1;
-        "chat.editor.fontSize" = lib.mkForce 12;
-        "chat.fontSize" = 12;
-        "debug.console.fontSize" = lib.mkForce 12;
-        "scm.inputFontSize" = lib.mkForce 12;
+        "window.zoomLevel" = 0.8;
+        "chat.editor.fontSize" = lib.mkForce 13;
+        "chat.fontSize" = 13;
+        "debug.console.fontSize" = lib.mkForce 13;
+        "scm.inputFontSize" = lib.mkForce 13;
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix
@@ -28,6 +30,9 @@
           sha256 = "sha256-pnzxhDSgnxGD2fd4MrCgBo/sRW6qjTJqE4J+ia9lJdA=";
         }
       ];
+    };
+    package = pkgs.vscode.override {
+      commandLineArgs = "--disable-features=WaylandWpColorManagerV1";
     };
   };
 }

@@ -10,8 +10,10 @@
     accent = "teal";
     enable = true;
     cursors.enable = false; # Let Stylix handle cursors to avoid conflicts
-    vscode.profiles.default.enable = false; # Let Stylix handle VS Code to avoid conflicts
+    vscode.profiles.default.enable = true;
   };
+
+  stylix.targets.vscode.enable = false;
 
   gtk = {
     enable = true;

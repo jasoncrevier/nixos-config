@@ -1,8 +1,7 @@
 { pkgs, lib, inputs, ... }: {
   stylix = {
     enable = true;
-    image = lib.mkDefault ../wallpaper.png;
-    base16Scheme = "${inputs.tinted-theming}/base24/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";
 
     cursor = {
