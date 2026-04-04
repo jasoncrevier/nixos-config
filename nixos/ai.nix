@@ -4,7 +4,7 @@
   services.ollama = {
     enable = true;
     host = "0.0.0.0";
-    package = pkgs.ollama-cuda;
+    package = (pkgs.callPackage ../pkgs/ollama.nix {});
   };
   services.open-webui = {
     package = pkgs.open-webui;
