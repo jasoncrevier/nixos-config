@@ -3,7 +3,7 @@
 let
   ntfyTokenFile = config.sops.secrets.ntfy_token.path;
 
-  obsidianUri = "obsidian://advanced-uri?vault=Journal&commandname=Mood%20Tracker:%20Open%20Tracker";
+  obsidianUri = "obsidian://advanced-uri?vault=Journal&commandname=QuickAdd:%20Log%20mood";
 
   thoughtRecordScript = pkgs.writeShellApplication {
     name = "send-mood-tracker-notification";
