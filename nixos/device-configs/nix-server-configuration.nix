@@ -24,6 +24,9 @@
     ../../scripts/thought-record-notification.nix
   ];
 
+  # Allow the jason user to perform remote builds
+  nix.settings.trusted-users = [ "root" "jason" ];
+
   # Autologin
   services.displayManager.autoLogin = {
     enable = true;
