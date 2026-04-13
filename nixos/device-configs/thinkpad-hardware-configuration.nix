@@ -9,7 +9,9 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "noresume" ];
+  
+  # i915.enable_psr=0 often fixes the 'black screen after suspend' on Intel Thinkpads
+  boot.kernelParams = [ "i915.enable_psr=0" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/c2d900be-9dc8-4f7d-b1ba-25b8dbabac68";
@@ -22,7 +24,10 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 8192;
+  }];
 
   networking.useDHCP = lib.mkDefault true;
 

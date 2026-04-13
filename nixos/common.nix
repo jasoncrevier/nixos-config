@@ -63,6 +63,7 @@
     arp-scan
     bat
     cifs-utils
+    cowsay
     git
     libimobiledevice
     qmk
@@ -101,7 +102,10 @@
   documentation.nixos.enable = false;
 
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "root" "jason" ];
+  };
 
   # Fix for command-not-found
   programs.nix-index = {
