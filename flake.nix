@@ -105,7 +105,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
-            ./nixos/device-configs/grunt.nix
+            ./nixos/device-configs/grunt-configuration.nix
           ];
         };
       };
@@ -147,7 +147,7 @@
         "jason@grunt" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs-hm;
           extraSpecialArgs = { inherit inputs; };
-          modules = ./home-manager/device-configs/grunt.nix;
+          modules = [ ./home-manager/device-configs/grunt-home.nix ];
         };
       };
     };

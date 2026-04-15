@@ -12,5 +12,8 @@
     signing = {
       format = null;
     };
+    extraConfig = {
+      credential.helper = "${pkgs.github-cli}/bin/gh auth git-credential";
+    };
   };
 }
