@@ -105,6 +105,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            vscode-server.nixosModules.default
             ./nixos/device-configs/grunt-configuration.nix
           ];
         };

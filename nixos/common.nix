@@ -5,19 +5,6 @@
 { config, pkgs, ... }:
 
 {
-  ##~Bootloader~
-  #boot = {
-  #  loader = {
-  #    systemd-boot.enable = true;
-  #    efi.canTouchEfiVariables = true;
-  #    timeout = 0;
-  #  };
-  #  plymouth.enable = true;
-  #  initrd.systemd.enable = true;
-  #  kernelParams = ["quiet"];
-  #  kernelModules = [ "ntsync" ];
-  #};
-
   #~Localization~
   time.timeZone = "America/Toronto";
   i18n.defaultLocale = "en_CA.UTF-8";

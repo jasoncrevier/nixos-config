@@ -18,6 +18,7 @@
       ../steam.nix
       ../sunshine.nix 
       ../syncthing.nix
+      ../systemd-boot.nix
       ../tailscale.nix
       ../workstation.nix
     ];
