@@ -74,7 +74,6 @@
           specialArgs = { inherit inputs; };
           modules = common-modules ++ [
             ./nixos/device-configs/surface-configuration.nix
-            { stylix.image = ./wallpaper_portrait.png; }
           ];
         };
 
@@ -83,7 +82,6 @@
           specialArgs = { inherit inputs; };
           modules = common-modules ++ [
             ./nixos/device-configs/office-configuration.nix
-            { stylix.image = ./wallpaper_WUHD.png; }
           ];
         };
 
@@ -100,6 +98,17 @@
               services.vscode-server.enable = true;
             }
             ./nixos/device-configs/nix-server-configuration.nix
+          ];
+        };
+
+        grunt = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            unfree-module
+            sops-nix.nixosModules.sops
+            vscode-server.nixosModules.default
+            ./nixos/device-configs/grunt-configuration.nix
           ];
         };
       };
@@ -127,7 +136,6 @@
           extraSpecialArgs = { inherit inputs; };
           modules = common-home-modules ++ [
             ./home-manager/device-configs/office-home.nix
-            { stylix.image = ./wallpaper_WUHD.png; }
           ];
         };
 
@@ -137,6 +145,12 @@
           modules = common-home-modules ++ [
             ./home-manager/device-configs/nix-server-home.nix
           ];
+        };
+
+        "jason@grunt" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs-hm;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-manager/device-configs/grunt-home.nix ];
         };
       };
     };

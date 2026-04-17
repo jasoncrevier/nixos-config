@@ -18,24 +18,10 @@
       ../steam.nix
       ../sunshine.nix 
       ../syncthing.nix
+      ../systemd-boot.nix
       ../tailscale.nix
       ../workstation.nix
     ];
-
-  # Remote Build Configuration
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "nix-server";
-        system = "x86_64-linux";
-        sshUser = "jason";
-        maxJobs = 8; # Adjust this based on your server's CPU threads
-        speedFactor = 2;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      }
-    ];
-  };
 
   # Enable Wayland for SDDM
   services.displayManager.sddm.wayland.enable = true;

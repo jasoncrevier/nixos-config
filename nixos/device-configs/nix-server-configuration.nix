@@ -17,6 +17,7 @@
     ../ssh.nix
     ../steam.nix
     ../sunshine.nix
+    ../systemd-boot.nix
     ../tailscale.nix
 
     ../../scripts/mood-tracker-notification.nix

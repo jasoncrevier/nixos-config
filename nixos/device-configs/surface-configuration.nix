@@ -14,6 +14,7 @@
       ../gnome.nix
       ../ssh.nix
       ../steam.nix
+      ../systemd-boot.nix
       ../tailscale.nix
       ../workstation.nix
     ];
