@@ -93,6 +93,8 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            stylix.nixosModules.stylix
+            ./nixos/stylix.nix
             vscode-server.nixosModules.default
             {
               services.vscode-server.enable = true;
