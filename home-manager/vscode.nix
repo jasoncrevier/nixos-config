@@ -16,6 +16,9 @@
         "chat.fontSize" = 13;
         "debug.console.fontSize" = lib.mkForce 13;
         "scm.inputFontSize" = lib.mkForce 13;
+        "remote.SSH.remotePlatform" = {
+          "nix-server" = "linux";
+        };
       };
       extensions = with pkgs.vscode-extensions; [
         bbenoist.nix

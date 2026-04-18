@@ -10,7 +10,7 @@
     ../common.nix
     ../docker.nix
     ../jellyfin.nix
-    ../linkwarden.nix
+    ../karakeep.nix
     ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
