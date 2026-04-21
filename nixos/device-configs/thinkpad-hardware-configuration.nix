@@ -26,7 +26,8 @@
 
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 8192;
+    size = 4096;
+    priority = 0;
   }];
 
   networking.useDHCP = lib.mkDefault true;

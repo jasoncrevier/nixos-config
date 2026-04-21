@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +32,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -74,6 +75,7 @@
           specialArgs = { inherit inputs; };
           modules = common-modules ++ [
             ./nixos/device-configs/surface-configuration.nix
+            nixos-hardware.nixosModules.microsoft-surface-common
           ];
         };
 
@@ -127,7 +129,6 @@
           extraSpecialArgs = { inherit inputs; };
           modules = common-home-modules ++ [
             ./home-manager/device-configs/surface-home.nix
-            { stylix.image = ./wallpaper_portrait.png; }
           ];
         };
 
