@@ -27,7 +27,7 @@
   ];
 
   # Allow the jason user to perform remote builds
-  nix.settings.trusted-users = [ "root" "jason" ];
+  nix.settings.trusted-users = [ "jason" ];
 
   # Autologin
   services.displayManager.autoLogin = {
