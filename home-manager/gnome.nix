@@ -6,8 +6,6 @@
   gnomeExtensions.just-perfection
   gnomeExtensions.pop-shell
   gnomeExtensions.user-themes
-  #gradience
-  tilix
   ];
 
 dconf.settings = {
