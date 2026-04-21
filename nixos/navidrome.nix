@@ -8,7 +8,7 @@
     openFirewall = true;
     settings = {
       MusicFolder = "/mnt/Media/Music";
-      BaseUrl = "https://navidrome.nullvoid.club";
+      BaseUrl = config.sops.secrets.navidrome_url.path;
       EnableSharing = true;
       Address = "0.0.0.0";
       Scanner.Schedule = "0 * * * *";
