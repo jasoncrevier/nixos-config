@@ -14,6 +14,7 @@
     ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
+    ../sops.nix
     ../ssh.nix
     ../steam.nix
     ../sunshine.nix
