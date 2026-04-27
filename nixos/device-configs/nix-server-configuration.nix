@@ -14,6 +14,7 @@
     ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
+    ../sops.nix
     ../ssh.nix
     ../steam.nix
     ../sunshine.nix
@@ -26,7 +27,7 @@
   ];
 
   # Allow the jason user to perform remote builds
-  nix.settings.trusted-users = [ "root" "jason" ];
+  nix.settings.trusted-users = [ "jason" ];
 
   # Autologin
   services.displayManager.autoLogin = {

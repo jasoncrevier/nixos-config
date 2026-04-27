@@ -2,15 +2,14 @@
  
 { config, pkgs, ... }: 
 
+let
+  karakeep_env = config.sops.secrets.karakeep_env.path;
+in
 {
-  sops.defaultSopsFile = ../secrets.yaml;
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-  sops.secrets.karakeep_env = {
-    owner = "karakeep";
-  };
+  sops.secrets.karakeep_env.owner = "karakeep";
   services.karakeep = {
     enable = true;
-    environmentFile = "/run/secrets/karakeep_env";
+    environmentFile = karakeep_env;
     extraEnvironment = {
       PORT = "3030";
       DISABLE_SIGNUPS = "true";

@@ -237,6 +237,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1775490113,
+        "narHash": "sha256-2ZBhDNZZwYkRmefK5XLOusCJHnoeKkoN95hoSGgMxWM=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "c775c2772ba56e906cbeb4e0b2db19079ef11ff7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1776877367,
@@ -304,6 +320,7 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "musnix": "musnix",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
@@ -320,8 +337,11 @@
       "locked": {
         "lastModified": 1776771786,
         "narHash": "sha256-DRFGPfFV6hbrfO9a1PH1FkCi7qR5FgjSqsQGGvk1rdI=",
+        "lastModified": 1776771786,
+        "narHash": "sha256-DRFGPfFV6hbrfO9a1PH1FkCi7qR5FgjSqsQGGvk1rdI=",
         "owner": "Mic92",
         "repo": "sops-nix",
+        "rev": "bef289e2248991f7afeb95965c82fbcd8ff72598",
         "rev": "bef289e2248991f7afeb95965c82fbcd8ff72598",
         "type": "github"
       },
