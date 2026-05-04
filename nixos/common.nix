@@ -52,9 +52,11 @@
     cifs-utils
     cowsay
     git
+    jq
     libimobiledevice
     qmk
     samba
+    steam-run
     unrar
     via
     wl-clipboard
