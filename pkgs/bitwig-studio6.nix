@@ -1,11 +1,11 @@
 {
-  stdenv,
-  fetchurl,
   alsa-lib,
   atk,
+  autoPatchelfHook,
+  bubblewrap,
   cairo,
   dpkg,
-  ffmpeg,
+  fetchurl,
   freetype,
   gdk-pixbuf,
   glib,
@@ -15,47 +15,47 @@
   lib,
   libglvnd,
   libjack2,
-  libjpeg,
+  libjpeg8,
   libnghttp2,
   libudev-zero,
-  libxkbcommon,
-  makeWrapper,
-  pango,
-  pipewire,
-  vulkan-loader,
-  wrapGAppsHook3,
-  xcb-imdkit,
-  xdg-utils,
-  libxcb,
-  libxcursor,
   libx11,
-  libxtst,
+  libxcb,
   libxcb-util,
   libxcb-wm,
+  libxcursor,
+  libxkbcommon,
+  libxtst,
+  makeBinaryWrapper,
+  pango,
+  pipewire,
+  stdenv,
+  vulkan-loader,
+  wrapGAppsHook3,
+  writeShellScript,
+  xcb-imdkit,
   zlib,
 }:
 
-stdenv.mkDerivation rec {
-  pname = "bitwig-studio-unwrapped";
-  version = "6.0";
+stdenv.mkDerivation (finalAttrs: {
+  pname = "bitwig-studio6";
+  version = "6.0.5";
 
   src = fetchurl {
-    name = "bitwig-studio-${version}.deb";
-    url = "https://www.bitwig.com/dl/Bitwig%20Studio/6.0/installer_linux/";
-    hash = "sha256-jrCTgaxfeWhfKwLeKLmqTQWS7RVbVnHqJ0InCipmm8k=";
+    name = "bitwig-studio-${finalAttrs.version}.deb";
+    url = "https://www.bitwig.com/dl/Bitwig%20Studio/${finalAttrs.version}/installer_linux";
+    hash = "sha256-7NWfxM1yQRYI7uJ0Fq7zrl/ckzdS1vW9bxLMj3FZtS4=";
   };
 
+  strictDeps = true;
+
   nativeBuildInputs = [
+    autoPatchelfHook
     dpkg
-    makeWrapper
+    makeBinaryWrapper
     wrapGAppsHook3
   ];
 
-  dontBuild = true;
-  dontWrapGApps = true; # we only want $gappsWrapperArgs here
-
   buildInputs = [
-    alsa-lib
     atk
     cairo
     freetype
@@ -65,70 +65,75 @@ stdenv.mkDerivation rec {
     harfbuzz
     lcms
     libglvnd
-    libjack2
-    # libjpeg8 is required for converting jpeg's to colour palettes
-    libjpeg
-    libnghttp2
-    libxcb
-    libxcursor
-    libx11
-    libxtst
-    libxkbcommon
-    libudev-zero
-    pango
-    pipewire
     (lib.getLib stdenv.cc.cc)
-    vulkan-loader
-    xcb-imdkit
+    libjack2
+    libjpeg8
+    libnghttp2
+    libudev-zero
+    libx11
+    libxcb
     libxcb-util
     libxcb-wm
+    libxcursor
+    libxkbcommon
+    libxtst
+    pango
+    pipewire
+    vulkan-loader
+    xcb-imdkit
     zlib
+    alsa-lib
   ];
+
+  dontWrapGApps = true; # we only want $gappsWrapperArgs here
 
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/bin
-    cp -r opt/bitwig-studio $out/libexec
-    ln -s $out/libexec/bitwig-studio $out/bin/bitwig-studio
-    cp -r usr/share $out/share
+    mkdir "$out"
+    cp -r usr/share "$out"
+    cp -r opt/bitwig-studio "$out"/libexec
 
     # Bitwig includes a copy of libxcb-imdkit.
     # Removing it will force it to use our version.
-    rm $out/libexec/lib/bitwig-studio/libxcb-imdkit.so.1
+    rm "$out"/libexec/lib/bitwig-studio/libxcb-imdkit.so.1
 
-    substitute usr/share/applications/com.bitwig.BitwigStudio.desktop \
-      $out/share/applications/com.bitwig.BitwigStudio.desktop \
-      --replace /usr/bin/bitwig-studio $out/bin/bitwig-studio
-
-      runHook postInstall
+    runHook postInstall
   '';
 
-  postFixup = ''
-    # patchelf fails to set rpath on BitwigStudioEngine, so we use
-    # the LD_LIBRARY_PATH way
+  postFixup =
+    let
+      wrapper = writeShellScript "bitwig-studio" ''
+        set -e
 
-    find $out -type f -executable \
-      -not -name '*.so.*' \
-      -not -name '*.so' \
-      -not -name '*.jar' \
-      -not -name 'jspawnhelper' \
-      -not -path '*/resources/*' | \
-    while IFS= read -r f ; do
-      patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $f
-      # make xdg-open overrideable at runtime
-      wrapProgram $f \
-        "''${gappsWrapperArgs[@]}" \
-        --prefix PATH : "${lib.makeBinPath [ ffmpeg ]}" \
-        --suffix PATH : "${lib.makeBinPath [ xdg-utils ]}" \
-        --suffix LD_LIBRARY_PATH : "${lib.strings.makeLibraryPath buildInputs}"
-    done
+        currentDir="$(cd "$(dirname "$0")" && pwd)"
+        outDir="$(cd "$currentDir/.." && pwd)"
 
-    find $out -type f -executable -name 'jspawnhelper' | \
-    while IFS= read -r f ; do
-      patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" $f
-    done
-  '';
+        TMPDIR="$(mktemp --directory)"
+        cp -r "$outDir"/libexec/resources/VampTransforms "$TMPDIR"
+        chmod -R u+w "$TMPDIR/VampTransforms"
+
+        bwrap \
+          --bind / / \
+          --bind "$TMPDIR"/VampTransforms "$outDir"/libexec/resources/VampTransforms \
+          --dev-bind /dev /dev \
+          "$outDir"/libexec/bitwig-studio \
+          || true
+
+        rm -rf "$TMPDIR"
+      '';
+    in
+    ''
+      for e in "$out"/libexec/bin/*gtk*; do
+        if [ -f "$e" ] && [ -x "$e" ]; then
+          wrapProgram "$e" "''${gappsWrapperArgs[@]}"
+        fi
+      done
+
+      install -D ${wrapper} "$out"/bin/bitwig-studio
+      wrapProgram "$out"/bin/bitwig-studio \
+        --prefix PATH : ${lib.makeBinPath [ bubblewrap ]}
+    '';
 
   meta = {
     description = "Digital audio workstation";
@@ -142,9 +147,11 @@ stdenv.mkDerivation rec {
     platforms = [ "x86_64-linux" ];
     maintainers = with lib.maintainers; [
       bfortz
+      eleina
       michalrus
       mrVanDalo
     ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
+    mainProgram = "bitwig-studio";
   };
-}
+})
