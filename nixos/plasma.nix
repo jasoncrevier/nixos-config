@@ -26,6 +26,7 @@
       kontact
       kdepim-addons
       kdepim-runtime
+      kio-extras
       krdc
       packagekit-qt
     ]);
