@@ -59,6 +59,7 @@
     steam-run
     unrar
     via
+    yad
     wl-clipboard
   ];
 
@@ -94,6 +95,7 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "jason" ];
+    auto-optimise-store = true;
   };
 
   # Fix for command-not-found

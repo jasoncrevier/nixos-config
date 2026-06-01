@@ -10,6 +10,10 @@
       url = "github:musnix/musnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    millennium = {
+      url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +36,7 @@
     };
   };
 
-  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, millennium, vscode-server, sops-nix, stylix, ... }@inputs:
     let
       system = "x86_64-linux";
 

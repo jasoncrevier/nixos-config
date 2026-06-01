@@ -3,6 +3,7 @@
 {
   imports =
     [
+      ../3d-printing.nix
       ../arduino.nix
       ../audio.nix
       ../chat.nix
