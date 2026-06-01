@@ -10,9 +10,9 @@
       
       ../common.nix
       ../flatpak.nix
+      ../gnome.nix
       ../intel.nix
       ../musnix.nix
-      ../plasma.nix
       ../ssh.nix
       ../steam.nix
       ../syncthing.nix
