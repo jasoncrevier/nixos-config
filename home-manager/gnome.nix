@@ -63,7 +63,4 @@ dconf.settings = {
       window-style = "disable-csd-hide-toolbar";
     };
   };
-
-  # Pick this theme manually in Gradience
-  home.file."/.config/presets/user/catppuccin-mocha-gradience.json".source = ./catppuccin-mocha-gradience-theme;
 }

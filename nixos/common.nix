@@ -98,6 +98,10 @@
     auto-optimise-store = true;
   };
 
+  # Catppuccin system-wide settings to silence enrollment warnings
+  catppuccin.enable = true;
+  catppuccin.autoEnable = true;
+
   # Fix for command-not-found
   programs.nix-index = {
     enable = true;

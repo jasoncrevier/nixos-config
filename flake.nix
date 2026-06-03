@@ -40,12 +40,17 @@
     let
       system = "x86_64-linux";
 
-      nixpkgs-config = {
-        inherit system;
-        config.allowUnfree = true;
+      nixpkgs-base-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "electron-39.8.10"
+        ];
       };
 
-      pkgs-hm = import nixpkgs nixpkgs-config;
+      pkgs-hm = import nixpkgs {
+        inherit system;
+        config = nixpkgs-base-config;
+      };
 
       common-home-modules = [
         catppuccin.homeModules.catppuccin
@@ -54,7 +59,7 @@
         ./nixos/stylix.nix
       ];
 
-      unfree-module = { nixpkgs.config.allowUnfree = true; };
+      unfree-module = { nixpkgs.config = nixpkgs-base-config; };
 
       common-modules = [
         unfree-module

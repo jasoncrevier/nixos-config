@@ -5,7 +5,7 @@ let
 
   obsidianUri = "obsidian://advanced-uri?vault=Journal&commandname=QuickAdd:%20Log%20mood";
 
-  thoughtRecordScript = pkgs.writeShellApplication {
+  moodTrackerScript = pkgs.writeShellApplication {
     name = "send-mood-tracker-notification";
     runtimeInputs = [ pkgs.curl ];
     text = ''
@@ -29,7 +29,7 @@ in
     serviceConfig = {
       Type = "oneshot";
       User = "jason";
-      ExecStart = "${thoughtRecordScript}/bin/send-mood-tracker-notification";
+      ExecStart = "${moodTrackerScript}/bin/send-mood-tracker-notification";
     };
   };
 

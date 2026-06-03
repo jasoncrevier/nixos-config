@@ -1,8 +1,13 @@
-{ pkgs, lib, inputs, ... }: {
+{ pkgs, lib, options, ... }: {
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";
+
+    targets = lib.mkMerge [
+      (lib.optionalAttrs (options.stylix.targets ? kmscon) { kmscon.enable = false; })
+      (lib.optionalAttrs (options.stylix.targets ? plymouth) { plymouth.enable = false; })
+    ];
 
     cursor = {
       package = pkgs.catppuccin-cursors.mochaDark;
