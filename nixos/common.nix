@@ -46,6 +46,7 @@
   # Enable some basic applications:
   # git, fish, tmux, firefox, adb
   environment.systemPackages = with pkgs; [
+    age
     android-tools
     arp-scan
     bat
@@ -56,6 +57,7 @@
     libimobiledevice
     qmk
     samba
+    sops
     steam-run
     unrar
     via
