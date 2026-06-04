@@ -4,8 +4,8 @@
 
 {
   services = {
-    xserver.displayManager.gdm.enable = true;
-    xserver.desktopManager.gnome = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome = {
       enable = true;
       extraGSettingsOverridePackages = [ pkgs.mutter ];
       extraGSettingsOverrides = ''
@@ -22,6 +22,7 @@
     ];
     gnome.excludePackages = (with pkgs; [
       epiphany
+      decibels
       geary
       gnome-connections
       gnome-font-viewer
@@ -34,6 +35,7 @@
       gnome-weather
       gnome-console
       totem
+      showtime
       yelp
     ]);
   };

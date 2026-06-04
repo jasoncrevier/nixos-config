@@ -7,7 +7,6 @@
   home.packages = with pkgs; [
     gamemode
     heroic
-    lutris
     moonlight-qt
     prismlauncher
     protonup-qt

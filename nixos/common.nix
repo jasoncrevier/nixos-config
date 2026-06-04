@@ -52,11 +52,14 @@
     cifs-utils
     cowsay
     git
+    jq
     libimobiledevice
     qmk
     samba
+    steam-run
     unrar
     via
+    yad
     wl-clipboard
   ];
 
@@ -92,7 +95,12 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "jason" ];
+    auto-optimise-store = true;
   };
+
+  # Catppuccin system-wide settings to silence enrollment warnings
+  catppuccin.enable = true;
+  catppuccin.autoEnable = true;
 
   # Fix for command-not-found
   programs.nix-index = {
