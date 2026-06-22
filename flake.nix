@@ -102,6 +102,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
             ./nixos/stylix.nix
             vscode-server.nixosModules.default
@@ -118,6 +119,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            catppuccin.nixosModules.catppuccin
             vscode-server.nixosModules.default
             ./nixos/device-configs/grunt-configuration.nix
           ];
