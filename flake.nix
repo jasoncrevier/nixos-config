@@ -12,7 +12,7 @@
     };
     millennium = {
       url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin = {
       url = "github:catppuccin/nix";

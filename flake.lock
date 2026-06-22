@@ -75,11 +75,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780394337,
-        "narHash": "sha256-qsiTng/LjFuxN5SNKIKhUWqFFbpvdpnYqRj2F7inK3k=",
+        "lastModified": 1782117778,
+        "narHash": "sha256-x6vIJpJziw3Hs0JKKDP+AeRPWwqyMDOmK6I26tqbYj4=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "9f015db982efc83ae1eb0074960e812ee386f3bb",
+        "rev": "e98afe2dfd950bda4e6a8ef32bb563ec2f04505a",
         "type": "github"
       },
       "original": {
@@ -183,11 +183,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780408569,
-        "narHash": "sha256-s7Tv6FUQThRAvW8En8XVC6HMb0uiikzVccCcCo9u/Bg=",
+        "lastModified": 1782134359,
+        "narHash": "sha256-dh0RDcJ17Rubgk3hGTugYmTu6rnUPfRu5vA7MA1Pdo0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f384af1bec6423a0d4ba1855917ab948f64e5808",
+        "rev": "979bfee6e1a7996fc395270d54c9b59e88762494",
         "type": "github"
       },
       "original": {
@@ -217,38 +217,18 @@
         "type": "github"
       }
     },
-    "luajit-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1763177035,
-        "narHash": "sha256-oYD86MqmlJpiCuEs4LwVtxvarPtz1RPWm8nJqNE0sBs=",
-        "owner": "SteamClientHomebrew",
-        "repo": "LuaJIT",
-        "rev": "89550023569c3e195e75e12951c067fe5591e0d2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SteamClientHomebrew",
-        "ref": "v2.1",
-        "repo": "LuaJIT",
-        "type": "github"
-      }
-    },
     "millennium": {
       "inputs": {
-        "luajit-src": "luajit-src",
         "millennium-src": "millennium-src",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "dir": "packages/nix",
-        "lastModified": 1780283376,
-        "narHash": "sha256-v0MQvXrkilwe2yn9lMdROF/oRwSCmsBXvybsg9ogtJs=",
+        "lastModified": 1781998760,
+        "narHash": "sha256-3xA3TSt1JcFdgDjt+GLsRB10W3x+SoZjKWjEpDxmKXY=",
         "owner": "SteamClientHomebrew",
         "repo": "Millennium",
-        "rev": "c40954af7c2b2f9fcbf39e53586f784735013bcf",
+        "rev": "2b29079f8138d5a4f6e29c2ef658457274c27523",
         "type": "github"
       },
       "original": {
@@ -262,17 +242,17 @@
     "millennium-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780199538,
-        "narHash": "sha256-ocI23Pl2OpezwafivNC0/f2vlQg1XOc+BmGQWTCqwBg=",
+        "lastModified": 1780800522,
+        "narHash": "sha256-Na2+zomNGTF2MPoX5Wm72MMi3dl+CQRtfFQHH0AT5JU=",
         "owner": "SteamClientHomebrew",
         "repo": "Millennium",
-        "rev": "76f9012b6ac14c454cfe3d4ad726ebddccff16e7",
+        "rev": "bd79fe7a94aad1e840d8cae54d6b5233d80268a8",
         "type": "github"
       },
       "original": {
         "owner": "SteamClientHomebrew",
         "repo": "Millennium",
-        "rev": "76f9012b6ac14c454cfe3d4ad726ebddccff16e7",
+        "rev": "bd79fe7a94aad1e840d8cae54d6b5233d80268a8",
         "type": "github"
       }
     },
@@ -298,14 +278,14 @@
     },
     "nixos-hardware": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1780310866,
-        "narHash": "sha256-fPBRVf6A5xlACYcOI59shGrjURuvwu0lRsDoSCEXt/I=",
+        "lastModified": 1781622756,
+        "narHash": "sha256-JrPh4M6S7aPsEE9tOENuZrxC6o2szSLlK+t4+nLke9s=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "4ed851c979641e28597a05086332d75cdc9e395f",
+        "rev": "08018c72174a4df5657f8d94178ac69fb9c243e5",
         "type": "github"
       },
       "original": {
@@ -316,6 +296,22 @@
       }
     },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1770115704,
+        "narHash": "sha256-KHFT9UWOF2yRPlAnSXQJh6uVcgNcWlFqqiAZ7OVlHNc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e6eae2ee2110f3d31110d5c222cd395303343b08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1767892417,
         "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
@@ -328,13 +324,13 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
-        "lastModified": 1780243769,
-        "narHash": "sha256-x5UQuRsH3MqI0U9afaXSNqzTPSeZlRLvFAav2Ux1pNw=",
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "331800de5053fcebacf6813adb5db9c9dca22a0c",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
         "type": "github"
       },
       "original": {
@@ -397,7 +393,7 @@
         "millennium": "millennium",
         "musnix": "musnix",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "plasma-manager": "plasma-manager",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
@@ -411,11 +407,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777944972,
-        "narHash": "sha256-VfGRo1qTBKOe3s2gOv8LSoA6Fk19PvBlwQ1ECN0Evn8=",
+        "lastModified": 1781943681,
+        "narHash": "sha256-NFHmA7H47adqiyp+0iEOyZOQhmigDqA/NBAlf4imB6U=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "c591bf665727040c6cc5cb409079acb22dcce33c",
+        "rev": "420f8d2e9882911f65cfac15cc706f639ba96cca",
         "type": "github"
       },
       "original": {
@@ -444,11 +440,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1780418031,
-        "narHash": "sha256-/lkloe/Vlpq8GmKiHzxA3woYUubWX1mV/RDtv8TE4d0=",
+        "lastModified": 1781997134,
+        "narHash": "sha256-muBZG4O/agq/ljgHr6c3AsobIWgODAS6vf50xIS7o+Q=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "b670c2bdf09861b3215f30fc8a70f2fe26dc5f16",
+        "rev": "a6a493119e492e15874caf6f7f8c7e572e64c655",
         "type": "github"
       },
       "original": {

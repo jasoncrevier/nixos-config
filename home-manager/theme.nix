@@ -18,9 +18,4 @@
   wayland.windowManager.hyprland.configType = "hyprlang";
 
   stylix.targets.vscode.enable = false;
-
-  gtk = {
-    enable = true;
-    gtk4.theme = config.gtk.theme;
-  };
 }
