@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
-  gnome-tweaks
-  gnomeExtensions.just-perfection
-  gnomeExtensions.pop-shell
-  gnomeExtensions.user-themes
+    gnome-tweaks
+    gnomeExtensions.just-perfection
+    gnomeExtensions.pop-shell
+    gnomeExtensions.user-themes
+    papirus-icon-theme
   ];
 
 dconf.settings = {
