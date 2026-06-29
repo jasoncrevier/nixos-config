@@ -20,6 +20,16 @@
     "d /var/lib/steamcmd 0770 zomboid zomboid -"
   ];
 
+  # Host Firewall Configuration
+  networking.firewall.allowedUDPPorts = [ 
+    16261 # Main handshake port
+    16262 # Direct connection UDP
+  ];
+  networking.firewall.allowedTCPPorts = [ 
+    29015 # Steam query port
+    16262 # Direct connection TCP
+  ] ++ (lib.range 16263 16282); # Dynamically opens player slots 1 through 20 (16263 to 16282)
+
   # Docker Runtime Configuration
   virtualisation.docker = {
     enable = true;
