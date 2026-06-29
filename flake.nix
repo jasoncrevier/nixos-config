@@ -114,6 +114,9 @@
             unfree-module
             sops-nix.nixosModules.sops
             vscode-server.nixosModules.default
+            {
+               services.vscode-server.enable = true;
+            }
             ./nixos/device-configs/grunt-configuration.nix
           ];
         };
