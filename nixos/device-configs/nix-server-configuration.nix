@@ -14,6 +14,7 @@
     ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
+    ../project-zomboid.nix
     ../sops.nix
     ../ssh.nix
     ../steam.nix

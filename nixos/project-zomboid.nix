@@ -9,16 +9,26 @@
   # System User & Group Setup
   users.users.zomboid = {
     isSystemUser = true;
-    group = "zomboid";
-    uid = 99; # Matches the UID expected by the container environment
+    uid = 99;
+    group = "users";
   };
-  users.groups.zomboid.gid = 100; # Matches the GID (often 'users' or 100)
+  users.groups.zomboid = {};
 
   # Host Directory Provisioning
   systemd.tmpfiles.rules = [
-    "d /var/lib/projectzomboid 0770 zomboid zomboid -"
-    "d /var/lib/steamcmd 0770 zomboid zomboid -"
+    "d /var/lib/projectzomboid 0775 99 100 -"
+    "d /var/lib/steamcmd 0775 99 100 -"
   ];
+
+  # Host Firewall Configuration
+  networking.firewall.allowedUDPPorts = [ 
+    16261 # Main handshake port
+    16262 # Direct connection UDP
+  ];
+  networking.firewall.allowedTCPPorts = [ 
+    29015 # Steam query port
+    16262 # Direct connection TCP
+  ] ++ (lib.range 16263 16282); # Dynamically opens player slots 1 through 20 (16263 to 16282)
 
   # Docker Runtime Configuration
   virtualisation.docker = {
@@ -31,7 +41,7 @@
   virtualisation.oci-containers.containers."project-zomboid" = {
     image = "ich777/steamcmd:projectzomboid";
     environment = {
-      "GAME_ID" = "380870 -beta 42.13.1";
+      "GAME_ID" = "380870 -beta unstable";
       "GID" = "100";
       "HOST_CONTAINERNAME" = "project-zomboid";
       "HOST_HOSTNAME" = "knight";
