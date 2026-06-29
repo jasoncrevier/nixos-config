@@ -2,10 +2,11 @@
 
 {
   home.packages = with pkgs; [
-  gnome-tweaks
-  gnomeExtensions.just-perfection
-  gnomeExtensions.pop-shell
-  gnomeExtensions.user-themes
+    gnome-tweaks
+    gnomeExtensions.just-perfection
+    gnomeExtensions.pop-shell
+    gnomeExtensions.user-themes
+    papirus-icon-theme
   ];
 
 dconf.settings = {
@@ -63,7 +64,4 @@ dconf.settings = {
       window-style = "disable-csd-hide-toolbar";
     };
   };
-
-  # Pick this theme manually in Gradience
-  home.file."/.config/presets/user/catppuccin-mocha-gradience.json".source = ./catppuccin-mocha-gradience-theme;
 }

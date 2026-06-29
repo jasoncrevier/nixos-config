@@ -6,6 +6,9 @@
   # Enable SDDM and Plasma
   services = {
     displayManager.sddm.enable = true;
+    displayManager.sessionPackages = [
+      pkgs.kdePackages.plasma-bigscreen
+    ];
     desktopManager.plasma6.enable = true;
   };
 
@@ -29,6 +32,7 @@
       kio-extras
       krdc
       packagekit-qt
+      plasma-bigscreen
     ]);
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa

@@ -9,14 +9,14 @@
     flavor = "mocha";
     accent = "teal";
     enable = true;
+    autoEnable = true; # Silences enrollment warnings
     cursors.enable = false; # Let Stylix handle cursors to avoid conflicts
     vscode.profiles.default.enable = true;
   };
 
-  stylix.targets.vscode.enable = false;
+  # Silence Hyprland config warning (triggered by catppuccin module evaluation)
+  wayland.windowManager.hyprland.configType = "hyprlang";
 
-  gtk = {
-    enable = true;
-    gtk4.theme = config.gtk.theme;
-  };
+  stylix.targets.gtk.enable = false;
+  stylix.targets.vscode.enable = false;
 }

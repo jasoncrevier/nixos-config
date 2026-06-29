@@ -12,7 +12,6 @@
     };
     millennium = {
       url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -40,12 +39,17 @@
     let
       system = "x86_64-linux";
 
-      nixpkgs-config = {
-        inherit system;
-        config.allowUnfree = true;
+      nixpkgs-base-config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "electron-39.8.10"
+        ];
       };
 
-      pkgs-hm = import nixpkgs nixpkgs-config;
+      pkgs-hm = import nixpkgs {
+        inherit system;
+        config = nixpkgs-base-config;
+      };
 
       common-home-modules = [
         catppuccin.homeModules.catppuccin
@@ -54,7 +58,7 @@
         ./nixos/stylix.nix
       ];
 
-      unfree-module = { nixpkgs.config.allowUnfree = true; };
+      unfree-module = { nixpkgs.config = nixpkgs-base-config; };
 
       common-modules = [
         unfree-module
@@ -97,6 +101,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
             ./nixos/stylix.nix
             vscode-server.nixosModules.default
@@ -113,6 +118,7 @@
           modules = [
             unfree-module
             sops-nix.nixosModules.sops
+            catppuccin.nixosModules.catppuccin
             vscode-server.nixosModules.default
             {
                services.vscode-server.enable = true;
