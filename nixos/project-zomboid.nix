@@ -9,15 +9,15 @@
   # System User & Group Setup
   users.users.zomboid = {
     isSystemUser = true;
-    group = "zomboid";
-    uid = 99; # Matches the UID expected by the container environment
+    uid = 99;
+    group = "users";
   };
-  users.groups.zomboid.gid = 100; # Matches the GID (often 'users' or 100)
+  users.groups.zomboid = {};
 
   # Host Directory Provisioning
   systemd.tmpfiles.rules = [
-    "d /var/lib/projectzomboid 0770 zomboid zomboid -"
-    "d /var/lib/steamcmd 0770 zomboid zomboid -"
+    "d /var/lib/projectzomboid 0775 99 100 -"
+    "d /var/lib/steamcmd 0775 99 100 -"
   ];
 
   # Host Firewall Configuration
@@ -41,7 +41,7 @@
   virtualisation.oci-containers.containers."project-zomboid" = {
     image = "ich777/steamcmd:projectzomboid";
     environment = {
-      "GAME_ID" = "380870 -beta 42.13.1";
+      "GAME_ID" = "380870 -beta unstable";
       "GID" = "100";
       "HOST_CONTAINERNAME" = "project-zomboid";
       "HOST_HOSTNAME" = "knight";

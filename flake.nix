@@ -120,6 +120,9 @@
             sops-nix.nixosModules.sops
             catppuccin.nixosModules.catppuccin
             vscode-server.nixosModules.default
+            {
+               services.vscode-server.enable = true;
+            }
             ./nixos/device-configs/grunt-configuration.nix
           ];
         };
