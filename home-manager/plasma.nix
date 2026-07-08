@@ -11,6 +11,7 @@
     enable = true;
     defaultProfile = "Catppuccin";
     profiles.Catppuccin.colorScheme = "CatppuccinMochaTeal";
+    profiles.Catppuccin.font.name = "IBM Plex Mono";
     customColorSchemes = {
       CatppuccinMochaTeal = ../misc/Catppuccin-Mocha-Konsole.colorscheme;
     };
