@@ -6,18 +6,20 @@
   # SOPS Secret Setup
   sops.secrets.project-zomboid_admin_pwd.owner = "zomboid";
 
-  # System User & Group Setup
+  # System User & Group Setup (Completely dynamic, rootless user mapping)
   users.users.zomboid = {
     isSystemUser = true;
-    uid = 99;
-    group = "users";
+    group = "zomboid";
+    # SubUID/SubGID allocations allow Podman to safely map container internal permissions
+    subUidRanges = [{ startUid = 100000; count = 65536; }];
+    subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
   users.groups.zomboid = {};
 
   # Host Directory Provisioning
   systemd.tmpfiles.rules = [
-    "d /var/lib/projectzomboid 0775 99 100 -"
-    "d /var/lib/steamcmd 0775 99 100 -"
+    "d /var/lib/projectzomboid 0775 zomboid zomboid -"
+    "d /var/lib/steamcmd 0775 zomboid zomboid -"
   ];
 
   # Host Firewall Configuration
@@ -30,25 +32,24 @@
     16262 # Direct connection TCP
   ] ++ (lib.range 16263 16282); # Dynamically opens player slots 1 through 20 (16263 to 16282)
 
-  # Docker Runtime Configuration
-  virtualisation.docker = {
+  # Podman Runtime Configuration (The Pure Nix Way)
+  virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
   };
-  virtualisation.oci-containers.backend = "docker";
+  virtualisation.oci-containers.backend = "podman";
 
   # Project Zomboid Container Configuration
   virtualisation.oci-containers.containers."project-zomboid" = {
     image = "ich777/steamcmd:projectzomboid";
     environment = {
-      "GAME_ID" = "380870 -beta unstable";
-      "GID" = "100";
+      "GAME_ID" = "380870 -beta b42test"; # Restored the stable working beta branch string
       "HOST_CONTAINERNAME" = "project-zomboid";
       "HOST_HOSTNAME" = "knight";
       "HOST_OS" = "NixOS";
       "TZ" = "America/Toronto";
-      "UID" = "99";
       "VALIDATE" = "true";
+      # UID/GID environment keys dropped: Podman handles ownership internally via namespaces!
     };
     volumes = [
       "/var/lib/projectzomboid:/serverdata/serverfiles:rw"
@@ -61,26 +62,11 @@
       "16262:16262/tcp"
       
       # Player slots 1 through 20
-      "16263:16263/tcp"
-      "16264:16264/tcp"
-      "16265:16265/tcp"
-      "16266:16266/tcp"
-      "16267:16267/tcp"
-      "16268:16268/tcp"
-      "16269:16269/tcp"
-      "16270:16270/tcp"
-      "16271:16271/tcp"
-      "16272:16272/tcp"
-      "16273:16273/tcp"
-      "16274:16274/tcp"
-      "16275:16275/tcp"
-      "16276:16276/tcp"
-      "16277:16277/tcp"
-      "16278:16278/tcp"
-      "16279:16279/tcp"
-      "16280:16280/tcp"
-      "16281:16281/tcp"
-      "16282:16282/tcp"
+      "16263:16263/tcp" "16264:16264/tcp" "16265:16265/tcp" "16266:16266/tcp"
+      "16267:16267/tcp" "16268:16268/tcp" "16269:16269/tcp" "16270:16270/tcp"
+      "16271:16271/tcp" "16272:16272/tcp" "16273:16273/tcp" "16274:16274/tcp"
+      "16275:16275/tcp" "16276:16276/tcp" "16277:16277/tcp" "16278:16278/tcp"
+      "16279:16279/tcp" "16280:16280/tcp" "16281:16281/tcp" "16282:16282/tcp"
     ];
     log-driver = "journald";
     extraOptions = [
@@ -89,8 +75,8 @@
     ];
   };
 
-  # Systemd Infrastructure Mapping
-  systemd.services."docker-project-zomboid" = {
+  # Systemd Infrastructure Mapping (Converted to target Podman targets)
+  systemd.services."podman-project-zomboid" = {
     serviceConfig = {
       EnvironmentFile = config.sops.secrets.project-zomboid_admin_pwd.path;
       Restart = lib.mkOverride 90 "always";
@@ -98,27 +84,27 @@
       RestartSec = lib.mkOverride 90 "100ms";
       RestartSteps = lib.mkOverride 90 9;
     };
-    after = [ "docker-network-project-zomboid_default.service" ];
-    requires = [ "docker-network-project-zomboid_default.service" ];
-    partOf = [ "docker-compose-project-zomboid-root.target" ];
-    wantedBy = [ "docker-compose-project-zomboid-root.target" ];
+    after = [ "podman-network-project-zomboid_default.service" ];
+    requires = [ "podman-network-project-zomboid_default.service" ];
+    partOf = [ "podman-compose-project-zomboid-root.target" ];
+    wantedBy = [ "podman-compose-project-zomboid-root.target" ];
   };
 
-  systemd.services."docker-network-project-zomboid_default" = {
-    path = [ pkgs.docker ];
+  systemd.services."podman-network-project-zomboid_default" = {
+    path = [ pkgs.podman ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStop = "${pkgs.docker}/bin/docker network rm -f project-zomboid_default";
+      ExecStop = "${pkgs.podman}/bin/podman network rm -f project-zomboid_default";
     };
     script = ''
-      docker network inspect project-zomboid_default || docker network create project-zomboid_default
+      podman network inspect project-zomboid_default || podman network create project-zomboid_default
     '';
-    partOf = [ "docker-compose-project-zomboid-root.target" ];
-    wantedBy = [ "docker-compose-project-zomboid-root.target" ];
+    partOf = [ "podman-compose-project-zomboid-root.target" ];
+    wantedBy = [ "podman-compose-project-zomboid-root.target" ];
   };
 
-  systemd.targets."docker-compose-project-zomboid-root" = {
+  systemd.targets."podman-compose-project-zomboid-root" = {
     unitConfig.Description = "Root target generated by compose2nix.";
     wantedBy = [ "multi-user.target" ];
   };

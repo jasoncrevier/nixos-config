@@ -17,6 +17,8 @@
   # Silence Hyprland config warning (triggered by catppuccin module evaluation)
   wayland.windowManager.hyprland.configType = "hyprlang";
 
+  home.pointerCursor.enable = true;
+
   #stylix.targets.gtk.enable = false;
   stylix.targets.vscode.enable = false;
 }
