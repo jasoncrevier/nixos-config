@@ -8,7 +8,6 @@
     
     ../ai.nix
     ../common.nix
-    ../docker.nix
     ../jellyfin.nix
     ../karakeep.nix
     ../navidrome.nix
