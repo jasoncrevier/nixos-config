@@ -244,14 +244,18 @@
       "locked": {
         "lastModified": 1783612754,
         "narHash": "sha256-97yND/JauDYEdYEHzuwkUeOUwfd+BCzHpKTmibkQZgw=",
+        "lastModified": 1783612754,
+        "narHash": "sha256-97yND/JauDYEdYEHzuwkUeOUwfd+BCzHpKTmibkQZgw=",
         "owner": "SteamClientHomebrew",
         "repo": "Millennium",
+        "rev": "78f1f71a63f18142289926ca435071500ac1cbad",
         "rev": "78f1f71a63f18142289926ca435071500ac1cbad",
         "type": "github"
       },
       "original": {
         "owner": "SteamClientHomebrew",
         "repo": "Millennium",
+        "rev": "78f1f71a63f18142289926ca435071500ac1cbad",
         "rev": "78f1f71a63f18142289926ca435071500ac1cbad",
         "type": "github"
       }
@@ -375,8 +379,11 @@
       "locked": {
         "lastModified": 1783574839,
         "narHash": "sha256-ICof1tV4/9XheBLBGf7dhMhfMq4dOs1zwTHrr7zGFlA=",
+        "lastModified": 1783574839,
+        "narHash": "sha256-ICof1tV4/9XheBLBGf7dhMhfMq4dOs1zwTHrr7zGFlA=",
         "owner": "nix-community",
         "repo": "plasma-manager",
+        "rev": "c551f0687658e4bb699cfff6015436ad7ee57a0d",
         "rev": "c551f0687658e4bb699cfff6015436ad7ee57a0d",
         "type": "github"
       },
