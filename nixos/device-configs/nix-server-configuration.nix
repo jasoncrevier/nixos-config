@@ -8,12 +8,12 @@
     
     ../ai.nix
     ../common.nix
-    ../docker.nix
     ../jellyfin.nix
     ../karakeep.nix
     ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
+    ../project-zomboid.nix
     ../sops.nix
     ../ssh.nix
     ../steam.nix

@@ -7,7 +7,6 @@
     ./grunt-hardware-configuration.nix
     
     ../common.nix
-    ../docker.nix
     ../ssh.nix
     ../tailscale.nix
   ];
