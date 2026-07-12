@@ -7,6 +7,8 @@
 
   programs.plasma.enable = true;
 
+  stylix.targets.gtk.enable = false;
+
   programs.konsole = {
     enable = true;
     defaultProfile = "Catppuccin";

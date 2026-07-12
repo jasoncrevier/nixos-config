@@ -6,7 +6,6 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.pop-shell
     gnomeExtensions.user-themes
-    papirus-icon-theme
   ];
 
 dconf.settings = {

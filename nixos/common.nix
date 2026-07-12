@@ -39,7 +39,7 @@
     isNormalUser = true;
     description = "Jason Crevier";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" "dialout" "uucp" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "docker" "adbusers" "kvm" "dialout" "uucp" "scanner" "lp" ];
   };
 
   #~Housekeeping~
