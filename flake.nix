@@ -19,7 +19,6 @@
     };
     vscode-server = {
       url = "github:nix-community/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -43,7 +42,6 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-39.8.10"
-          "pnpm-9.15.9"
         ];
       };
 
@@ -68,6 +66,8 @@
         stylix.nixosModules.stylix
         ./nixos/stylix.nix
       ];
+
+      vscodeServerModule = import (inputs.vscode-server + "/modules/vscode-server");
     in
     {
       nixosConfigurations = {
@@ -105,7 +105,7 @@
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
             ./nixos/stylix.nix
-            vscode-server.nixosModules.default
+            vscodeServerModule
             {
               services.vscode-server.enable = true;
             }
@@ -120,7 +120,7 @@
             unfree-module
             sops-nix.nixosModules.sops
             catppuccin.nixosModules.catppuccin
-            vscode-server.nixosModules.default
+            vscodeServerModule
             {
                services.vscode-server.enable = true;
             }
