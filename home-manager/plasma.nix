@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -7,7 +7,7 @@
 
   programs.plasma.enable = true;
 
-  stylix.targets.gtk.enable = false;
+  stylix.targets.gtk.enable = true;
 
   programs.konsole = {
     enable = true;

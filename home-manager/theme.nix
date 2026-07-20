@@ -19,6 +19,5 @@
 
   home.pointerCursor.enable = true;
 
-  #stylix.targets.gtk.enable = false;
   stylix.targets.vscode.enable = false;
 }
