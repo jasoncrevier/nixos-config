@@ -7,7 +7,7 @@
   autoPatchelfHook,
   copyDesktopItems,
   makeDesktopItem,
-  icoutils,
+  imagemagick,
   makeWrapper,
   xorg,
   libxkbcommon,
@@ -27,8 +27,6 @@ buildDotnetModule (finalAttrs: {
 
   dotnet-sdk = dotnet-sdk_10;
 
-  DOTNET_NUGET_SIGNATURE_VERIFICATION = "false";
-
   src = fetchFromGitHub {
     owner = "dan0v";
     repo = "AmplitudeSoundboard";
@@ -42,7 +40,7 @@ buildDotnetModule (finalAttrs: {
   nativeBuildInputs = [
     autoPatchelfHook
     copyDesktopItems
-    icoutils
+    imagemagick
     makeWrapper
   ];
 
@@ -68,8 +66,15 @@ buildDotnetModule (finalAttrs: {
   executables = [ "amplitude_soundboard" ];
 
   postInstall = ''
-    mkdir -p $out/share/icons/hicolor/256x256/apps
-    icotool -x -w 256 $src/Assets/Icon.ico -o $out/share/icons/hicolor/256x256/apps/amplitude-soundboard.png || true
+    tmpdir=$(mktemp -d)
+    magick "$src/Assets/Icon.ico" "$tmpdir/icon.png"
+    for img in "$tmpdir"/icon*.png; do
+      [ -f "$img" ] || continue
+      size=$(magick identify -format "%wx%h" "$img")
+      mkdir -p "$out/share/icons/hicolor/$size/apps"
+      cp "$img" "$out/share/icons/hicolor/$size/apps/amplitude-soundboard.png"
+    done
+    rm -rf "$tmpdir"
   '';
 
   postFixup = ''
@@ -115,7 +120,7 @@ buildDotnetModule (finalAttrs: {
     homepage = "https://github.com/dan0v/AmplitudeSoundboard";
     changelog = "https://github.com/dan0v/AmplitudeSoundboard/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ jasoncrevier ];
     mainProgram = "amplitude_soundboard";
     platforms = lib.platforms.linux;
   };
