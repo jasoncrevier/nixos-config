@@ -45,22 +45,22 @@ buildDotnetModule (finalAttrs: {
   ];
 
   buildInputs = [
-    xorg.libXtst
-    xorg.libXt
-    xorg.libX11
-    xorg.libXinerama
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXcursor
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXfixes
-    libxkbcommon
-    fontconfig
-    glib
     alsa-lib
     alsa-plugins
+    fontconfig
+    glib
     libpulseaudio
+    libx11
+    libxcursor
+    libxext
+    libxfixes
+    libxi
+    libxinerama
+    libxkbcommon
+    libxrandr
+    libxrender
+    libxt
+    libxtst
   ];
 
   executables = [ "amplitude_soundboard" ];
@@ -79,23 +79,31 @@ buildDotnetModule (finalAttrs: {
 
   postFixup = ''
     wrapProgram $out/bin/amplitude_soundboard \
-      --prefix PATH : "${lib.makeBinPath [ xclip xsel wl-clipboard ]}" \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [
-        alsa-lib
-        alsa-plugins
-        libpulseaudio
-        xorg.libX11
-        xorg.libXext
-        xorg.libXi
-        xorg.libXcursor
-        xorg.libXinerama
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXfixes
-        xorg.libXtst
-        libxkbcommon
-        glib
-      ]}" \
+      --prefix PATH : "${
+        lib.makeBinPath [
+          xclip
+          xsel
+          wl-clipboard
+        ]
+      }" \
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          alsa-lib
+          alsa-plugins
+          glib
+          libpulseaudio
+          libx11
+          libxcursor
+          libxext
+          libxfixes
+          libxi
+          libxinerama
+          libxkbcommon
+          libxrandr
+          libxrender
+          libxtst
+        ]
+      }" \
       --set AVALONIA_X11_USE_DBUS_MENU 0 \
       --set AVALONIA_X11_WM_OVERRIDE_REDIRECT 0
   '';
@@ -108,7 +116,11 @@ buildDotnetModule (finalAttrs: {
       desktopName = "Amplitude Soundboard";
       genericName = "Soundboard";
       comment = "A sleek, cross-platform soundboard";
-      categories = [ "AudioVideo" "Audio" "Player" ];
+      categories = [
+        "AudioVideo"
+        "Audio"
+        "Player"
+      ];
       terminal = false;
     })
   ];
