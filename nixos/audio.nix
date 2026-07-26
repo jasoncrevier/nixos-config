@@ -12,4 +12,9 @@
     pulse.enable = true;
     jack.enable = true;
   };
+  
+  security.pam.loginLimits = [
+    { domain = "@audio"; item = "rtprio"; type = "-"; value = "95"; }
+    { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+  ];
 }

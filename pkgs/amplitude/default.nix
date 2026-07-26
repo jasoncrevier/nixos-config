@@ -9,7 +9,6 @@
   makeDesktopItem,
   imagemagick,
   makeWrapper,
-  xorg,
   libxkbcommon,
   fontconfig,
   glib,
@@ -19,6 +18,15 @@
   xclip,
   xsel,
   wl-clipboard,
+  libX11,
+  libXext,
+  libXfixes,
+  libXi,
+  libXinerama,
+  libXrandr,
+  libXrender,
+  libXt,
+  libXtst,
 }:
 
 buildDotnetModule (finalAttrs: {
@@ -50,17 +58,16 @@ buildDotnetModule (finalAttrs: {
     fontconfig
     glib
     libpulseaudio
-    libx11
-    libxcursor
-    libxext
-    libxfixes
-    libxi
-    libxinerama
+    libX11
+    libXext
+    libXfixes
+    libXi
+    libXinerama
     libxkbcommon
-    libxrandr
-    libxrender
-    libxt
-    libxtst
+    libXrandr
+    libXrender
+    libXt
+    libXtst
   ];
 
   executables = [ "amplitude_soundboard" ];
@@ -92,16 +99,15 @@ buildDotnetModule (finalAttrs: {
           alsa-plugins
           glib
           libpulseaudio
-          libx11
-          libxcursor
-          libxext
-          libxfixes
-          libxi
-          libxinerama
+          libX11
+          libXext
+          libXfixes
+          libXi
+          libXinerama
           libxkbcommon
-          libxrandr
-          libxrender
-          libxtst
+          libXrandr
+          libXrender
+          libXtst
         ]
       }" \
       --set AVALONIA_X11_USE_DBUS_MENU 0 \
