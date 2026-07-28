@@ -50,4 +50,36 @@
     fi
     '';
   };
+
+  services.pipewire.wireplumber.extraConfig = {
+    "50-minifuse-driver-fix" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            {
+              "node.name" = "alsa_output.usb-ARTURIA_MiniFuse_1_8830400743360506-00.pro-output-0";
+            }
+          ];
+          actions = {
+            update-props = {
+              "priority.driver" = 20000;
+            };
+          };
+        }
+        {
+          matches = [
+            {
+              "node.name" = "alsa_input.usb-ARTURIA_MiniFuse_1_8830400743360506-00.pro-input-0";
+            }
+          ];
+          actions = {
+            update-props = {
+              "node.passive" = true;
+              "priority.driver" = 0;
+            };
+          };
+        }
+      ];
+    };
+  };
 }
