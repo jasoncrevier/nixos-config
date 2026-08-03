@@ -70,6 +70,8 @@
         stylix.nixosModules.stylix
         ./nixos/stylix.nix
       ];
+
+      vscodeServerModule = import (inputs.vscode-server + "/modules/vscode-server");
     in
     {
       nixosConfigurations = {
@@ -107,7 +109,7 @@
             catppuccin.nixosModules.catppuccin
             stylix.nixosModules.stylix
             ./nixos/stylix.nix
-            vscode-server.nixosModules.default
+            vscodeServerModule
             {
               services.vscode-server.enable = true;
             }
@@ -122,7 +124,7 @@
             unfree-module
             sops-nix.nixosModules.sops
             catppuccin.nixosModules.catppuccin
-            vscode-server.nixosModules.default
+            vscodeServerModule
             {
                services.vscode-server.enable = true;
             }

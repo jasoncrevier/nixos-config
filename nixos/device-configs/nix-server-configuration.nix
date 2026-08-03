@@ -20,6 +20,7 @@
     ../sunshine.nix
     ../systemd-boot.nix
     ../tailscale.nix
+    ../wyoming.nix
 
     ../../scripts/mood-tracker-notification.nix
     ../../scripts/navidrome-likes-to-listenbrainz.nix
