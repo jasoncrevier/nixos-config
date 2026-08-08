@@ -40,7 +40,9 @@
   ];
 
   # Host Firewall Configuration
-  networking.firewall.allowedTCPPorts = [ 80 ];
+  networking.firewall.allowedTCPPorts = [
+    80 
+  ];
 
   # Containers
   virtualisation.oci-containers.containers."wallabag-db" = {
@@ -55,6 +57,7 @@
       "--health-timeout=3s"
       "--network-alias=db"
       "--network=wallabag_default"
+      "--env-file=${config.sops.secrets.wallabag_env.path}"
     ];
   };
   systemd.services."podman-wallabag-db" = {
@@ -106,6 +109,7 @@
   virtualisation.oci-containers.containers."wallabag-wallabag" = {
     image = "wallabag/wallabag";
     environment = {
+      "SYMFONY__ENV__APP_ENV" = "prod";
       "SYMFONY__ENV__DATABASE_CHARSET" = "utf8mb4";
       "SYMFONY__ENV__DATABASE_DRIVER" = "pdo_mysql";
       "SYMFONY__ENV__DATABASE_HOST" = "db";
@@ -129,6 +133,7 @@
     extraOptions = [
       "--network-alias=wallabag"
       "--network=wallabag_default"
+      "--env-file=${config.sops.secrets.wallabag_env.path}"
     ];
   };
   systemd.services."podman-wallabag-wallabag" = {
@@ -148,7 +153,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStop = "podman network rm -f wallabag_default";
+      ExecStop = "${pkgs.podman}/bin/podman network rm -f wallabag_default";
     };
     script = ''
       podman network inspect wallabag_default || podman network create wallabag_default
