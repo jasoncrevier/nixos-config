@@ -1,9 +1,11 @@
 keys:
   - &jason age1z8cyzwua7d7vmvgvxznfsq9rhr9wu8pu82vk0tznl6z8w8hsr90sm3dnsg
   - &server age1svgtayqrzxf63xwxwfvfh4tzf398g6xjcgqe2zzqg6k6yt9mnugqvxzxx3
+  - &grunt age1hydmfffyqxldaafzpq933d0hryha60av2v8e7zvyw3qy5uhyue4sg0eh6f
 creation_rules:
   - path_regex: secrets.*\.yaml$
     key_groups:
       - age:
         - *jason
         - *server
+        - *grunt

@@ -4,5 +4,6 @@
   home.packages = with pkgs; [
     cura-appimage
     f3d
+    orca-slicer
   ];
 }

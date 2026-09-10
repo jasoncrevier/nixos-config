@@ -7,9 +7,8 @@
   autoPatchelfHook,
   copyDesktopItems,
   makeDesktopItem,
-  icoutils,
+  imagemagick,
   makeWrapper,
-  xorg,
   libxkbcommon,
   fontconfig,
   glib,
@@ -19,6 +18,15 @@
   xclip,
   xsel,
   wl-clipboard,
+  libX11,
+  libXext,
+  libXfixes,
+  libXi,
+  libXinerama,
+  libXrandr,
+  libXrender,
+  libXt,
+  libXtst,
 }:
 
 buildDotnetModule (finalAttrs: {
@@ -26,8 +34,6 @@ buildDotnetModule (finalAttrs: {
   version = "2.13.1";
 
   dotnet-sdk = dotnet-sdk_10;
-
-  DOTNET_NUGET_SIGNATURE_VERIFICATION = "false";
 
   src = fetchFromGitHub {
     owner = "dan0v";
@@ -42,55 +48,68 @@ buildDotnetModule (finalAttrs: {
   nativeBuildInputs = [
     autoPatchelfHook
     copyDesktopItems
-    icoutils
+    imagemagick
     makeWrapper
   ];
 
   buildInputs = [
-    xorg.libXtst
-    xorg.libXt
-    xorg.libX11
-    xorg.libXinerama
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXcursor
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXfixes
-    libxkbcommon
-    fontconfig
-    glib
     alsa-lib
     alsa-plugins
+    fontconfig
+    glib
     libpulseaudio
+    libX11
+    libXext
+    libXfixes
+    libXi
+    libXinerama
+    libxkbcommon
+    libXrandr
+    libXrender
+    libXt
+    libXtst
   ];
 
   executables = [ "amplitude_soundboard" ];
 
   postInstall = ''
-    mkdir -p $out/share/icons/hicolor/256x256/apps
-    icotool -x -w 256 $src/Assets/Icon.ico -o $out/share/icons/hicolor/256x256/apps/amplitude-soundboard.png || true
+    tmpdir=$(mktemp -d)
+    magick "$src/Assets/Icon.ico" "$tmpdir/icon.png"
+    for img in "$tmpdir"/icon*.png; do
+      [ -f "$img" ] || continue
+      size=$(magick identify -format "%wx%h" "$img")
+      mkdir -p "$out/share/icons/hicolor/$size/apps"
+      cp "$img" "$out/share/icons/hicolor/$size/apps/amplitude-soundboard.png"
+    done
+    rm -rf "$tmpdir"
   '';
 
   postFixup = ''
     wrapProgram $out/bin/amplitude_soundboard \
-      --prefix PATH : "${lib.makeBinPath [ xclip xsel wl-clipboard ]}" \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [
-        alsa-lib
-        alsa-plugins
-        libpulseaudio
-        xorg.libX11
-        xorg.libXext
-        xorg.libXi
-        xorg.libXcursor
-        xorg.libXinerama
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXfixes
-        xorg.libXtst
-        libxkbcommon
-        glib
-      ]}" \
+      --prefix PATH : "${
+        lib.makeBinPath [
+          xclip
+          xsel
+          wl-clipboard
+        ]
+      }" \
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          alsa-lib
+          alsa-plugins
+          glib
+          libpulseaudio
+          libX11
+          libXext
+          libXfixes
+          libXi
+          libXinerama
+          libxkbcommon
+          libXrandr
+          libXrender
+          libXtst
+        ]
+      }" \
       --set AVALONIA_X11_USE_DBUS_MENU 0 \
       --set AVALONIA_X11_WM_OVERRIDE_REDIRECT 0
   '';
@@ -103,7 +122,11 @@ buildDotnetModule (finalAttrs: {
       desktopName = "Amplitude Soundboard";
       genericName = "Soundboard";
       comment = "A sleek, cross-platform soundboard";
-      categories = [ "AudioVideo" "Audio" "Player" ];
+      categories = [
+        "AudioVideo"
+        "Audio"
+        "Player"
+      ];
       terminal = false;
     })
   ];
@@ -115,7 +138,7 @@ buildDotnetModule (finalAttrs: {
     homepage = "https://github.com/dan0v/AmplitudeSoundboard";
     changelog = "https://github.com/dan0v/AmplitudeSoundboard/releases/tag/${finalAttrs.src.tag}";
     license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ jasoncrevier ];
     mainProgram = "amplitude_soundboard";
     platforms = lib.platforms.linux;
   };

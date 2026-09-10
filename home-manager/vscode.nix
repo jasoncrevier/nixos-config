@@ -18,6 +18,7 @@
         "scm.inputFontSize" = lib.mkForce 13;
         "remote.SSH.remotePlatform" = {
           "nix-server" = "linux";
+          "grunt" = "linux";
         };
       };
       extensions = with pkgs.vscode-extensions; [
