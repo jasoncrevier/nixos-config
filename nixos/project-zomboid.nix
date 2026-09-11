@@ -52,7 +52,7 @@
   virtualisation.oci-containers.containers."project-zomboid" = {
     image = "ich777/steamcmd:projectzomboid";
     environment = {
-      "GAME_ID" = "380870 -beta b42test"; 
+      "GAME_ID" = "380870"; 
       "HOST_CONTAINERNAME" = "project-zomboid";
       "HOST_HOSTNAME" = "knight";
       "HOST_OS" = "NixOS";

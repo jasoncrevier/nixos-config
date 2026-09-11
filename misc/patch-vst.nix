@@ -13,12 +13,19 @@ pkgs.mkShell {
     libx11
     libxcb
     libxcb-wm
+    xcbutil          # libxcb-util.so.1
+    xcbutilcursor    # libxcb-cursor.so.0
+    glib             # libglib-2.0.so.0, libgobject-2.0.so.0
+    cairo            # libcairo.so.2
+    pango            # libpango-1.0.so.0, libpangocairo, libpangoft2
+    harfbuzz         # libharfbuzz.so.0
     libGL
     libxkbcommon
     fontconfig
     freetype
     stdenv.cc.cc.lib
-    xorg.libXcursor
-    xorg.libXrandr
+    libsm            # libSM.so.6
+    libxcursor       # libXcursor.so.1
+    libxrandr        # libXrandr.so.2
   ];
 }

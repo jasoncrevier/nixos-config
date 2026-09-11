@@ -20,6 +20,7 @@
     ../sunshine.nix
     ../systemd-boot.nix
     ../tailscale.nix
+    ../valheim.nix
     ../wyoming.nix
 
     ../../scripts/mood-tracker-notification.nix
@@ -61,6 +62,7 @@
       { from = 8083; to = 8083; }
       { from = 11434; to = 11434; }
       { from = 4533; to = 4533; }
+      { from = 2456; to = 2458; }
     ];
   };
 
