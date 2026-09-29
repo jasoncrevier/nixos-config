@@ -23,6 +23,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 80 ];
+    checkReversePath = "loose";
   };
   
   services.xserver.enable = lib.mkForce false;

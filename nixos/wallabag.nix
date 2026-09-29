@@ -41,7 +41,7 @@
 
   # Host Firewall Configuration
   networking.firewall.allowedTCPPorts = [
-    80 
+    80
   ];
 
   # Containers
