@@ -28,4 +28,9 @@ in
     dump_dir = "/var/lib/meilisearch/dumps";
     snapshot_dir = "/var/lib/meilisearch/snapshots";
   };
+
+  # Allow Meilisearch to automatically perform database schema upgrades on startup
+  systemd.services.meilisearch.environment = {
+    MEILI_UPGRADE_DB = "true";
+  };
 }

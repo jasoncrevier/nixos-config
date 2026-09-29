@@ -30,7 +30,6 @@
       gnome-characters
       gnome-clocks
       gnome-maps
-      gnome-nettool
       gnome-music
       gnome-weather
       gnome-console
