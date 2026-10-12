@@ -7,7 +7,6 @@
     ./grunt-hardware-configuration.nix
     
     ../common.nix
-    ../octoprint.nix
     ../sops.nix
     ../ssh.nix
     ../tailscale.nix
