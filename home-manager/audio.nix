@@ -5,7 +5,7 @@
     (callPackage ../pkgs/amplitude/default.nix {})
     (callPackage ../pkgs/bitwig-studio6.nix {})
     cardinal
-    easyeffects
+    easyeffects 
     mixxx
     qpwgraph
     reaper

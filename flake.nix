@@ -36,9 +36,12 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kosync = {
+      url = "git+https://codeberg.org/cmooon/kosync";
+    };
   };
 
-  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, millennium, vscode-server, sops-nix, stylix, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, millennium, vscode-server, sops-nix, stylix, kosync, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -128,6 +131,7 @@
             {
                services.vscode-server.enable = true;
             }
+            kosync.nixosModules.${system}.default
             ./nixos/device-configs/grunt-configuration.nix
           ];
         };

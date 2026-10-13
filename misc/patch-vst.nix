@@ -8,6 +8,8 @@ pkgs.mkShell {
     pkgs.autoPatchelfHook
   ];
   buildInputs = with pkgs; [
+    alsa-lib
+    libjack2
     wayland
     dbus
     libx11
