@@ -13,6 +13,7 @@
       ../graphics.nix
       ../misc.nix
       ../plasma.nix
+      ../tempopad.nix
       ../theme.nix
       ../video.nix
       ../vscode.nix
