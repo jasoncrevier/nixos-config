@@ -8,7 +8,6 @@
       timeout = 0;
     };
     plymouth.enable = true;
-    initrd.systemd.enable = true;
     kernelParams = ["quiet"];
     kernelModules = [ "ntsync" ];
   };

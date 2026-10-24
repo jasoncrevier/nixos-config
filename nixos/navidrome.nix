@@ -17,5 +17,9 @@
     };
   };
 
+  systemd.services.navidrome.environment = {
+    ND_PLUGINS_FOLDER = "/var/lib/navidrome/plugins";
+  };
+
   systemd.services.navidrome.serviceConfig.EnvironmentFile = config.sops.secrets.navidrome_url.path;
 }

@@ -44,7 +44,7 @@
   };
 
   # Use X11 instead of Wayland
-  services.displayManager.defaultSession = "plasmax11";
+  services.displayManager.defaultSession = "plasma";
   
   # Enable VS Code server
   services.vscode-server.enable = true;
