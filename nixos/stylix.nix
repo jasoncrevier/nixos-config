@@ -7,6 +7,7 @@
     targets = lib.mkMerge [
       (lib.optionalAttrs (options.stylix.targets ? kmscon) { kmscon.enable = false; })
       (lib.optionalAttrs (options.stylix.targets ? plymouth) { plymouth.enable = false; })
+      { console.enable = false; }
     ];
 
     cursor = {
