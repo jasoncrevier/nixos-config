@@ -7,7 +7,8 @@
     [
       ./surface-hardware-configuration.nix
       
-      ../common.nix
+      ../desktop.nix
+      ../remote-builder.nix
       ../flatpak.nix
       ../intel.nix
       #../musnix.nix
@@ -25,17 +26,4 @@
   zramSwap.enable = true;
   zramSwap.memoryPercent = 50;
 
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "nix-server";
-        system = "x86_64-linux";
-        sshUser = "jason";
-        maxJobs = 8;
-        speedFactor = 2;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      }
-    ];
-  };
 }

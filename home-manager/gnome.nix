@@ -8,15 +8,13 @@
     gnomeExtensions.user-themes
   ];
 
-dconf.settings = {
+  dconf.settings = {
     "org/gnome/shell" = {
       disable-user-extensions = false;
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "just-perfection-desktop@just-perfection"
       ];
-    };
-    "org/gnome/interface" = {
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -43,16 +41,10 @@ dconf.settings = {
     "org/gnome/shell/extensions/just-perfection" = {
       panel-size = 28;
     };
-    "org/gnome/shell/extensions/gsnap" = {
-      show-icon = false;
-      use-modifer = true;
-    };
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
     };
-    "org/gnomeStandard/shell/extensions/user-theme" = {
-      name = "catppuccin-mocha-teal-standard";
-    };
+    # The GNOME shell theme is set by Stylix ("org/gnome/shell/extensions/user-theme").
     
     #Tilix
     "com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d" = {

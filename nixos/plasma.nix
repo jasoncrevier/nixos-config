@@ -16,7 +16,6 @@
   environment = {
     systemPackages = with pkgs; [
       adwaita-icon-theme
-      mariadb
     ] 
     ++ (with pkgs.kdePackages; [
       akonadi
@@ -42,11 +41,6 @@
   };
   
   programs.kde-pim.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-  };
 
   # Extra programs
   programs = {

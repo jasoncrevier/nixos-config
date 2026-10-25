@@ -10,7 +10,7 @@
 
       ../amd.nix
       ../audio.nix
-      ../common.nix
+      ../desktop.nix
       ../flatpak.nix
       ../musnix.nix
       ../plasma.nix

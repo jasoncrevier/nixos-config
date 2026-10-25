@@ -3,23 +3,12 @@
 {
   boot.kernelParams = [ 
     "processor.max_cstate=1" 
-    "intel_idle.max_cstate=1" 
     "usbcore.autosuspend=-1"
-    "snd-virmidi"
   ];
+  boot.kernelModules = [ "snd-virmidi" ];
   boot.extraModprobeConfig = ''
     options snd-virmidi midi_devs=2
   '';
-  systemd.services.load-snd-virmidi = {
-    description = "Load Virtual MIDI Kernel Module";
-    after = [ "sound.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.kmod}/bin/modprobe snd-virmidi midi_devs=2";
-      RemainAfterExit = true;
-    };
-  };
 
   services.pipewire = {
     enable = true;

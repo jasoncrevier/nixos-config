@@ -17,13 +17,15 @@ nixos-config
 │          └── konsole
 ├── nixos
 │   └── device-configs
-└── pkgs
+├── pkgs
+└── scripts
 ```
 - `nixos-config`: Includes the main flake for all the NixOS devices in my fleet, my wallpaper, and all the sub-directories below.
-- `home-manager`: Separate config files for `home-manager`. A main config file for each device that import any of the other config files from the folder that are relevant to that machine.
+- `home-manager`: Separate config files for `home-manager`, which runs as part of the system build (a single `nixos-rebuild switch` applies both). A main config file for each device imports any of the other config files from the folder that are relevant to that machine.
 - `misc`: Legacy directory for manual config files. Most of this has been moved to Home Manager or handled by Stylix.
-- `nixos`: Separate `configuration.nix` files for each device. They each import their relevant `hardware-configuration.nix` and any of the other config files from the folder that are relevant to that machine. Most machines will import `common.nix` which contains basic applications and configs like enabling `systemd-boot`, setting the time zone, installing `git`, etc.
+- `nixos`: Separate `configuration.nix` files for each device. They each import their relevant `hardware-configuration.nix` and any of the other config files from the folder that are relevant to that machine. Every machine imports `base.nix` (time zone, user, `git`, Nix settings, garbage collection). Desktop machines import `desktop.nix` instead, which pulls in `base.nix` and adds graphics, Bluetooth, Firefox and other desktop applications.
 - `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos.
+- `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules.
 
 
 ## Devices
@@ -36,7 +38,7 @@ Specs:
 - Storage: **256GB**
 
 System:
-- Desktop environment: **Gnome 46**
+- Desktop environment: **GNOME** (follows `nixos-unstable`)
 - Window manager: **Wayland**
 - Shell: **fish**
 - Theme: **Catppuccin Mocha**
@@ -67,3 +69,18 @@ System:
 
 ![Plasma](./screenshots/plasma.png)
 </details>
+
+### Surface
+
+- Desktop environment: **GNOME**
+- Shell: **fish**
+- Theme: **Catppuccin Mocha**
+- Offloads builds to `nix-server` (see `nixos/remote-builder.nix`).
+
+### Home server (`nix-server`)
+
+Runs Plasma 6 (Wayland) with Sunshine for streaming, plus the always-on services: Jellyfin, Navidrome, Music Assistant, Karakeep, Ollama + Open WebUI, Wyoming (Whisper/Piper), and Valheim and Project Zomboid game servers. It is also the remote builder for the other machines.
+
+### Grunt
+
+A small headless server (old laptop) running Wallabag and kosync.

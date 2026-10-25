@@ -6,7 +6,8 @@
   imports = [ 
     ./grunt-hardware-configuration.nix
     
-    ../common.nix
+    ../base.nix
+    ../remote-builder.nix
     ../kosync.nix
     ../sops.nix
     ../ssh.nix
@@ -22,24 +23,9 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 ];
     checkReversePath = "loose";
   };
   
-  services.xserver.enable = lib.mkForce false;
   services.logind.settings.Login.HandleLidSwitch = "ignore"; # Disable sleep when laptop lid is closed
 
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "nix-server";
-        system = "x86_64-linux";
-        sshUser = "jason";
-        maxJobs = 8;
-        speedFactor = 2;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      }
-    ];
-  };
 }

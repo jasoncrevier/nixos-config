@@ -3,8 +3,6 @@
 { config, pkgs, ... }: 
 
 {
-  nixpkgs.config.allowUnfree = true;
-
   nixpkgs.overlays = [
     (final: prev: {
       ctranslate2 = prev.ctranslate2.override {

@@ -13,9 +13,6 @@
       url = "github:musnix/musnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    millennium = {
-      url = "github:SteamClientHomebrew/Millennium/next?dir=packages/nix";
-    };
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,140 +38,85 @@
     };
   };
 
-  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, millennium, vscode-server, sops-nix, stylix, kosync, ... }@inputs:
+  outputs = { nixpkgs, nixos-hardware, home-manager, catppuccin, musnix, vscode-server, sops-nix, stylix, kosync, ... }@inputs:
     let
       system = "x86_64-linux";
 
       nixpkgs-base-config = {
         allowUnfree = true;
-        permittedInsecurePackages = [
-          "electron-39.8.10"
-        ];
       };
 
-      pkgs-hm = import nixpkgs {
-        inherit system;
-        config = nixpkgs-base-config;
+      mkSystem = modules: nixpkgs.lib.nixosSystem {
+        inherit system modules;
+        specialArgs = { inherit inputs; };
       };
-
-      common-home-modules = [
-        catppuccin.homeModules.catppuccin
-        inputs.plasma-manager.homeModules.plasma-manager
-        inputs.stylix.homeModules.stylix
-        ./nixos/stylix.nix
-      ];
 
       unfree-module = { nixpkgs.config = nixpkgs-base-config; };
 
-      common-modules = [
-        unfree-module
-        musnix.nixosModules.musnix
+      vscodeServerModules = [
+        (import (inputs.vscode-server + "/modules/vscode-server"))
+        { services.vscode-server.enable = true; }
+      ];
+
+      theme-modules = [
         catppuccin.nixosModules.catppuccin
         stylix.nixosModules.stylix
         ./nixos/stylix.nix
       ];
 
-      vscodeServerModule = import (inputs.vscode-server + "/modules/vscode-server");
+      workstation-modules = [
+        unfree-module
+        musnix.nixosModules.musnix
+      ] ++ theme-modules;
+
+      mkHome = { name, shared ? [ ] }: [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "hm-backup";
+            extraSpecialArgs = { inherit inputs; };
+            sharedModules = shared;
+            users.jason = ./home-manager/device-configs + "/${name}-home.nix";
+          };
+        }
+      ];
+
+      themed-home-modules = [
+        catppuccin.homeModules.catppuccin
+        inputs.plasma-manager.homeModules.plasma-manager
+      ];
+
+      hostConfig = name: ./nixos/device-configs + "/${name}-configuration.nix";
     in
     {
       nixosConfigurations = {
-        thinkpad = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = common-modules ++ [
-            ./nixos/device-configs/thinkpad-configuration.nix
-          ];
-        };
+        thinkpad = mkSystem (workstation-modules ++ [ (hostConfig "thinkpad") ]
+          ++ mkHome { name = "thinkpad"; shared = themed-home-modules; });
 
-        surface = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = common-modules ++ [
-            ./nixos/device-configs/surface-configuration.nix
-            nixos-hardware.nixosModules.microsoft-surface-common
-          ];
-        };
+        surface = mkSystem (workstation-modules ++ [
+          (hostConfig "surface")
+          nixos-hardware.nixosModules.microsoft-surface-common
+        ] ++ mkHome { name = "surface"; shared = themed-home-modules; });
 
-        office = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = common-modules ++ [
-            ./nixos/device-configs/office-configuration.nix
-          ];
-        };
+        office = mkSystem (workstation-modules ++ [ (hostConfig "office") ]
+          ++ mkHome { name = "office"; shared = themed-home-modules; });
 
-        nix-server = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            unfree-module
-            sops-nix.nixosModules.sops
-            catppuccin.nixosModules.catppuccin
-            stylix.nixosModules.stylix
-            ./nixos/stylix.nix
-            vscodeServerModule
-            {
-              services.vscode-server.enable = true;
-            }
-            ./nixos/device-configs/nix-server-configuration.nix
-          ];
-        };
+        nix-server = mkSystem ([
+          unfree-module
+          sops-nix.nixosModules.sops
+        ] ++ theme-modules ++ vscodeServerModules ++ [ (hostConfig "nix-server") ]
+          ++ mkHome { name = "nix-server"; shared = themed-home-modules; });
 
-        grunt = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            unfree-module
-            sops-nix.nixosModules.sops
-            catppuccin.nixosModules.catppuccin
-            vscodeServerModule
-            {
-               services.vscode-server.enable = true;
-            }
-            kosync.nixosModules.${system}.default
-            ./nixos/device-configs/grunt-configuration.nix
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "jason@thinkpad" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-hm;
-          extraSpecialArgs = { inherit inputs; };
-          modules = common-home-modules ++ [
-            ./home-manager/device-configs/thinkpad-home.nix
-          ];
-        };
-
-        "jason@surface" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-hm;
-          extraSpecialArgs = { inherit inputs; };
-          modules = common-home-modules ++ [
-            ./home-manager/device-configs/surface-home.nix
-          ];
-        };
-
-        "jason@office" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-hm;
-          extraSpecialArgs = { inherit inputs; };
-          modules = common-home-modules ++ [
-            ./home-manager/device-configs/office-home.nix
-          ];
-        };
-
-        "jason@nix-server" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-hm;
-          extraSpecialArgs = { inherit inputs; };
-          modules = common-home-modules ++ [
-            ./home-manager/device-configs/nix-server-home.nix
-          ];
-        };
-
-        "jason@grunt" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs-hm;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/device-configs/grunt-home.nix ];
-        };
+        grunt = mkSystem ([
+          unfree-module
+          sops-nix.nixosModules.sops
+          catppuccin.nixosModules.catppuccin
+        ] ++ vscodeServerModules ++ [
+          kosync.nixosModules.${system}.default
+          (hostConfig "grunt")
+        ] ++ mkHome { name = "grunt"; });
       };
     };
 }

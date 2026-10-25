@@ -45,6 +45,8 @@
   ];
 
   # Containers
+  # TODO: pin image tags (check running versions with `podman images`).
+  # Unpinned `mariadb` can jump a major version if the image is pruned and re-pulled.
   virtualisation.oci-containers.containers."wallabag-db" = {
     image = "mariadb";
     volumes = [

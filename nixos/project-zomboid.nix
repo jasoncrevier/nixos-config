@@ -83,6 +83,10 @@
     ];
   };
   systemd.services."podman-project-zomboid" = {
+    # TODO: EnvironmentFile only sets the environment of the podman process itself.
+    # If the admin password must reach the container, add
+    # "--env-file=${config.sops.secrets.project-zomboid_admin_pwd.path}" to extraOptions
+    # (as wallabag.nix does).
     serviceConfig = {
       EnvironmentFile = config.sops.secrets.project-zomboid_admin_pwd.path;
       Restart = lib.mkOverride 90 "always";

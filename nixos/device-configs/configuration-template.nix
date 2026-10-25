@@ -11,7 +11,8 @@
       # here as well. For example, if you want to add steam to
       # this system, uncomment:
       #../steam.nix
-      ../common.nix
+      # Desktop machines: ../desktop.nix. Headless servers: ../base.nix.
+      ../desktop.nix
     ];
 
   #~Bootloader~

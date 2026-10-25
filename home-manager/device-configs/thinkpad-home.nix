@@ -12,7 +12,6 @@
       ../gnome.nix
       ../graphics.nix
       ../misc.nix
-      ../tempopad.nix
       ../theme.nix
       ../vscode.nix
       ../web.nix

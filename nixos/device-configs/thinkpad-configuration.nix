@@ -8,7 +8,8 @@
       ./thinkpad-hardware-configuration.nix
       ./thinkpad-syncthing.nix
       
-      ../common.nix
+      ../desktop.nix
+      ../remote-builder.nix
       ../flatpak.nix
       ../gnome.nix
       ../intel.nix
@@ -21,20 +22,6 @@
       ../workstation.nix
     ];
 
-  # Remote Build Configuration
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "nix-server";
-        system = "x86_64-linux";
-        sshUser = "jason";
-        maxJobs = 8; # Adjust this based on your server's CPU threads
-        speedFactor = 2;
-        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      }
-    ];
-  };
 
   # Enable Wayland for SDDM
   services = {

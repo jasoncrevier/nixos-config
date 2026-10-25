@@ -18,7 +18,6 @@
     systemPackages = with pkgs; [
       remmina
       tilix
-      errands
     ];
     gnome.excludePackages = (with pkgs; [
       epiphany

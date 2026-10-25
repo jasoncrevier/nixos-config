@@ -1,4 +1,4 @@
-# Enable firewall, open SSH port, and enable the OpenSSH daemon
+# Enable the OpenSSH daemon (services.openssh opens port 22 in the firewall by default)
 
 { config, pkgs, ... }:
 
@@ -6,11 +6,5 @@
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
-  };
-  
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 22 ];
-    allowedUDPPorts = [ 22 ];
   };
 }

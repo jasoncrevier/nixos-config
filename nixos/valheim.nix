@@ -1,6 +1,6 @@
 # Enable Valheim server
 
-{ config, pkgs, lib, utils, ... }:
+{ config, pkgs, ... }:
 
 let
   steam-app = "896660";
@@ -79,9 +79,6 @@ in
   users.groups.valheim = {};
 
   networking.firewall.allowedUDPPorts = [ 2456 2457 2458 ];
-  networking.firewall.allowedUDPPortRanges = [
-    { from = 2456; to = 2458; }
-  ];
 
   # ---------------------------------------------------------------------------
   # Systemd Services
