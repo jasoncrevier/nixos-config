@@ -1,7 +1,7 @@
 # Basics shared by every machine, including headless servers.
 # Desktop machines import desktop.nix, which pulls this in.
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   #~Localization~

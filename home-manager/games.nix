@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 # Steam is enabled through nixos config, not home-manager.
 # It requires config that doesn't work with home-manager.

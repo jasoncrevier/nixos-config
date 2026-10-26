@@ -50,7 +50,6 @@
       home-manager,
       catppuccin,
       musnix,
-      vscode-server,
       sops-nix,
       stylix,
       kosync,

@@ -19,26 +19,23 @@
       remmina
       tilix
     ];
-    gnome.excludePackages = (
-      with pkgs;
-      [
-        epiphany
-        decibels
-        geary
-        gnome-connections
-        gnome-font-viewer
-        gnome-tour
-        gnome-characters
-        gnome-clocks
-        gnome-maps
-        gnome-music
-        gnome-weather
-        gnome-console
-        totem
-        showtime
-        yelp
-      ]
-    );
+    gnome.excludePackages = with pkgs; [
+      epiphany
+      decibels
+      geary
+      gnome-connections
+      gnome-font-viewer
+      gnome-tour
+      gnome-characters
+      gnome-clocks
+      gnome-maps
+      gnome-music
+      gnome-weather
+      gnome-console
+      totem
+      showtime
+      yelp
+    ];
   };
 
   programs.firefox.policies.ExtensionSettings =

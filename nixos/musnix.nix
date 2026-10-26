@@ -1,6 +1,6 @@
 # Musnix settings
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   musnix = {

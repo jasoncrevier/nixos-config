@@ -1,6 +1,6 @@
 # Enable Navidrome
 
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   sops.secrets.navidrome_url.owner = "navidrome";

@@ -1,9 +1,6 @@
 # Configuration for the server: Grunt
 
 {
-  config,
-  pkgs,
-  lib,
   ...
 }:
 

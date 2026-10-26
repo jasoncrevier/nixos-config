@@ -1,6 +1,6 @@
 # Configuration for my office workstation
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   imports = [

@@ -1,6 +1,6 @@
 # Enable Sunshine and Moonlight
 
-{ pkgs, config, ... }:
+{ ... }:
 
 {
   services.sunshine = {

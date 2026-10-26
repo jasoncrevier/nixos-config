@@ -1,6 +1,6 @@
 # Load Intel driver
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   hardware.graphics = {

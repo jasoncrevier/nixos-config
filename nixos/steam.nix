@@ -1,6 +1,6 @@
 # Enable Steam and open remote play ports
 
-{ pkgs, config, ... }:
+{ ... }:
 
 {
   programs.steam = {

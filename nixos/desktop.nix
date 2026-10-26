@@ -2,7 +2,6 @@
 # Headless machines (grunt) import base.nix directly instead.
 
 {
-  config,
   pkgs,
   lib,
   ...

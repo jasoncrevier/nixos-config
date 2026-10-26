@@ -1,9 +1,6 @@
 # Configuration for my Surface
 
 {
-  config,
-  pkgs,
-  inputs,
   ...
 }:
 

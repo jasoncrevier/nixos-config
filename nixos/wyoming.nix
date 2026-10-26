@@ -1,6 +1,6 @@
 # Enable whisper and piper
 
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   nixpkgs.overlays = [

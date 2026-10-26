@@ -1,6 +1,6 @@
 # Enable Music Assistant
 
-{ pkgs, config, ... }:
+{ ... }:
 
 {
   services.music-assistant = {
