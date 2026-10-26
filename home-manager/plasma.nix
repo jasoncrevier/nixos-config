@@ -17,7 +17,12 @@
 
     kscreenlocker = {
       autoLock = false;
-      appearance.wallpaper = ../wallpaper.png;
+      # Copied on its own so the path only changes when the image does,
+      # not on every commit to the repo
+      appearance.wallpaper = builtins.path {
+        path = ../wallpaper.png;
+        name = "wallpaper.png";
+      };
     };
 
     configFile = {
