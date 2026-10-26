@@ -85,6 +85,10 @@ in
     }
     // lib.genAttrs cfg.services (_: {
       onFailure = [ "notify-failure@%n.service" ];
+      # systemd's default (5 starts in 10s) never trips for services with a long RestartSec,
+      # so a crash loop would never reach "failed". 5 starts in 10 minutes catches those too.
+      startLimitIntervalSec = lib.mkDefault 600;
+      startLimitBurst = lib.mkDefault 5;
     });
 
     # Alongside wall, which smartd already uses
