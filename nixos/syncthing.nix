@@ -48,6 +48,11 @@ in
           path = "/home/jason/Bitwig Studio";
           devices = shareWith;
         };
+        # Claude Code's notes for this repo, shared between the NixOS machines only
+        "claude_memory_nixos_config" = {
+          path = "/home/jason/.claude/projects/-home-jason-nixos-config/memory";
+          devices = builtins.filter (name: name != "tower") shareWith;
+        };
       };
     };
   };
