@@ -32,6 +32,8 @@
 
   programs.fish.enable = true;
 
+  programs.nix-ld.enable = true;
+
   programs.tmux = {
     enable = true;
     extraConfig = ''

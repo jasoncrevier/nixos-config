@@ -3,6 +3,7 @@
 {
   programs.vscode = {
     enable = true;
+    mutableExtensionsDir = false;
     profiles.default = {
       userSettings = {
         "workbench.colorTheme" = "Catppuccin Mocha";
@@ -22,11 +23,12 @@
         };
       };
       extensions = with pkgs.vscode-extensions; [
+        anthropic.claude-code
         bbenoist.nix
         ms-python.python
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "favorite-folders";
           publisher = "Artelin";
