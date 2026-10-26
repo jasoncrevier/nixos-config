@@ -50,7 +50,8 @@
 
   # Containers
   virtualisation.oci-containers.containers."project-zomboid" = {
-    image = "ich777/steamcmd:projectzomboid";
+    # The image only has a moving tag, so pin by digest. The game itself still updates via VALIDATE.
+    image = "ich777/steamcmd:projectzomboid@sha256:99dce31146fa9dc696c627ca05c59b4ec4b040500c1b226601ca1aa86653fb82";
     environment = {
       "GAME_ID" = "380870"; 
       "HOST_CONTAINERNAME" = "project-zomboid";
@@ -80,15 +81,12 @@
     extraOptions = [
       "--network-alias=steamcmd"
       "--network=project-zomboid_default"
+      # Provides ADMIN_PWD, which the image passes to the server as -adminpassword
+      "--env-file=${config.sops.secrets.project-zomboid_admin_pwd.path}"
     ];
   };
   systemd.services."podman-project-zomboid" = {
-    # TODO: EnvironmentFile only sets the environment of the podman process itself.
-    # If the admin password must reach the container, add
-    # "--env-file=${config.sops.secrets.project-zomboid_admin_pwd.path}" to extraOptions
-    # (as wallabag.nix does).
     serviceConfig = {
-      EnvironmentFile = config.sops.secrets.project-zomboid_admin_pwd.path;
       Restart = lib.mkOverride 90 "always";
       RestartMaxDelaySec = lib.mkOverride 90 "1m";
       RestartSec = lib.mkOverride 90 "100ms";

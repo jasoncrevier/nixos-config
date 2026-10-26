@@ -69,5 +69,7 @@
     options = "--delete-older-than 30d";
   };
 
+  security.sudo.execWheelOnly = true;
+
   system.stateVersion = "23.05";
 }

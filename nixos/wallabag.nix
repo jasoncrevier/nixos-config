@@ -45,10 +45,8 @@
   ];
 
   # Containers
-  # TODO: pin image tags (check running versions with `podman images`).
-  # Unpinned `mariadb` can jump a major version if the image is pruned and re-pulled.
   virtualisation.oci-containers.containers."wallabag-db" = {
-    image = "mariadb";
+    image = "mariadb:12.3";
     volumes = [
       "/var/lib/wallabag/data:/var/lib/mysql:rw"
     ];
@@ -81,7 +79,7 @@
     ];
   };
   virtualisation.oci-containers.containers."wallabag-redis" = {
-    image = "redis:alpine";
+    image = "redis:8.8-alpine";
     log-driver = "journald";
     extraOptions = [
       "--health-cmd=[\"redis-cli\", \"ping\"]"
@@ -109,7 +107,7 @@
     ];
   };
   virtualisation.oci-containers.containers."wallabag-wallabag" = {
-    image = "wallabag/wallabag";
+    image = "wallabag/wallabag:2.6.14";
     environment = {
       "SYMFONY__ENV__APP_ENV" = "prod";
       "SYMFONY__ENV__DATABASE_CHARSET" = "utf8mb4";
