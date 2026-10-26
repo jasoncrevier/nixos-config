@@ -25,16 +25,26 @@
           "nix-server" = "linux";
           "grunt" = "linux";
         };
+        # Installed on a remote the first time you connect to it; UI extensions
+        # (theme etc.) keep running locally
+        "remote.SSH.defaultExtensions" = [
+          "anthropic.claude-code"
+          "jnoortheen.nix-ide"
+          "ms-python.python"
+          "ms-azuretools.vscode-docker"
+        ];
 
-        # Nix language server: errors, option completion and nixfmt on save
+        # Nix language server: errors, option completion and nixfmt on save.
+        # nixd and nixfmt are on every machine (base.nix), so plain command names
+        # work in remote sessions too.
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
+        "nix.serverPath" = "nixd";
         "nix.serverSettings".nixd =
           let
             flake = ''(builtins.getFlake "/home/jason/nixos-config")'';
           in
           {
-            formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+            formatting.command = [ "nixfmt" ];
             nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
             # The hosts share most modules, so office's options cover nearly everything
             options = {

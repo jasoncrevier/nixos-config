@@ -31,6 +31,8 @@
     cowsay
     git
     jq
+    nixd # Nix language server for VS Code, including Remote-SSH sessions
+    nixfmt
     sops
   ];
 
