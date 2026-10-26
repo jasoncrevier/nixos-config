@@ -3,3 +3,6 @@
 
 # Format with nixfmt-tree
 4040eef8a97ab8973c27afc4f7938f7efb8cf2e3
+
+# Remove unused args
+4daac9dc9cd1ffaf1cbbe5941e79472f7c9fbc6a
