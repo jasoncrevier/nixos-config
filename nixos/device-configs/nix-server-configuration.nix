@@ -9,6 +9,7 @@
 
     ../ai.nix
     ../desktop.nix
+    ../failure-alerts.nix
     ../jellyfin.nix
     ../karakeep.nix
     ../music-assistant.nix
@@ -41,6 +42,23 @@
   };
 
   services.displayManager.defaultSession = "plasma";
+
+  # ntfy alert when any of these fail (see failure-alerts.nix)
+  failureAlerts.services = [
+    "jellyfin"
+    "karakeep-web"
+    "karakeep-workers"
+    "music-assistant"
+    "navidrome"
+    "navidrome-listenbrainz-sync"
+    "ollama"
+    "open-webui"
+    "podman-project-zomboid"
+    "steam@"
+    "valheim"
+    "wyoming-faster-whisper-knight"
+    "wyoming-piper-knight"
+  ];
 
   #~Hostname~
   networking.hostName = "nix-server";
