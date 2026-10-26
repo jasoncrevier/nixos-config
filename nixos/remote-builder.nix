@@ -5,6 +5,9 @@
 {
   nix = {
     distributedBuilds = true;
+    # nix-server fetches build inputs from the binary caches itself,
+    # instead of this machine uploading them over SSH
+    settings.builders-use-substitutes = true;
     buildMachines = [
       {
         hostName = "nix-server";
