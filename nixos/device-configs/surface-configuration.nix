@@ -25,4 +25,7 @@
 
   zramSwap.enable = true;
 
+  # The NixOS release this machine was first installed with. Don't change it
+  # without reading the release notes: it controls how existing state is handled.
+  system.stateVersion = "23.05";
 }

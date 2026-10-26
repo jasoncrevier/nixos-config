@@ -5,7 +5,6 @@
 {
   musnix = {
     enable = true;
-    kernel.realtime = true;
     rtcqs.enable = true;
   };
 }

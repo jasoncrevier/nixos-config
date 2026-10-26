@@ -3,30 +3,15 @@
 { pkgs, lib, config, ... }:
 
 {
+  imports = [ ./podman.nix ];
+
   # SOPS Secret Setup
   sops.secrets.project-zomboid_admin_pwd.owner = "zomboid";
-
-  # Runtime
-  virtualisation.podman = {
-    enable = true;
-    autoPrune.enable = true;
-    dockerCompat = true;
-  };
-
-  # Enable container name DNS for all Podman networks.
-  networking.firewall.interfaces = let
-    matchAll = if !config.networking.nftables.enable then "podman+" else "podman*";
-  in {
-    "${matchAll}".allowedUDPPorts = [ 53 ];
-  };
 
   # System User & Group Setup
   users.users.zomboid = {
     isSystemUser = true;
     group = "zomboid";
-    # SubUID/SubGID allocations allow Podman to safely map container internal permissions
-    subUidRanges = [{ startUid = 100000; count = 65536; }];
-    subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
   users.groups.zomboid = {};
 

@@ -17,7 +17,7 @@
     # Only available from driver 515.43.04+
     open = false;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    # Beta on purpose: it gets Wayland fixes sooner than the production driver.
     package = config.boot.kernelPackages.nvidiaPackages.beta;
 
     # Fix screen tearing (adds input lag)

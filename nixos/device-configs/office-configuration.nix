@@ -6,7 +6,7 @@
   imports =
     [
       ./office-hardware-configuration.nix
-      ./office-syncthing.nix
+      (import ../media-mount.nix { readOnly = false; })
 
       ../amd.nix
       ../audio.nix
@@ -28,6 +28,10 @@
 
   #~Hostname~
   networking.hostName = "office";
+
+  # Realtime kernel for audio work. Left off on the laptops, where it tends to
+  # break suspend/resume.
+  musnix.kernel.realtime = true;
 
   # Script to ensure monitor layout in sddm matched plasma
   system.activationScripts.sddmCopyDisplayConfig = {
@@ -86,4 +90,8 @@
   environment.sessionVariables = {
     WEBKIT_DISABLE_DMABUF_RENDERER = "1";
   };
+
+  # The NixOS release this machine was first installed with. Don't change it
+  # without reading the release notes: it controls how existing state is handled.
+  system.stateVersion = "23.05";
 }

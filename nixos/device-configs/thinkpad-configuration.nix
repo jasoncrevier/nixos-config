@@ -6,7 +6,6 @@
   imports =
     [
       ./thinkpad-hardware-configuration.nix
-      ./thinkpad-syncthing.nix
       
       ../desktop.nix
       ../remote-builder.nix
@@ -23,10 +22,6 @@
     ];
 
 
-  # Realtime kernels often break suspend/resume on laptops and cause lag.
-  # We keep musnix enabled for other optimizations but disable the RT kernel.
-  musnix.kernel.realtime = lib.mkForce false;
-
   # Better power management for Intel laptops
   services.thermald.enable = true;
 
@@ -38,4 +33,8 @@
       libinput
     ];
   };
+
+  # The NixOS release this machine was first installed with. Don't change it
+  # without reading the release notes: it controls how existing state is handled.
+  system.stateVersion = "23.05";
 }

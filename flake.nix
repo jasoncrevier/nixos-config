@@ -35,6 +35,7 @@
     };
     kosync = {
       url = "git+https://codeberg.org/cmooon/kosync";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -42,16 +43,10 @@
     let
       system = "x86_64-linux";
 
-      nixpkgs-base-config = {
-        allowUnfree = true;
-      };
-
       mkSystem = modules: nixpkgs.lib.nixosSystem {
         inherit system modules;
         specialArgs = { inherit inputs; };
       };
-
-      unfree-module = { nixpkgs.config = nixpkgs-base-config; };
 
       vscodeServerModules = [
         (import (inputs.vscode-server + "/modules/vscode-server"))
@@ -65,7 +60,6 @@
       ];
 
       workstation-modules = [
-        unfree-module
         musnix.nixosModules.musnix
       ] ++ theme-modules;
 
@@ -77,7 +71,7 @@
             useUserPackages = true;
             backupFileExtension = "hm-backup";
             extraSpecialArgs = { inherit inputs; };
-            sharedModules = shared;
+            sharedModules = [{ home.stateVersion = "24.05"; }] ++ shared;
             users.jason = ./home-manager/device-configs + "/${name}-home.nix";
           };
         }
@@ -104,13 +98,11 @@
           ++ mkHome { name = "office"; shared = themed-home-modules; });
 
         nix-server = mkSystem ([
-          unfree-module
           sops-nix.nixosModules.sops
         ] ++ theme-modules ++ vscodeServerModules ++ [ (hostConfig "nix-server") ]
           ++ mkHome { name = "nix-server"; shared = themed-home-modules; });
 
         grunt = mkSystem ([
-          unfree-module
           sops-nix.nixosModules.sops
           catppuccin.nixosModules.catppuccin
         ] ++ vscodeServerModules ++ [

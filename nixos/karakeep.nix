@@ -21,4 +21,6 @@ in
       SEARCH_JOB_TIMEOUT_SEC = "300";
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 3030 ];
 }

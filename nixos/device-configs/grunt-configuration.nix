@@ -5,6 +5,7 @@
 {
   imports = [ 
     ./grunt-hardware-configuration.nix
+    (import ../media-mount.nix {})
     
     ../base.nix
     ../remote-builder.nix
@@ -25,4 +26,7 @@
   
   services.logind.settings.Login.HandleLidSwitch = "ignore"; # Disable sleep when laptop lid is closed
 
+  # The NixOS release this machine was first installed with. Don't change it
+  # without reading the release notes: it controls how existing state is handled.
+  system.stateVersion = "23.05";
 }

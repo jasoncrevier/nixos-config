@@ -41,6 +41,8 @@
     '';
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   # Remove the manual
   documentation.nixos.enable = false;
 
@@ -66,6 +68,4 @@
   };
 
   security.sudo.execWheelOnly = true;
-
-  system.stateVersion = "23.05";
 }

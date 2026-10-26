@@ -3,30 +3,15 @@
 { pkgs, lib, config, ... }:
 
 {
+  imports = [ ./podman.nix ];
+
   # SOPS Secret Setup
   sops.secrets.wallabag_env.owner = "wallabag";
-
-  # Runtime
-  virtualisation.podman = {
-    enable = true;
-    autoPrune.enable = true;
-    dockerCompat = true;
-  };
-
-  # Enable container name DNS for all Podman networks.
-  networking.firewall.interfaces = let
-    matchAll = if !config.networking.nftables.enable then "podman+" else "podman*";
-  in {
-    "${matchAll}".allowedUDPPorts = [ 53 ];
-  };
 
   # System User & Group Setup
   users.users.wallabag = {
     isSystemUser = true;
     group = "wallabag";
-    # SubUID/SubGID allocations allow Podman to safely map container internal permissions
-    subUidRanges = [{ startUid = 200000; count = 65536; }];
-    subGidRanges = [{ startGid = 200000; count = 65536; }];
   };
   users.groups.wallabag = {};
 

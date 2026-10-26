@@ -5,6 +5,7 @@
 {
   imports = [ 
     ./nix-server-hardware-configuration.nix
+    (import ../media-mount.nix {})
     
     ../ai.nix
     ../desktop.nix
@@ -24,9 +25,8 @@
     ../valheim.nix
     ../wyoming.nix
 
-    ../../scripts/mood-tracker-notification.nix
     ../../scripts/navidrome-likes-to-listenbrainz.nix
-    ../../scripts/thought-record-notification.nix
+    ../../scripts/obsidian-notifications.nix
   ];
 
   # Autologin
@@ -45,10 +45,7 @@
   #~Hostname~
   networking.hostName = "nix-server";
 
-  networking.firewall.allowedTCPPorts = [
-    8083  # Open WebUI
-    11434 # Ollama
-    8095  # Music Assistant web UI
-    3030  # Karakeep
-  ];
+  # The NixOS release this machine was first installed with. Don't change it
+  # without reading the release notes: it controls how existing state is handled.
+  system.stateVersion = "23.05";
 }

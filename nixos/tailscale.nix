@@ -1,11 +1,13 @@
 # Enables Tailscale. Use "sudo tailscale up" after enabling.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.tailscale.enable = true;
-  environment.systemPackages = with pkgs; [
-    catppuccin-tailscale-systray
+
+  # Tray app only on machines with a desktop
+  environment.systemPackages = lib.mkIf config.services.xserver.enable [
+    pkgs.catppuccin-tailscale-systray
   ];
   
   nixpkgs.overlays = [
