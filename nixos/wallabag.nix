@@ -20,8 +20,6 @@
     "${matchAll}".allowedUDPPorts = [ 53 ];
   };
 
-  virtualisation.oci-containers.backend = "podman";
-
   # System User & Group Setup
   users.users.wallabag = {
     isSystemUser = true;

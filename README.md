@@ -8,13 +8,6 @@ nixos-config
 ├── home-manager
 │   └── device-configs
 ├── misc
-│   └── .config
-│       └── presets
-│   └── .local
-│       └── share
-│          ├── applications
-│          ├── color-schemes
-│          └── konsole
 ├── nixos
 │   └── device-configs
 ├── pkgs
@@ -22,7 +15,7 @@ nixos-config
 ```
 - `nixos-config`: Includes the main flake for all the NixOS devices in my fleet, my wallpaper, and all the sub-directories below.
 - `home-manager`: Separate config files for `home-manager`, which runs as part of the system build (a single `nixos-rebuild switch` applies both). A main config file for each device imports any of the other config files from the folder that are relevant to that machine.
-- `misc`: Legacy directory for manual config files. Most of this has been moved to Home Manager or handled by Stylix.
+- `misc`: The Konsole colour scheme used by `home-manager/plasma.nix`, and `patch-vst.nix`, a shell for patching prebuilt VST plugins.
 - `nixos`: Separate `configuration.nix` files for each device. They each import their relevant `hardware-configuration.nix` and any of the other config files from the folder that are relevant to that machine. Every machine imports `base.nix` (time zone, user, `git`, Nix settings, garbage collection). Desktop machines import `desktop.nix` instead, which pulls in `base.nix` and adds graphics, Bluetooth, Firefox and other desktop applications.
 - `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos.
 - `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules.

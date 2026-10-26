@@ -24,6 +24,5 @@
   networking.hostName = "surface";
 
   zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
 
 }

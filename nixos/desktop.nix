@@ -24,7 +24,6 @@
 
   #~Bluetooth~
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
 
   #~Users~
   users.users.jason.extraGroups = [ "audio" "dialout" "uucp" "scanner" "lp" ];

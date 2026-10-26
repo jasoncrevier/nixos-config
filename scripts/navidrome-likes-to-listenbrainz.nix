@@ -129,8 +129,6 @@ in
 {
   sops.secrets.listenbrainz_token.owner = "navidrome";
 
-  environment.systemPackages = [ navidromeSyncScript ];
-
   systemd.services.navidrome-listenbrainz-sync = {
     description = "Sync Navidrome Stars to ListenBrainz";
     after = [ "network-online.target" "navidrome.service" ];

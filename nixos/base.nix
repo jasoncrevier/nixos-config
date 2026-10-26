@@ -56,11 +56,7 @@
   catppuccin.autoEnable = true;
 
   # Fix for command-not-found
-  programs.nix-index = {
-    enable = true;
-    enableBashIntegration = true;
-    enableFishIntegration = true;
-  };
+  programs.nix-index.enable = true;
 
   # Automatically collect garbage
   nix.gc = {

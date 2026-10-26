@@ -18,17 +18,13 @@
       adwaita-icon-theme
     ] 
     ++ (with pkgs.kdePackages; [
-      akonadi
       discover
       filelight
       kalk
       kamoso
       kcolorchooser
       kolourpaint
-      kontact
       kdepim-addons
-      kdepim-runtime
-      kio-extras
       krdc
       packagekit-qt
       plasma-bigscreen

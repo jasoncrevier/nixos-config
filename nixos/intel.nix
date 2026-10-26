@@ -8,7 +8,4 @@
       intel-media-driver
     ];
   };
-  services.xserver = {
-    videoDrivers = [ "modesetting" ];
-  };
 }

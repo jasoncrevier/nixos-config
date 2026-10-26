@@ -45,13 +45,10 @@
   #~Hostname~
   networking.hostName = "nix-server";
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      8083  # Open WebUI
-      11434 # Ollama
-      8095  # Music Assistant web UI
-      3030  # Karakeep
-    ];
-  };
+  networking.firewall.allowedTCPPorts = [
+    8083  # Open WebUI
+    11434 # Ollama
+    8095  # Music Assistant web UI
+    3030  # Karakeep
+  ];
 }

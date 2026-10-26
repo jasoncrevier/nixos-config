@@ -21,10 +21,7 @@
   #~Hostname~
   networking.hostName = "grunt";
 
-  networking.firewall = {
-    enable = true;
-    checkReversePath = "loose";
-  };
+  networking.firewall.checkReversePath = "loose";
   
   services.logind.settings.Login.HandleLidSwitch = "ignore"; # Disable sleep when laptop lid is closed
 

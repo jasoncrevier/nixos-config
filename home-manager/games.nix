@@ -5,7 +5,6 @@
 
 {
   home.packages = with pkgs; [
-    gamemode
     heroic
     moonlight-qt
     prismlauncher
