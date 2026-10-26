@@ -3,10 +3,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./nix-server-hardware-configuration.nix
-    (import ../media-mount.nix {})
-    
+    (import ../media-mount.nix { })
+
     ../ai.nix
     ../desktop.nix
     ../jellyfin.nix

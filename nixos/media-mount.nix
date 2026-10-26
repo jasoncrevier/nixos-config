@@ -1,7 +1,9 @@
 # Mount the NAS media share at /mnt/Media.
 # Import as (import ../media-mount.nix { readOnly = false; }) to allow writes.
 
-{ readOnly ? true }:
+{
+  readOnly ? true,
+}:
 
 { lib, ... }:
 
@@ -18,6 +20,7 @@
       "guest"
       "uid=1000"
       "gid=100"
-    ] ++ lib.optional readOnly "ro";
+    ]
+    ++ lib.optional readOnly "ro";
   };
 }

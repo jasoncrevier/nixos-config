@@ -4,7 +4,7 @@ let
   synidoScript = pkgs.writeShellScript "synido-autoconnect" ''
     MAC="81:24:24:01:6C:A2"
     HANDSHAKEN=""
-    
+
     while true; do
       if bluetoothctl info "$MAC" 2>/dev/null | grep -q "Connected: yes"; then
         if [ -z "$HANDSHAKEN" ]; then
@@ -27,7 +27,12 @@ in
   systemd.user.services.synido-midi-autoconnect = {
     Unit = {
       Description = "Auto-connect and handshake Synido TempoPAD C16";
-      After = [ "pipewire.service" "wireplumber.service" "sound.target" "bluetooth.service" ];
+      After = [
+        "pipewire.service"
+        "wireplumber.service"
+        "sound.target"
+        "bluetooth.service"
+      ];
       Requires = [ "pipewire.service" ];
     };
     Service = {

@@ -1,26 +1,29 @@
 # Configuration for my Thinkpad
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./thinkpad-hardware-configuration.nix
-      
-      ../desktop.nix
-      ../remote-builder.nix
-      ../flatpak.nix
-      ../gnome.nix
-      ../intel.nix
-      ../musnix.nix
-      ../ssh.nix
-      ../steam.nix
-      ../syncthing.nix
-      ../systemd-boot.nix
-      ../tailscale.nix
-      ../workstation.nix
-    ];
+  imports = [
+    ./thinkpad-hardware-configuration.nix
 
+    ../desktop.nix
+    ../remote-builder.nix
+    ../flatpak.nix
+    ../gnome.nix
+    ../intel.nix
+    ../musnix.nix
+    ../ssh.nix
+    ../steam.nix
+    ../syncthing.nix
+    ../systemd-boot.nix
+    ../tailscale.nix
+    ../workstation.nix
+  ];
 
   # Better power management for Intel laptops
   services.thermald.enable = true;

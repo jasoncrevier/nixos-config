@@ -1,12 +1,17 @@
 # Configuration for the server: Grunt
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports = [ 
+  imports = [
     ./grunt-hardware-configuration.nix
-    (import ../media-mount.nix {})
-    
+    (import ../media-mount.nix { })
+
     ../base.nix
     ../remote-builder.nix
     ../kosync.nix
@@ -15,11 +20,11 @@
     ../tailscale.nix
     ../wallabag.nix
   ];
- 
+
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.configurationLimit = 10; # Keep /boot from filling up
-  
+
   #~Hostname~
   networking.hostName = "grunt";
 

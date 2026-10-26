@@ -7,7 +7,7 @@ let
 in
 {
   sops.secrets.karakeep_env.owner = "karakeep";
-  
+
   services.karakeep = {
     enable = true;
     environmentFile = karakeep_env;

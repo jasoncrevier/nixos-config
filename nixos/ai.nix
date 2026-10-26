@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   services.ollama = {
@@ -17,8 +22,9 @@
 
   # Temp fix for build error. Warns on rebuild once nixpkgs stops marking
   # posthog as broken, so this block (and the warning) can be deleted.
-  warnings = lib.optional (!(pkgs.python3Packages.posthog.meta.broken or false))
-    "nixos/ai.nix: posthog is no longer marked broken in nixpkgs. The posthog workaround can probably be removed.";
+  warnings =
+    lib.optional (!(pkgs.python3Packages.posthog.meta.broken or false))
+      "nixos/ai.nix: posthog is no longer marked broken in nixpkgs. The posthog workaround can probably be removed.";
 
   nixpkgs.config.problems.handlers = {
     posthog.broken = "warn";

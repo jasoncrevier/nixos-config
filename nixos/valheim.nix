@@ -5,10 +5,10 @@
 let
   steam-app = "896660";
   valheim_env = config.sops.secrets.valheim_env.path;
-  
+
   steamcmd-downloader = pkgs.writeShellScript "steamcmd-downloader" ''
     set -eux
-    
+
     instance="$1"
     if [ -z "$instance" ]; then
       echo "Error: Instance parameter missing."
@@ -23,7 +23,7 @@ let
     fi
 
     dir="/var/lib/steam-app-$instance"
-    
+
     cmds=(
       "+force_install_dir" "$dir"
       "+login" "anonymous"
@@ -76,14 +76,18 @@ in
     homeMode = "750";
     group = "valheim";
   };
-  users.groups.valheim = {};
+  users.groups.valheim = { };
 
-  networking.firewall.allowedUDPPorts = [ 2456 2457 2458 ];
+  networking.firewall.allowedUDPPorts = [
+    2456
+    2457
+    2458
+  ];
 
   # ---------------------------------------------------------------------------
   # Systemd Services
   # ---------------------------------------------------------------------------
-  
+
   # 1. Parameterized Steam Downloader Service
   systemd.services."steam@" = {
     unitConfig = {
@@ -125,7 +129,7 @@ in
       Group = "valheim";
       WorkingDirectory = "/var/lib/steam-app-${steam-app}";
     };
-    
+
     environment = {
       LD_LIBRARY_PATH = "./linux64";
       SteamAppId = "892970";

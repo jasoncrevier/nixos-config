@@ -1,12 +1,27 @@
 # ntfy reminders that open Obsidian when tapped
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   ntfyTokenFile = config.sops.secrets.ntfy_token.path;
 
   # A oneshot service that sends one notification, plus the timer that runs it
-  mkNtfyNotifier = { name, scriptName, description, tag, title, uri, timerDescription, timerConfig }:
+  mkNtfyNotifier =
+    {
+      name,
+      scriptName,
+      description,
+      tag,
+      title,
+      uri,
+      timerDescription,
+      timerConfig,
+    }:
     let
       script = pkgs.writeShellApplication {
         name = scriptName;
@@ -56,7 +71,11 @@ lib.mkMerge [
     uri = "obsidian://advanced-uri?vault=Journal&commandname=QuickAdd:%20Log%20mood";
     timerDescription = "Run three times daily at random intervals (9-12, 12-3, 3-6)";
     timerConfig = {
-      OnCalendar = [ "09:00:00" "12:00:00" "15:00:00" ];
+      OnCalendar = [
+        "09:00:00"
+        "12:00:00"
+        "15:00:00"
+      ];
       RandomizedDelaySec = "10800"; # 3 hours
     };
   })

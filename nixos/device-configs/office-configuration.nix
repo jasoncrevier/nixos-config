@@ -3,25 +3,24 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./office-hardware-configuration.nix
-      (import ../media-mount.nix { readOnly = false; })
+  imports = [
+    ./office-hardware-configuration.nix
+    (import ../media-mount.nix { readOnly = false; })
 
-      ../amd.nix
-      ../audio.nix
-      ../desktop.nix
-      ../flatpak.nix
-      ../musnix.nix
-      ../plasma.nix
-      ../ssh.nix
-      ../steam.nix
-      ../sunshine.nix 
-      ../syncthing.nix
-      ../systemd-boot.nix
-      ../tailscale.nix
-      ../workstation.nix
-    ];
+    ../amd.nix
+    ../audio.nix
+    ../desktop.nix
+    ../flatpak.nix
+    ../musnix.nix
+    ../plasma.nix
+    ../ssh.nix
+    ../steam.nix
+    ../sunshine.nix
+    ../syncthing.nix
+    ../systemd-boot.nix
+    ../tailscale.nix
+    ../workstation.nix
+  ];
 
   # Enable Wayland for SDDM
   services.displayManager.sddm.wayland.enable = true;
@@ -35,23 +34,23 @@
 
   # Script to ensure monitor layout in sddm matched plasma
   system.activationScripts.sddmCopyDisplayConfig = {
-  text = ''
-    # Define the source and destination paths
-    SOURCE_FILE="/home/jason/.config/kwinoutputconfig.json"
-    DEST_DIR="/var/lib/sddm/.config"
-    DEST_FILE="$DEST_DIR/kwinoutputconfig.json"
+    text = ''
+      # Define the source and destination paths
+      SOURCE_FILE="/home/jason/.config/kwinoutputconfig.json"
+      DEST_DIR="/var/lib/sddm/.config"
+      DEST_FILE="$DEST_DIR/kwinoutputconfig.json"
 
-    # Ensure the destination directory exists
-    if [ ! -d "$DEST_DIR" ]; then
-        mkdir -p "$DEST_DIR"
-        chown sddm:sddm "$DEST_DIR"
-    fi
+      # Ensure the destination directory exists
+      if [ ! -d "$DEST_DIR" ]; then
+          mkdir -p "$DEST_DIR"
+          chown sddm:sddm "$DEST_DIR"
+      fi
 
-    # Copy the file only if it exists
-    if [ -f "$SOURCE_FILE" ]; then
-        cp "$SOURCE_FILE" "$DEST_FILE"
-        chown sddm:sddm "$DEST_FILE"
-    fi
+      # Copy the file only if it exists
+      if [ -f "$SOURCE_FILE" ]; then
+          cp "$SOURCE_FILE" "$DEST_FILE"
+          chown sddm:sddm "$DEST_FILE"
+      fi
     '';
   };
 

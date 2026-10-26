@@ -16,7 +16,11 @@
     isNormalUser = true;
     description = "Jason Crevier";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "kvm" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "kvm"
+    ];
   };
 
   #~Housekeeping~
@@ -48,8 +52,14 @@
 
   # Enable flakes
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "jason" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [
+      "root"
+      "jason"
+    ];
   };
 
   # Deduplicate the store on a weekly timer rather than during every build

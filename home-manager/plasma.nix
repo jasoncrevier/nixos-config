@@ -2,7 +2,10 @@
 
 {
   home.packages = with pkgs; [
-    (catppuccin-papirus-folders.override { flavor = "mocha"; accent = "teal"; })
+    (catppuccin-papirus-folders.override {
+      flavor = "mocha";
+      accent = "teal";
+    })
   ];
 
   # Settings shared by every Plasma machine. Only these keys are managed;

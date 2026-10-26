@@ -14,28 +14,30 @@
 
   # Exclude some default KDE packages and add some additional ones
   environment = {
-    systemPackages = with pkgs; [
-      adwaita-icon-theme
-    ] 
-    ++ (with pkgs.kdePackages; [
-      discover
-      filelight
-      kalk
-      kamoso
-      kcolorchooser
-      kolourpaint
-      kdepim-addons
-      krdc
-      packagekit-qt
-      plasma-bigscreen
-    ]);
+    systemPackages =
+      with pkgs;
+      [
+        adwaita-icon-theme
+      ]
+      ++ (with pkgs.kdePackages; [
+        discover
+        filelight
+        kalk
+        kamoso
+        kcolorchooser
+        kolourpaint
+        kdepim-addons
+        krdc
+        packagekit-qt
+        plasma-bigscreen
+      ]);
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
       khelpcenter
       oxygen
     ];
   };
-  
+
   programs.kde-pim.enable = true;
 
   programs.firefox.policies.ExtensionSettings."plasma-browser-integration@kde.org" = {

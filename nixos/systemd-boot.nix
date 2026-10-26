@@ -11,7 +11,7 @@
       timeout = 0;
     };
     plymouth.enable = true;
-    kernelParams = ["quiet"];
+    kernelParams = [ "quiet" ];
     kernelModules = [ "ntsync" ];
   };
 }

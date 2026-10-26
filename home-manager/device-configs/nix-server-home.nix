@@ -1,15 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ../fish.nix
-      ../games.nix
-      ../git.nix
-      ../plasma.nix
-      ../theme.nix
-      ../vscode.nix
-    ];
+  imports = [
+    ../fish.nix
+    ../games.nix
+    ../git.nix
+    ../plasma.nix
+    ../theme.nix
+    ../vscode.nix
+  ];
 
   programs.plasma = {
     kscreenlocker.lockOnResume = false;

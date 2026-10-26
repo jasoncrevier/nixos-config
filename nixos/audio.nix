@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
 
 {
-  boot.kernelParams = [ 
-    "processor.max_cstate=1" 
+  boot.kernelParams = [
+    "processor.max_cstate=1"
     "usbcore.autosuspend=-1"
   ];
   boot.kernelModules = [ "snd-virmidi" ];
@@ -20,7 +20,10 @@
       "10-clock-rate" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
-          "default.clock.allowed-rates" = [ 44100 48000 ];
+          "default.clock.allowed-rates" = [
+            44100
+            48000
+          ];
           "default.clock.min-quantum" = 128;
           "default.clock.max-quantum" = 1024;
         };

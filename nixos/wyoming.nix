@@ -1,6 +1,6 @@
- # Enable whisper and piper
- 
-{ config, pkgs, ... }: 
+# Enable whisper and piper
+
+{ config, pkgs, ... }:
 
 {
   nixpkgs.overlays = [
@@ -32,5 +32,8 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 10200 10300 ];
+  networking.firewall.allowedTCPPorts = [
+    10200
+    10300
+  ];
 }

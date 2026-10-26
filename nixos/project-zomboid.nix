@@ -1,6 +1,11 @@
 # Enable Project Zomboid server
 
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   imports = [ ./podman.nix ];
@@ -13,7 +18,7 @@
     isSystemUser = true;
     group = "zomboid";
   };
-  users.groups.zomboid = {};
+  users.groups.zomboid = { };
 
   # Host Directory Provisioning
   systemd.tmpfiles.rules = [
@@ -22,21 +27,22 @@
   ];
 
   # Host Firewall Configuration
-  networking.firewall.allowedUDPPorts = [ 
+  networking.firewall.allowedUDPPorts = [
     16261 # Main handshake port
     16262 # Direct connection UDP
   ];
-  networking.firewall.allowedTCPPorts = [ 
+  networking.firewall.allowedTCPPorts = [
     29015 # Steam query port
     16262 # Direct connection TCP
-  ] ++ (lib.range 16263 16282); # Dynamically opens player slots 1 through 20 (16263 to 16282)
+  ]
+  ++ (lib.range 16263 16282); # Dynamically opens player slots 1 through 20 (16263 to 16282)
 
   # Containers
   virtualisation.oci-containers.containers."project-zomboid" = {
     # The image only has a moving tag, so pin by digest. The game itself still updates via VALIDATE.
     image = "ich777/steamcmd:projectzomboid@sha256:99dce31146fa9dc696c627ca05c59b4ec4b040500c1b226601ca1aa86653fb82";
     environment = {
-      "GAME_ID" = "380870"; 
+      "GAME_ID" = "380870";
       "HOST_CONTAINERNAME" = "project-zomboid";
       "HOST_HOSTNAME" = "knight";
       "HOST_OS" = "NixOS";
@@ -48,17 +54,32 @@
       "/var/lib/steamcmd:/serverdata/steamcmd:rw"
     ];
     ports = [
-      "29015:27015/tcp"  # Steam query port
-      "16261:16261/udp"  # Main handshake port
-      "16262:16262/udp"  # Direct connection
+      "29015:27015/tcp" # Steam query port
+      "16261:16261/udp" # Main handshake port
+      "16262:16262/udp" # Direct connection
       "16262:16262/tcp"
-      
+
       # Player slots 1 through 20
-      "16263:16263/tcp" "16264:16264/tcp" "16265:16265/tcp" "16266:16266/tcp"
-      "16267:16267/tcp" "16268:16268/tcp" "16269:16269/tcp" "16270:16270/tcp"
-      "16271:16271/tcp" "16272:16272/tcp" "16273:16273/tcp" "16274:16274/tcp"
-      "16275:16275/tcp" "16276:16276/tcp" "16277:16277/tcp" "16278:16278/tcp"
-      "16279:16279/tcp" "16280:16280/tcp" "16281:16281/tcp" "16282:16282/tcp"
+      "16263:16263/tcp"
+      "16264:16264/tcp"
+      "16265:16265/tcp"
+      "16266:16266/tcp"
+      "16267:16267/tcp"
+      "16268:16268/tcp"
+      "16269:16269/tcp"
+      "16270:16270/tcp"
+      "16271:16271/tcp"
+      "16272:16272/tcp"
+      "16273:16273/tcp"
+      "16274:16274/tcp"
+      "16275:16275/tcp"
+      "16276:16276/tcp"
+      "16277:16277/tcp"
+      "16278:16278/tcp"
+      "16279:16279/tcp"
+      "16280:16280/tcp"
+      "16281:16281/tcp"
+      "16282:16282/tcp"
     ];
     log-driver = "journald";
     extraOptions = [

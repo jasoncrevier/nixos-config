@@ -45,7 +45,7 @@
       show-extensions-notice = false;
     };
     # The GNOME shell theme is set by Stylix ("org/gnome/shell/extensions/user-theme").
-    
+
     #Tilix
     "com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d" = {
       background-transparency-percent = 10;

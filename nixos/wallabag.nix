@@ -1,6 +1,11 @@
 # Enable Wallabag server
 
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   imports = [ ./podman.nix ];
@@ -13,7 +18,7 @@
     isSystemUser = true;
     group = "wallabag";
   };
-  users.groups.wallabag = {};
+  users.groups.wallabag = { };
 
   # Host Directory Provisioning
   systemd.tmpfiles.rules = [
