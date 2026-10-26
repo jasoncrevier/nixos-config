@@ -21,10 +21,29 @@
           "nix-server" = "linux";
           "grunt" = "linux";
         };
+
+        # Nix language server: errors, option completion and nixfmt on save
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
+        "nix.serverSettings".nixd = let
+          flake = ''(builtins.getFlake "/home/jason/nixos-config")'';
+        in {
+          formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+          nixpkgs.expr = "import ${flake}.inputs.nixpkgs { }";
+          # The hosts share most modules, so office's options cover nearly everything
+          options = {
+            nixos.expr = "${flake}.nixosConfigurations.office.options";
+            home-manager.expr = "${flake}.nixosConfigurations.office.options.home-manager.users.type.getSubOptions [ ]";
+          };
+        };
+        "[nix]" = {
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          "editor.formatOnSave" = true;
+        };
       };
       extensions = with pkgs.vscode-extensions; [
         anthropic.claude-code
-        bbenoist.nix
+        jnoortheen.nix-ide
         ms-python.python
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh

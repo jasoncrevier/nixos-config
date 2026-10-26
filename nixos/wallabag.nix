@@ -45,7 +45,6 @@
   };
   systemd.services."podman-wallabag-db" = {
     serviceConfig = {
-      EnvironmentFile = config.sops.secrets.wallabag_env.path;
       Restart = lib.mkOverride 90 "always";
     };
     after = [
@@ -121,7 +120,6 @@
   };
   systemd.services."podman-wallabag-wallabag" = {
     serviceConfig = {
-      EnvironmentFile = config.sops.secrets.wallabag_env.path;
       Restart = lib.mkOverride 90 "always";
     };
     after = [ "podman-network-wallabag_default.service" ];

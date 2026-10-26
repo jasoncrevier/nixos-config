@@ -23,4 +23,11 @@
     # Fix screen tearing (adds input lag)
     #forceFullCompositionPipeline = true;
   };
+
+  # Prebuilt CUDA packages (ollama-cuda, ctranslate2), which cache.nixos.org
+  # doesn't carry because CUDA is unfree
+  nix.settings = {
+    substituters = [ "https://cache.nixos-cuda.org" ];
+    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+  };
 }

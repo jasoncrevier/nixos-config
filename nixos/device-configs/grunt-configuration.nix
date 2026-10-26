@@ -23,8 +23,6 @@
   #~Hostname~
   networking.hostName = "grunt";
 
-  networking.firewall.checkReversePath = "loose";
-  
   services.logind.settings.Login.HandleLidSwitch = "ignore"; # Disable sleep when laptop lid is closed
 
   # The NixOS release this machine was first installed with. Don't change it
