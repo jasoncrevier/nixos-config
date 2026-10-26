@@ -1,6 +1,6 @@
 # Gnome settings
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   services = {
@@ -36,6 +36,14 @@
       showtime
       yelp
     ]);
+  };
+
+  programs.firefox.policies.ExtensionSettings = lib.mapAttrs (id: slug: {
+    installation_mode = "normal_installed";
+    install_url = "https://addons.mozilla.org/firefox/downloads/latest/${slug}/latest.xpi";
+  }) {
+    "chrome-gnome-shell@gnome.org" = "gnome-shell-integration";
+    "gsconnect@andyholmes.github.io" = "gsconnect";
   };
 
   # Global patch -- using to fix blurry electron apps when using fractional scaling

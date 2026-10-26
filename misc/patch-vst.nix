@@ -1,4 +1,5 @@
-# Use: nix-shell patch-vst.nix --run "autoPatchelf \"/path/to/plugin\""
+# Use: nix develop ~/nixos-config#patch-vst, then run: autoPatchelf "/path/to/plugin"
+# (or without flakes: nix-shell patch-vst.nix --run "autoPatchelf \"/path/to/plugin\"")
 # Add additional buildInputs to the list below if the plugin has additional dependencies that need to be patched
 
 { pkgs ? import <nixpkgs> {} }:

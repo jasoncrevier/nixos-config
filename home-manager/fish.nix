@@ -7,8 +7,9 @@
     set fish_greeting # Disable greeting
     '';
     shellAliases = {
-      update = "cd ~/nixos-config && git add . && sudo nixos-rebuild switch --flake .";
-      upgrade = "cd ~/nixos-config && git add . && nix flake update && sudo nixos-rebuild switch --flake .";
+      # Flakes ignore untracked files, so stage everything before building
+      update = "git -C ~/nixos-config add -A && nh os switch";
+      upgrade = "git -C ~/nixos-config add -A && nh os switch --update";
       flake-repair = "rm -rf ~/.cache/nix && sudo rm -rf /root/.cache/nix && cd ~/nixos-config && git add . && nix flake update --refresh";
     };
   };

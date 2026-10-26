@@ -4,7 +4,6 @@
   programs.git = {
     enable = true;
     settings = {
-      credential.helper = "${pkgs.github-cli}/bin/gh auth git-credential";
       user = {
         name = "Jason Crevier";
         email = "jason@jasoncrevier.com";
@@ -13,5 +12,11 @@
     signing = {
       format = null;
     };
+  };
+
+  # gh handles credentials for github.com only; other hosts prompt as usual
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
   };
 }

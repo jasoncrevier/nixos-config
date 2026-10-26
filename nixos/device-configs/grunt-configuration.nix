@@ -18,6 +18,7 @@
  
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.configurationLimit = 10; # Keep /boot from filling up
   
   #~Hostname~
   networking.hostName = "grunt";

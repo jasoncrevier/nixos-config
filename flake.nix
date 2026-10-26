@@ -33,6 +33,10 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     kosync = {
       url = "git+https://codeberg.org/cmooon/kosync";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,8 +47,15 @@
     let
       system = "x86_64-linux";
 
+      # For the flake's own outputs (packages, dev shells, formatter)
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       mkSystem = modules: nixpkgs.lib.nixosSystem {
-        inherit system modules;
+        inherit system;
+        modules = [ inputs.nix-index-database.nixosModules.nix-index ] ++ modules;
         specialArgs = { inherit inputs; };
       };
 
@@ -85,9 +96,23 @@
       hostConfig = name: ./nixos/device-configs + "/${name}-configuration.nix";
     in
     {
+      # nix build .#amplitude
+      packages.${system} = {
+        amplitude = pkgs.callPackage ./pkgs/amplitude/default.nix { };
+        bitwig-studio6 = pkgs.callPackage ./pkgs/bitwig-studio6.nix { };
+      };
+
+      # nix develop .#patch-vst
+      devShells.${system}.patch-vst = import ./misc/patch-vst.nix { inherit pkgs; };
+
+      # nix fmt
+      formatter.${system} = pkgs.nixfmt;
+
       nixosConfigurations = {
-        thinkpad = mkSystem (workstation-modules ++ [ (hostConfig "thinkpad") ]
-          ++ mkHome { name = "thinkpad"; shared = themed-home-modules; });
+        thinkpad = mkSystem (workstation-modules ++ [
+          (hostConfig "thinkpad")
+          nixos-hardware.nixosModules.lenovo-thinkpad
+        ] ++ mkHome { name = "thinkpad"; shared = themed-home-modules; });
 
         surface = mkSystem (workstation-modules ++ [
           (hostConfig "surface")

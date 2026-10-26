@@ -38,6 +38,11 @@
   
   programs.kde-pim.enable = true;
 
+  programs.firefox.policies.ExtensionSettings."plasma-browser-integration@kde.org" = {
+    installation_mode = "normal_installed";
+    install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
+  };
+
   # Extra programs
   programs = {
     gnome-disks.enable = true; # I just like gnome-disks

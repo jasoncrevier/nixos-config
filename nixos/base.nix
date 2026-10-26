@@ -50,7 +50,12 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "jason" ];
-    auto-optimise-store = true;
+  };
+
+  # Deduplicate the store on a weekly timer rather than during every build
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   # Catppuccin system-wide settings to silence enrollment warnings
@@ -58,13 +63,18 @@
   catppuccin.autoEnable = true;
 
   # Fix for command-not-found
+  # Prebuilt database from the nix-index-database flake input
   programs.nix-index.enable = true;
+  programs.nix-index-database.comma.enable = true;
 
-  # Automatically collect garbage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  # nh: nicer rebuilds (`nh os switch`) and weekly garbage collection
+  programs.nh = {
+    enable = true;
+    flake = "/home/jason/nixos-config";
+    clean = {
+      enable = true;
+      extraArgs = "--keep 5 --keep-since 30d";
+    };
   };
 
   security.sudo.execWheelOnly = true;
