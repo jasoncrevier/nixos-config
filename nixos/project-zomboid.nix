@@ -40,7 +40,7 @@
   # Containers
   virtualisation.oci-containers.containers."project-zomboid" = {
     # The image only has a moving tag, so pin by digest. The game itself still updates via VALIDATE.
-    image = "ich777/steamcmd:projectzomboid@sha256:99dce31146fa9dc696c627ca05c59b4ec4b040500c1b226601ca1aa86653fb82";
+    image = "docker.io/ich777/steamcmd:projectzomboid@sha256:99dce31146fa9dc696c627ca05c59b4ec4b040500c1b226601ca1aa86653fb82";
     environment = {
       "GAME_ID" = "380870";
       "HOST_CONTAINERNAME" = "project-zomboid";

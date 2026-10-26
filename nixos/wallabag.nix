@@ -32,9 +32,11 @@
     80
   ];
 
-  # Containers
+  # Containers. Images need the full registry name (docker.io/...): podman can't
+  # pull short names like "redis:8.8-alpine". Upgrade MariaDB one minor version
+  # at a time, and back up /var/lib/wallabag/data first.
   virtualisation.oci-containers.containers."wallabag-db" = {
-    image = "mariadb:12.3";
+    image = "docker.io/library/mariadb:12.3";
     volumes = [
       "/var/lib/wallabag/data:/var/lib/mysql:rw"
     ];
@@ -66,7 +68,7 @@
     ];
   };
   virtualisation.oci-containers.containers."wallabag-redis" = {
-    image = "redis:8.8-alpine";
+    image = "docker.io/library/redis:8.8-alpine";
     log-driver = "journald";
     extraOptions = [
       "--health-cmd=[\"redis-cli\", \"ping\"]"
@@ -94,7 +96,7 @@
     ];
   };
   virtualisation.oci-containers.containers."wallabag-wallabag" = {
-    image = "wallabag/wallabag:2.6.14";
+    image = "docker.io/wallabag/wallabag:2.6.14";
     environment = {
       "SYMFONY__ENV__APP_ENV" = "prod";
       "SYMFONY__ENV__DATABASE_CHARSET" = "utf8mb4";
