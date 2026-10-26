@@ -33,6 +33,7 @@
     jq
     nixd # Nix language server for VS Code, including Remote-SSH sessions
     nixfmt
+    smartmontools # smartctl, for checking disks by hand
     sops
   ];
 
@@ -88,6 +89,9 @@
       extraArgs = "--keep 5 --keep-since 30d";
     };
   };
+
+  # Disk health monitoring (SMART) on every drive smartd can find; warnings go to `wall` for now
+  services.smartd.enable = true;
 
   security.sudo.execWheelOnly = true;
 }

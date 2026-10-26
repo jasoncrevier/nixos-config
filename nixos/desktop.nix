@@ -57,6 +57,9 @@
 
   services.usbmuxd.enable = true;
 
+  # Firmware updates via LVFS (fwupdmgr / GNOME Software / Discover). Plasma already turns this on.
+  services.fwupd.enable = true;
+
   programs.firefox = {
     enable = true;
     preferences = {
