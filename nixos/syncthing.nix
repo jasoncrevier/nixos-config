@@ -11,7 +11,7 @@ let
   # Every Syncthing device. Each machine shares with all of the others.
   allDevices = {
     "office" = {
-      id = "UQ5JITA-OXCRVTH-ZASHRVT-7L7MOQX-UO6VYI2-CDTIQLD-VYKUOMI-QMMPDQP";
+      id = "3BUNMEZ-TWPP4MZ-Z2G7BAO-ZY5ZLSX-ENN5YON-AINIIGZ-CG4LHSI-VUESUQ2";
     };
     "thinkpad" = {
       id = "ZYUMO4O-YCWCXF7-LIH7DDZ-7XDHXVW-A6P4FZD-XQVER3U-QIGAVCO-7V36XQL";
