@@ -17,9 +17,6 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    vscode-server = {
-      url = "github:nix-community/nixos-vscode-server";
-    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -71,11 +68,6 @@
           modules = [ inputs.nix-index-database.nixosModules.nix-index ] ++ modules;
           specialArgs = { inherit inputs; };
         };
-
-      vscodeServerModules = [
-        (import (inputs.vscode-server + "/modules/vscode-server"))
-        { services.vscode-server.enable = true; }
-      ];
 
       theme-modules = [
         catppuccin.nixosModules.catppuccin
@@ -166,7 +158,6 @@
             sops-nix.nixosModules.sops
           ]
           ++ theme-modules
-          ++ vscodeServerModules
           ++ [ (hostConfig "nix-server") ]
           ++ mkHome {
             name = "nix-server";
@@ -179,7 +170,6 @@
             sops-nix.nixosModules.sops
             catppuccin.nixosModules.catppuccin
           ]
-          ++ vscodeServerModules
           ++ [
             kosync.nixosModules.${system}.default
             (hostConfig "grunt")

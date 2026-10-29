@@ -12,6 +12,7 @@
     ../failure-alerts.nix
     ../jellyfin.nix
     ../karakeep.nix
+    ../minecraft.nix
     ../music-assistant.nix
     ../navidrome.nix
     ../nvidia.nix
@@ -55,6 +56,7 @@
     "jellyfin"
     "karakeep-web"
     "karakeep-workers"
+    "minecraft-server"
     "music-assistant"
     "navidrome"
     "navidrome-listenbrainz-sync"
