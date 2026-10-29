@@ -10,11 +10,9 @@
         wrapProgram $out/bin/feishin --add-flags "--ozone-platform=x11"
       '';
     }))
-    freetube
     heynote
     kdePackages.kasts
     micro
-    nicotine-plus
     obsidian
     onlyoffice-desktopeditors
     tutanota-desktop
