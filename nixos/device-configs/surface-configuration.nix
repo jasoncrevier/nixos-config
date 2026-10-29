@@ -2,6 +2,7 @@
 
 {
   lib,
+  pkgs,
   ...
 }:
 
@@ -27,6 +28,24 @@
   networking.hostName = "surface";
 
   zramSwap.enable = true;
+
+  # Pen and touchscreen input. The kernel's IPTS driver only passes raw digitizer data;
+  # iptsd turns it into input events. nixos-hardware's surface-common doesn't enable it
+  # (only the per-device profiles do, and there's none for the Surface Book).
+  services.iptsd = {
+    enable = true;
+    # Palm rejection: ignore touch while the pen is near the screen
+    config.Touchscreen.DisableOnStylus = true;
+  };
+  # iptsd's own udev rule only matches "add". Starting iptsd resets the digitizer, which
+  # sends a "change" event that drops the rule's systemd tag, so systemd considers the
+  # device gone and stops iptsd a second after boot. Re-apply the rule on "change" too.
+  services.udev.extraRules = ''
+    SUBSYSTEM=="hidraw", ACTION=="change", TAG+="systemd", \
+      PROGRAM="${pkgs.iptsd}/bin/iptsd-check-device --quiet $env{DEVNAME}", \
+      PROGRAM="${pkgs.systemd}/bin/systemd-escape --path $env{DEVNAME}", \
+      ENV{SYSTEMD_WANTS}+="iptsd@$result.service"
+  '';
 
   # Temp fix: the linux-surface 6.19.8 kernel's Rust support doesn't build with nixpkgs'
   # rustc 1.99 ("invalid rustc abi: 'x86-softfloat'"). Nothing here needs kernel Rust
