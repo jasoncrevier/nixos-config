@@ -8,6 +8,7 @@
     ../plasma.nix
     ../theme.nix
     ../vscode.nix
+    ../vscode-server.nix
   ];
 
   programs.plasma = {

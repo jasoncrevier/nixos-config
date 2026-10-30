@@ -25,14 +25,9 @@
           "nix-server" = "linux";
           "grunt" = "linux";
         };
-        # Installed on a remote the first time you connect to it; UI extensions
-        # (theme etc.) keep running locally
-        "remote.SSH.defaultExtensions" = [
-          "anthropic.claude-code"
-          "jnoortheen.nix-ide"
-          "ms-python.python"
-          "ms-azuretools.vscode-docker"
-        ];
+        # Never pull extensions from the Marketplace behind Nix's back. Remotes
+        # get theirs from vscode-server.nix instead of remote.SSH.defaultExtensions.
+        "extensions.autoUpdate" = false;
 
         # Nix language server: errors, option completion and nixfmt on save.
         # nixd and nixfmt are on every machine (base.nix), so plain command names
@@ -57,15 +52,10 @@
           "editor.formatOnSave" = true;
         };
       };
+      enableExtensionUpdateCheck = false;
       extensions =
-        with pkgs.vscode-extensions;
-        [
-          anthropic.claude-code
-          jnoortheen.nix-ide
-          ms-python.python
-          ms-azuretools.vscode-docker
-          ms-vscode-remote.remote-ssh
-        ]
+        import ./vscode-extensions.nix pkgs
+        ++ [ pkgs.vscode-extensions.ms-vscode-remote.remote-ssh ]
         ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "favorite-folders";
