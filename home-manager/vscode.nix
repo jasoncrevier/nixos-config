@@ -27,7 +27,7 @@
         };
         # Never pull extensions from the Marketplace behind Nix's back. Remotes
         # get theirs from vscode-server.nix instead of remote.SSH.defaultExtensions.
-        "extensions.autoUpdate" = false;
+        "extensions.autoUpdate" = "off";
 
         # Nix language server: errors, option completion and nixfmt on save.
         # nixd and nixfmt are on every machine (base.nix), so plain command names
