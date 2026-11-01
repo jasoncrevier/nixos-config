@@ -43,12 +43,21 @@
 
   services.displayManager.defaultSession = "plasma";
 
-  # Root's remote-build keys on the machines that offload builds here (see remote-builder.nix)
-  users.users.jason.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEZkNWP4k2SUAFTXadWUnx0Fpu4HQ0EAzwEbDv7+m5UT nix-builder@thinkpad"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMbZZ85vml0wCwXZf90pUL6sBypIbVJRtvo5etn5bwjo nix-builder@grunt"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6EfMXZgZbss6Vld8Jjy77xaHDswiXplMjFttjmQxcV nix-builder@surface"
-  ];
+  # Remote builds for the machines that offload here (see remote-builder.nix). These keys
+  # log in as nix-ssh, which can only run nix-daemon: no shell, no forwarding.
+  # trusted is needed so clients can upload their unsigned build inputs.
+  nix.sshServe = {
+    enable = true;
+    protocol = "ssh-ng";
+    write = true;
+    trusted = true;
+    # Root's remote-build keys on the clients
+    keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEZkNWP4k2SUAFTXadWUnx0Fpu4HQ0EAzwEbDv7+m5UT nix-builder@thinkpad"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMbZZ85vml0wCwXZf90pUL6sBypIbVJRtvo5etn5bwjo nix-builder@grunt"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL6EfMXZgZbss6Vld8Jjy77xaHDswiXplMjFttjmQxcV nix-builder@surface"
+    ];
+  };
 
   # ntfy alert when any of these fail (see failure-alerts.nix)
   failureAlerts.services = [
