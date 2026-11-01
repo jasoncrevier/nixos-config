@@ -28,7 +28,6 @@
     ../wyoming.nix
 
     ../../scripts/navidrome-likes-to-listenbrainz.nix
-    ../../scripts/obsidian-notifications.nix
   ];
 
   # Autologin

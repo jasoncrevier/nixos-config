@@ -17,6 +17,8 @@
     ../ssh.nix
     ../tailscale.nix
     ../wallabag.nix
+
+    ../../scripts/obsidian-notifications.nix
   ];
 
   boot.loader.grub.enable = true;
