@@ -25,6 +25,9 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.configurationLimit = 10; # Keep /boot from filling up
 
+  # The Wi-Fi card fails to initialise on every boot and grunt is wired (enp0s25)
+  boot.blacklistedKernelModules = [ "iwlwifi" ];
+
   #~Hostname~
   networking.hostName = "grunt";
 
