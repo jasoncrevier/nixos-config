@@ -30,11 +30,21 @@
     ../../scripts/navidrome-likes-to-listenbrainz.nix
   ];
 
-  # Autologin
+  # The TV logs in as tv, which has no sudo
+  users.users.tv = {
+    isNormalUser = true;
+    description = "TV";
+  };
+
+  home-manager.users.tv = ../../home-manager/device-configs/nix-server-tv-home.nix;
+
   services.displayManager.autoLogin = {
     enable = true;
-    user = "jason";
+    user = "tv";
   };
+
+  # Sunshine streams the TV session, so start it with tv's desktop
+  services.sunshine.autoStart = true;
 
   # Disable Wayland for SDDM
   services = {
