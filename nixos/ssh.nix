@@ -1,4 +1,4 @@
-# Enable the OpenSSH daemon (services.openssh opens port 22 in the firewall by default)
+# Enable the OpenSSH daemon, reachable over Tailscale only
 
 { ... }:
 
@@ -11,13 +11,18 @@
       KbdInteractiveAuthentication = false;
       PermitRootLogin = "no";
     };
+    # Reachable over Tailscale only (below), not the LAN or public Wi-Fi
+    openFirewall = false;
   };
+
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
 
   # Keys that can log in as jason, one per machine I SSH from.
   # Additive: ~/.ssh/authorized_keys still works too.
   users.users.jason.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOM3I5nkJqOFe2vlsQtmT6MoctIsLlZVRDIPB4LeKfgS jason@office"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIZJfNFW+qEo/nSTjHW5lilVhlXZVygLWV4mutgjBqJm jason@thinkpad"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJ6887zCpsope4o9eCOouFwW/EZmcdiXKO/2QZb554r jason@surface"
   ];
 
   # Host keys of every machine, so SSH (including root's, for remote builds) trusts them without prompting
