@@ -19,4 +19,7 @@
   # It would pick a different Qt style than catppuccin's Kvantum theme and trip
   # catppuccin's assertion, so leave Qt to catppuccin/the desktop as before.
   stylix.targets.qt.enable = false;
+
+  # Rofi isn't used, and Stylix's rofi target still sets the renamed programs.rofi.font
+  stylix.targets.rofi.enable = false;
 }
