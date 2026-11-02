@@ -30,17 +30,29 @@
     ../../scripts/navidrome-likes-to-listenbrainz.nix
   ];
 
-  # Autologin
+  # The TV logs in as tv, which has no sudo
+  users.users.tv = {
+    isNormalUser = true;
+    description = "TV";
+  };
+
+  home-manager.users.tv = ../../home-manager/device-configs/nix-server-tv-home.nix;
+
   services.displayManager.autoLogin = {
     enable = true;
-    user = "jason";
+    user = "tv";
   };
 
-  # Disable Wayland for SDDM
+  # Sunshine streams the TV session, so start it with tv's desktop
+  services.sunshine.autoStart = true;
+
+  # Disable Wayland for SDDM. Relogin puts tv straight back into Big Picture after a logout
   services = {
     displayManager.sddm.wayland.enable = false;
+    displayManager.sddm.autoLogin.relogin = true;
   };
 
+  # tv autologins into regular Plasma (Bigscreen was too unreliable)
   services.displayManager.defaultSession = "plasma";
 
   # Remote builds for the machines that offload here (see remote-builder.nix). These keys
