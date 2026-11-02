@@ -47,6 +47,8 @@
 
   stylix.targets.gtk.enable = true;
 
+  gtk.gtk2.force = true;
+
   programs.konsole = {
     enable = true;
     defaultProfile = "Catppuccin";
