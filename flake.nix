@@ -77,6 +77,7 @@
 
       workstation-modules = [
         musnix.nixosModules.musnix
+        sops-nix.nixosModules.sops
       ]
       ++ theme-modules;
 

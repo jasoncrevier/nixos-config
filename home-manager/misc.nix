@@ -14,7 +14,7 @@
     kdePackages.kasts
     micro
     obsidian
-    onlyoffice-desktopeditors
+    #onlyoffice-desktopeditors
     tutanota-desktop
     vlc
   ];

@@ -12,6 +12,7 @@
     ../desktop.nix
     ../flatpak.nix
     ../musnix.nix
+    ../nextcloud-tasks.nix
     ../plasma.nix
     ../ssh.nix
     ../steam.nix

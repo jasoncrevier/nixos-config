@@ -15,6 +15,7 @@
     ../gnome.nix
     ../intel.nix
     ../musnix.nix
+    ../nextcloud-tasks.nix
     ../ssh.nix
     ../steam.nix
     ../syncthing.nix

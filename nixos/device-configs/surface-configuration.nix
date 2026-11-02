@@ -15,6 +15,7 @@
     ../flatpak.nix
     ../intel.nix
     #../musnix.nix
+    ../nextcloud-tasks.nix
     ../gnome.nix
     ../ssh.nix
     ../steam.nix

@@ -2,7 +2,19 @@ keys:
   - &jason age1z8cyzwua7d7vmvgvxznfsq9rhr9wu8pu82vk0tznl6z8w8hsr90sm3dnsg
   - &server age1svgtayqrzxf63xwxwfvfh4tzf398g6xjcgqe2zzqg6k6yt9mnugqvxzxx3
   - &grunt age1hydmfffyqxldaafzpq933d0hryha60av2v8e7zvyw3qy5uhyue4sg0eh6f
+  # Workstations, derived from their SSH host keys (ssh-to-age)
+  - &office age1ha6hwzr65f7278f37ywry55dklea37xc8x76cm4q57yz445fn9hsaw9s7x
+  - &thinkpad age1atckv9pae2wylqkch6x3la0qgx5mwrfn5z0nhgefg42tn6reupqq4zs400
+  - &surface age15weekku43zecpt8dwk8dmkxellt0xl6chwgwa69cjt7sz520t9aqzxl852
 creation_rules:
+  # Listed first: the rule below would match this file too
+  - path_regex: workstation-secrets\.yaml$
+    key_groups:
+      - age:
+        - *jason
+        - *office
+        - *thinkpad
+        - *surface
   - path_regex: secrets.*\.yaml$
     key_groups:
       - age:

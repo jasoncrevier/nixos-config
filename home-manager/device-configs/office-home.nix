@@ -11,6 +11,7 @@
     ../git.nix
     ../graphics.nix
     ../misc.nix
+    ../tasks.nix
     ../plasma.nix
     ../tempopad.nix
     ../theme.nix
