@@ -46,12 +46,14 @@
   # Sunshine streams the TV session, so start it with tv's desktop
   services.sunshine.autoStart = true;
 
-  # Disable Wayland for SDDM
+  # Disable Wayland for SDDM. Relogin puts tv straight back into Big Picture after a logout
   services = {
     displayManager.sddm.wayland.enable = false;
+    displayManager.sddm.autoLogin.relogin = true;
   };
 
-  services.displayManager.defaultSession = "plasma";
+  # The TV-style Plasma shell, which tv autologins into
+  services.displayManager.defaultSession = "plasma-bigscreen-wayland";
 
   # Remote builds for the machines that offload here (see remote-builder.nix). These keys
   # log in as nix-ssh, which can only run nix-daemon: no shell, no forwarding.
