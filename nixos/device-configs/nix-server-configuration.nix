@@ -52,8 +52,8 @@
     displayManager.sddm.autoLogin.relogin = true;
   };
 
-  # The TV-style Plasma shell, which tv autologins into
-  services.displayManager.defaultSession = "plasma-bigscreen-wayland";
+  # tv autologins into regular Plasma (Bigscreen was too unreliable)
+  services.displayManager.defaultSession = "plasma";
 
   # Remote builds for the machines that offload here (see remote-builder.nix). These keys
   # log in as nix-ssh, which can only run nix-daemon: no shell, no forwarding.
