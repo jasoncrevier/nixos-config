@@ -12,6 +12,7 @@
     ../base.nix
     ../failure-alerts.nix
     ../remote-builder.nix
+    ../binary-cache.nix
     ../kosync.nix
     ../sops.nix
     ../ssh.nix

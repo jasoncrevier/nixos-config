@@ -12,6 +12,7 @@
 
     ../desktop.nix
     ../remote-builder.nix
+    ../binary-cache.nix
     ../flatpak.nix
     ../intel.nix
     #../musnix.nix

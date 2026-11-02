@@ -9,6 +9,7 @@
 
     ../amd.nix
     ../audio.nix
+    ../binary-cache.nix
     ../desktop.nix
     ../flatpak.nix
     ../musnix.nix

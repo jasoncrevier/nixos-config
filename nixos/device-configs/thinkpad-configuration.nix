@@ -11,6 +11,7 @@
 
     ../desktop.nix
     ../remote-builder.nix
+    ../binary-cache.nix
     ../flatpak.nix
     ../gnome.nix
     ../intel.nix
