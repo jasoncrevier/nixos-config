@@ -18,6 +18,13 @@ in
 
   networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 5000 ];
 
+  # Garbage-collect during builds instead of failing when the disk fills up:
+  # starts below 10 GB free and stops once 30 GB is free
+  nix.settings = {
+    min-free = 10 * 1024 * 1024 * 1024;
+    max-free = 30 * 1024 * 1024 * 1024;
+  };
+
   # Its out-links in /var/lib/fleet-prebuild are GC roots, so the latest builds survive nh clean
   users.users.fleet-prebuild = {
     isSystemUser = true;
