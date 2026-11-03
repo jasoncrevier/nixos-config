@@ -23,6 +23,7 @@
     ../syncthing.nix
     ../systemd-boot.nix
     ../tailscale.nix
+    ../update-notifier.nix
     ../workstation.nix
   ];
 

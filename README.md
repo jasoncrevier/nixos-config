@@ -22,8 +22,8 @@ nixos-config
 
 ## Usage
 These fish aliases (from `home-manager/fish.nix`) work from any directory:
-- `update`: rebuild and switch the current machine.
-- `upgrade`: update all flake inputs, then rebuild and switch.
+- `update`: pull main, then rebuild and switch the current machine (downloading from nix-server's cache where it can).
+- `upgrade` (nix-server only): update all flake inputs and build every machine with them, push the new `flake.lock` to main only if they all build, then `update`. This also runs on its own every Sunday at 2:00, and the workstations get a desktop notification when a new build for them is ready.
 - `flake-repair`: clear Nix's caches and re-fetch every flake input, for when an update gets stuck on a bad download.
 
 Other useful commands, run from the repo:
