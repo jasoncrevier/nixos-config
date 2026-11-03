@@ -8,8 +8,12 @@ let
   host = config.networking.hostName;
   manifestUrl = "http://nix-server:5001/manifest.json";
 
-  # Same steps as the update alias in fish.nix, plus a pause so the result stays on screen
+  # Same steps as the update alias in fish.nix, plus a pause so the result stays on screen.
+  # It's started from the systemd user service, whose PATH has none of the system's programs,
+  # so use the login PATH: sudo's setuid wrapper first, then git, nh and nix.
   apply = pkgs.writeShellScript "fleet-update-apply" ''
+    export PATH="/run/wrappers/bin:/etc/profiles/per-user/$USER/bin:/run/current-system/sw/bin:$PATH"
+
     git -C ~/nixos-config pull --ff-only \
       && git -C ~/nixos-config add -AN \
       && nh os switch ~/nixos-config
