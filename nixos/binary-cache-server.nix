@@ -101,7 +101,11 @@ in
   # to push changes onto every machine in the fleet.
 
   # Created with `nix key generate-secret --key-name nix-server-2`; the public half is in binary-cache.nix
-  sops.secrets.harmonia_signing_key.sopsFile = ../server-secrets.yaml;
+  sops.secrets.harmonia_signing_key = {
+    sopsFile = ../server-secrets.yaml;
+    # Harmonia reads the key only at startup
+    restartUnits = [ "harmonia.service" ];
+  };
 
   # Write-access deploy key for the repo, so the weekly job can push flake.lock
   sops.secrets.fleet_prebuild_deploy_key = {
