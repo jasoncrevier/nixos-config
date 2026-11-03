@@ -7,6 +7,13 @@ keys:
   - &thinkpad age1atckv9pae2wylqkch6x3la0qgx5mwrfn5z0nhgefg42tn6reupqq4zs400
   - &surface age15weekku43zecpt8dwk8dmkxellt0xl6chwgwa69cjt7sz520t9aqzxl852
 creation_rules:
+  # Keys that can compromise the whole fleet (cache signing, repo write): nix-server only.
+  # Listed first, like the next one, because secrets.*\.yaml would match it too
+  - path_regex: server-secrets\.yaml$
+    key_groups:
+      - age:
+        - *jason
+        - *server
   # Listed first: the rule below would match this file too
   - path_regex: workstation-secrets\.yaml$
     key_groups:

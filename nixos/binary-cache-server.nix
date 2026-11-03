@@ -97,11 +97,17 @@ let
   };
 in
 {
-  # Created with `nix key generate-secret --key-name nix-server-1`; the public half is in binary-cache.nix
-  sops.secrets.harmonia_signing_key = { };
+  # Both kept in server-secrets.yaml, which only nix-server can decrypt: either one is enough
+  # to push changes onto every machine in the fleet.
+
+  # Created with `nix key generate-secret --key-name nix-server-2`; the public half is in binary-cache.nix
+  sops.secrets.harmonia_signing_key.sopsFile = ../server-secrets.yaml;
 
   # Write-access deploy key for the repo, so the weekly job can push flake.lock
-  sops.secrets.fleet_prebuild_deploy_key.owner = "fleet-prebuild";
+  sops.secrets.fleet_prebuild_deploy_key = {
+    sopsFile = ../server-secrets.yaml;
+    owner = "fleet-prebuild";
+  };
 
   services.harmonia.cache = {
     enable = true;
