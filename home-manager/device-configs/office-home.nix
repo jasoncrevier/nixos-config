@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 
 {
   imports = [
@@ -26,6 +26,15 @@
   programs.battlenet-umu = {
     enable = true;
     prefix = "/mnt/Gaming_SSD/battlenet-umu/prefix";
+  };
+
+  # The flake's desktop entry has no icon; reuse the one Proton extracted into the prefix
+  xdg.desktopEntries.battle-net-umu = {
+    name = "Battle.net";
+    exec = "battle-net-umu";
+    icon = "${config.programs.battlenet-umu.prefix}/drive_c/proton_shortcuts/icons/256x256/apps/1AC2_Battle.net Launcher.0.png";
+    categories = [ "Game" ];
+    settings.StartupWMClass = "battle.net.exe";
   };
 
   programs.plasma = {
