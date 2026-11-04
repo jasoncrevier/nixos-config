@@ -23,7 +23,10 @@
   ];
 
   # Battle.net through umu-launcher + Proton-GE; launch games from inside Battle.net
-  programs.battlenet-umu.enable = true;
+  programs.battlenet-umu = {
+    enable = true;
+    prefix = "/mnt/Gaming_SSD/battlenet-umu/prefix";
+  };
 
   programs.plasma = {
     kwin.effects.wobblyWindows.enable = true;
