@@ -38,6 +38,10 @@
       url = "git+https://codeberg.org/cmooon/kosync";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    battlenet-umu = {
+      url = "github:jacobjdowning/battlenet-umu";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

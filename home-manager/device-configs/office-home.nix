@@ -1,7 +1,8 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   imports = [
+    inputs.battlenet-umu.homeModules.default
     ../3d-printing.nix
     ../arduino.nix
     ../audio.nix
@@ -20,6 +21,9 @@
     ../web.nix
     ../wine.nix
   ];
+
+  # Battle.net through umu-launcher + Proton-GE; launch games from inside Battle.net
+  programs.battlenet-umu.enable = true;
 
   programs.plasma = {
     kwin.effects.wobblyWindows.enable = true;
