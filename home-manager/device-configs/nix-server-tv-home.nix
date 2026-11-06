@@ -6,7 +6,8 @@ let
   steam-bigpicture = pkgs.makeDesktopItem {
     name = "steam-bigpicture";
     desktopName = "Steam Big Picture";
-    exec = "steam -gamepadui";
+    # -pipewire: on Wayland, Remote Play otherwise falls back to X11 capture and input
+    exec = "steam -gamepadui -pipewire";
     icon = "steam";
   };
 in
