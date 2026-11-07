@@ -6,6 +6,8 @@ let
   karakeep_env = config.sops.secrets.karakeep_env.path;
 in
 {
+  imports = [ ./backups.nix ];
+
   sops.secrets.karakeep_env.owner = "karakeep";
 
   services.karakeep = {
@@ -23,4 +25,7 @@ in
   };
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
+
+  # Bookmarks (db.db) and saved pages/screenshots (assets)
+  backups.paths = [ "/var/lib/karakeep" ];
 }

@@ -14,6 +14,12 @@ creation_rules:
       - age:
         - *jason
         - *server
+  # grunt's own keys (its backup repo), so nix-server can't read them. Also listed first
+  - path_regex: grunt-secrets\.yaml$
+    key_groups:
+      - age:
+        - *jason
+        - *grunt
   # Listed first: the rule below would match this file too
   - path_regex: workstation-secrets\.yaml$
     key_groups:

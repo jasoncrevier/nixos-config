@@ -72,6 +72,12 @@
     ];
   };
 
+  # Nightly restic backup to B2 of what the service modules list (see backups.nix)
+  backups = {
+    enable = true;
+    sopsFile = ../../server-secrets.yaml;
+  };
+
   # ntfy alert when any of these fail (see failure-alerts.nix)
   failureAlerts.services = [
     "jellyfin"

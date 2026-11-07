@@ -8,10 +8,16 @@
 }:
 
 {
-  imports = [ ./podman.nix ];
+  imports = [
+    ./backups.nix
+    ./podman.nix
+  ];
 
   # SOPS Secret Setup
   sops.secrets.project-zomboid_admin_pwd.owner = "zomboid";
+
+  # Saves, server settings and the game's own backups. The rest is game files from Steam.
+  backups.paths = [ "/var/lib/projectzomboid/Zomboid" ];
 
   # System User & Group Setup
   users.users.zomboid = {

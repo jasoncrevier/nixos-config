@@ -3,6 +3,8 @@
 { config, ... }:
 
 {
+  imports = [ ./backups.nix ];
+
   sops.secrets.navidrome_url.owner = "navidrome";
 
   services.navidrome = {
@@ -22,4 +24,8 @@
   };
 
   systemd.services.navidrome.serviceConfig.EnvironmentFile = config.sops.secrets.navidrome_url.path;
+
+  # Users, playlists, stars and play counts. The music itself is on the NAS.
+  backups.paths = [ "/var/lib/navidrome" ];
+  backups.exclude = [ "/var/lib/navidrome/cache" ];
 }

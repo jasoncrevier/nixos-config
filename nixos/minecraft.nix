@@ -8,6 +8,8 @@
 }:
 
 {
+  imports = [ ./backups.nix ];
+
   # whitelist.json contents (a JSON list of { "name": ..., "uuid": ... }).
   # Kept in sops because the module's own `whitelist` option lands in the world-readable store.
   sops.secrets.minecraft_whitelist = {
@@ -45,4 +47,13 @@
 
     jvmOpts = "-Xms2G -Xmx4G";
   };
+
+  # The world. Flush it to disk first so the snapshot has the latest chunks.
+  backups.paths = [ "/var/lib/minecraft" ];
+  backups.prepareCommands = ''
+    if systemctl is-active --quiet minecraft-server; then
+      echo "save-all flush" > ${config.systemd.sockets.minecraft-server.socketConfig.ListenFIFO}
+      sleep 10
+    fi
+  '';
 }

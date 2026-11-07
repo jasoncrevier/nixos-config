@@ -34,6 +34,12 @@
 
   services.logind.settings.Login.HandleLidSwitch = "ignore"; # Disable sleep when laptop lid is closed
 
+  # Nightly restic backup to B2 of what the service modules list (see backups.nix)
+  backups = {
+    enable = true;
+    sopsFile = ../../grunt-secrets.yaml;
+  };
+
   # ntfy alert when any of these fail (see failure-alerts.nix)
   failureAlerts.services = [
     "kosync"

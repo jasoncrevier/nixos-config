@@ -8,10 +8,26 @@
 }:
 
 {
-  imports = [ ./podman.nix ];
+  imports = [
+    ./backups.nix
+    ./podman.nix
+  ];
 
   # SOPS Secret Setup
   sops.secrets.wallabag_env.owner = "wallabag";
+
+  # Back up a dump of the database instead of MariaDB's live files, plus images and app data
+  backups.paths = [
+    "/var/lib/wallabag/dump"
+    "/var/lib/wallabag/images"
+    "/var/lib/wallabag/app-data"
+  ];
+  backups.prepareCommands = ''
+    mkdir -p /var/lib/wallabag/dump
+    ${pkgs.podman}/bin/podman exec wallabag-db sh -c \
+      'exec mariadb-dump --all-databases --single-transaction -uroot -p"''${MARIADB_ROOT_PASSWORD:-$MYSQL_ROOT_PASSWORD}"' \
+      > /var/lib/wallabag/dump/all-databases.sql
+  '';
 
   # System User & Group Setup
   users.users.wallabag = {

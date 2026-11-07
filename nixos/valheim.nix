@@ -58,6 +58,8 @@ let
   '';
 in
 {
+  imports = [ ./backups.nix ];
+
   # ---------------------------------------------------------------------------
   # SOPS Secrets Configuration
   # ---------------------------------------------------------------------------
@@ -65,6 +67,9 @@ in
     owner = "valheim";
     group = "valheim";
   };
+
+  # Worlds (.fwl/.db). The server files in /var/lib/steam-app-* are downloaded again.
+  backups.paths = [ "/var/lib/valheim/save" ];
 
   # ---------------------------------------------------------------------------
   # User & Group Configuration
