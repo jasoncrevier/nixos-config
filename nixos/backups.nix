@@ -68,6 +68,18 @@ let
     runtimeInputs = [ pkgs.systemd ];
     text = ''
       ${cfg.prepareCommands}
+
+      # Only restart what was running. The trap starts them again even if the copy fails.
+      units=(${lib.escapeShellArgs cfg.stopServices})
+      stopped=()
+      for unit in "''${units[@]}"; do
+        if systemctl is-active --quiet "$unit"; then stopped+=("$unit"); fi
+      done
+      if [ ''${#stopped[@]} -gt 0 ]; then
+        trap 'systemctl start "''${stopped[@]}"' EXIT
+        systemctl stop "''${stopped[@]}"
+      fi
+
       ${dumpSqlite}/bin/restic-dump-sqlite ${lib.escapeShellArgs cfg.paths}
     '';
   };
@@ -100,6 +112,13 @@ in
       default = "";
       description = "Run as root before each backup, e.g. to dump a database into a backed-up path.";
     };
+
+    stopServices = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      example = [ "music-assistant" ];
+      description = "Services stopped while SQLite files are copied (for apps that lock their databases exclusively), then started again before the upload.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -115,7 +134,8 @@ in
       createWrapper = true; # restic-b2 command for browsing and restores
 
       paths = cfg.paths ++ [ sqliteDir ];
-      exclude = cfg.exclude;
+      # Also leave out copies of excluded databases (e.g. a cache.db) from the SQLite step
+      exclude = cfg.exclude ++ map (p: sqliteDir + p) (lib.filter (lib.hasPrefix "/") cfg.exclude);
       extraBackupArgs = [ "--exclude-file=${sqliteExcludes}" ];
 
       backupPrepareCommand = "${prepare}/bin/restic-prepare";

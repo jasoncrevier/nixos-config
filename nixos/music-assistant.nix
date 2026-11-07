@@ -19,5 +19,8 @@
 
   # Settings and library. DynamicUser: /var/lib/music-assistant is a symlink into /var/lib/private.
   backups.paths = [ "/var/lib/private/music-assistant" ];
-  backups.exclude = [ "/var/lib/private/music-assistant/cache*" ];
+  # No XDG_CACHE_HOME, so its cache (cache.db, artwork) is in a .cache folder under the data dir
+  backups.exclude = [ "/var/lib/private/music-assistant/**/.cache" ];
+  # Its databases use locking_mode=exclusive, so nothing else can read them while it runs
+  backups.stopServices = [ "music-assistant" ];
 }
