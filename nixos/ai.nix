@@ -36,6 +36,12 @@
   # Chats, users and uploads. Ollama's models can be pulled again, so they're left out.
   # DynamicUser: /var/lib/open-webui is a symlink into /var/lib/private.
   backups.paths = [ "/var/lib/private/open-webui" ];
+  # Downloaded embedding and Whisper models (~2 GB), fetched again when missing
+  backups.exclude = [
+    "/var/lib/private/open-webui/hf_home"
+    "/var/lib/private/open-webui/transformers_home"
+    "/var/lib/private/open-webui/data/cache"
+  ];
 
   # Temp fixes warn on rebuild once they're probably no longer needed,
   # so the matching block (and its warning) can be deleted.
