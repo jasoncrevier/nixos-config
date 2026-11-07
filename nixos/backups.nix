@@ -48,12 +48,17 @@ let
       done
       [ ''${#existing[@]} -gt 0 ] || exit 0
 
-      find "''${existing[@]}" -xdev -type f -size +0 -print0 | while IFS= read -r -d "" f; do
+      while IFS= read -r -d "" f; do
         cmp -s -n 15 <(printf 'SQLite format 3') "$f" || continue
         mkdir -p "${sqliteDir}$(dirname "$f")"
-        sqlite3 "$f" ".backup '${sqliteDir}$f'"
+        # Databases in rollback-journal mode (e.g. Zomboid's, Karakeep's queue) lock out
+        # readers while they write, so wait for the writer instead of failing at once
+        if ! sqlite3 -cmd ".timeout 60000" "$f" ".backup '${sqliteDir}$f'"; then
+          echo "Couldn't copy $f (still locked after 60s?)" >&2
+          exit 1
+        fi
         printf '%s\n%s-wal\n%s-shm\n' "$f" "$f" "$f" >> "${sqliteExcludes}"
-      done
+      done < <(find "''${existing[@]}" -xdev -type f -size +0 -print0)
     '';
   };
 
