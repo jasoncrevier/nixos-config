@@ -46,6 +46,12 @@ in
         "home_dot_BitwigStudio" = {
           path = "/home/jason/.BitwigStudio";
           devices = shareWith;
+          # Each machine rebuilds these itself; syncing them only made conflict copies.
+          # Not synced to tower: add the same two lines to its .stignore by hand
+          ignorePatterns = [
+            "/cache"
+            "/index"
+          ];
         };
         "home_Bitwig_Studio" = {
           path = "/home/jason/Bitwig Studio";
