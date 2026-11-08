@@ -14,6 +14,7 @@
     ../remote-builder.nix
     ../binary-cache.nix
     ../flatpak.nix
+    ../laptop-firewall.nix
     ../intel.nix
     #../musnix.nix
     ../nextcloud-tasks.nix

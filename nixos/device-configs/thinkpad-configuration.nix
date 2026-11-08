@@ -13,6 +13,7 @@
     ../remote-builder.nix
     ../binary-cache.nix
     ../flatpak.nix
+    ../laptop-firewall.nix
     ../gnome.nix
     ../intel.nix
     ../musnix.nix

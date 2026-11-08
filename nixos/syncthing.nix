@@ -29,7 +29,7 @@ in
 {
   services.syncthing = {
     enable = true;
-    openDefaultPorts = true; # TCP/UDP 22000 UDP 21027
+    openDefaultPorts = lib.mkDefault true; # TCP/UDP 22000 UDP 21027
     systemService = true;
     user = "jason";
     group = "users";
