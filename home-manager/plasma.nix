@@ -1,5 +1,17 @@
 { pkgs, ... }:
 
+let
+  # KDE Connect leaves a dead sshfs mount behind when the phone drops off,
+  # and every later mount fails on it until it's unmounted
+  sshfsCleanupScript = pkgs.writeShellScript "sshfs-stale-cleanup" ''
+    ${pkgs.util-linux}/bin/findmnt -rn -t fuse.sshfs -o TARGET | while read -r mnt; do
+      case "$mnt" in /run/user/$UID/*) ;; *) continue ;; esac
+      if ! ${pkgs.coreutils}/bin/stat "$mnt" >/dev/null 2>&1; then
+        /run/wrappers/bin/fusermount3 -uz "$mnt" && echo "Unmounted stale $mnt"
+      fi
+    done
+  '';
+in
 {
   home.packages = with pkgs; [
     (catppuccin-papirus-folders.override {
@@ -43,6 +55,25 @@
       # The trailing space is part of the device name
       kcminputrc."Libinput/13364/53296/Keychron  Keychron Link ".NaturalScroll = true;
     };
+  };
+
+  systemd.user.services.sshfs-stale-cleanup = {
+    Unit.Description = "Unmount dead KDE Connect sshfs mounts";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${sshfsCleanupScript}";
+      # stat can hang on a live mount while the phone is briefly unreachable
+      TimeoutStartSec = "30s";
+    };
+  };
+
+  systemd.user.timers.sshfs-stale-cleanup = {
+    Unit.Description = "Check for dead KDE Connect sshfs mounts every minute";
+    Timer = {
+      OnStartupSec = "1min";
+      OnUnitActiveSec = "1min";
+    };
+    Install.WantedBy = [ "timers.target" ];
   };
 
   stylix.targets.gtk.enable = true;
