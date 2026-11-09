@@ -8,7 +8,7 @@
     desktopManager.gnome = {
       enable = true;
       extraGSettingsOverridePackages = [ pkgs.mutter ];
-      extraGSettingsOverrides = ''
+      extraGSettingsOverrides = lib.optionalString (lib.versionOlder pkgs.mutter.version "51") ''
         [org.gnome.mutter]
         experimental-features=['scale-monitor-framebuffer']
       '';
