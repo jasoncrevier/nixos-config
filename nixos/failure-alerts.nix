@@ -11,8 +11,9 @@
 let
   cfg = config.failureAlerts;
   ntfyTokenFile = config.sops.secrets.ntfy_token.path;
+  # The server URL is a secret too, so this public repo doesn't name the server
+  ntfyUrlFile = config.sops.secrets.ntfy_url.path;
   host = config.networking.hostName;
-  topicUrl = "https://ntfy.nullspace.lol/${cfg.topic}";
 
   # Called by notify-failure@<unit>.service with the failed unit's name; sends its last log lines
   notifyFailure = pkgs.writeShellApplication {
@@ -24,6 +25,7 @@ let
     text = ''
       UNIT="$1"
       TOKEN=$(cat "${ntfyTokenFile}")
+      URL=$(cat "${ntfyUrlFile}")
 
       journalctl --unit "$UNIT" --lines 15 --no-pager --output cat \
         | curl --fail --silent --show-error \
@@ -32,7 +34,7 @@ let
             -H "Tags: rotating_light" \
             -H "Priority: high" \
             --data-binary @- \
-            ${topicUrl}
+            "$URL/${cfg.topic}"
     '';
   };
 
@@ -44,6 +46,7 @@ let
     text = ''
       cat > /dev/null
       TOKEN=$(cat "${ntfyTokenFile}")
+      URL=$(cat "${ntfyUrlFile}")
 
       curl --fail --silent --show-error \
         -H "Authorization: Bearer $TOKEN" \
@@ -51,7 +54,7 @@ let
         -H "Tags: floppy_disk" \
         -H "Priority: high" \
         -d "''${SMARTD_MESSAGE:-smartd reported a problem (no details)}" \
-        ${topicUrl}
+        "$URL/${cfg.topic}"
     '';
   };
 in
@@ -67,12 +70,13 @@ in
     topic = lib.mkOption {
       type = lib.types.str;
       default = "alerts";
-      description = "ntfy topic on ntfy.nullspace.lol; the ntfy_token must be allowed to publish to it.";
+      description = "ntfy topic on the server in the ntfy_url secret; the ntfy_token must be allowed to publish to it.";
     };
   };
 
   config = {
     sops.secrets.ntfy_token = { };
+    sops.secrets.ntfy_url = { };
 
     systemd.services = {
       "notify-failure@" = {

@@ -9,6 +9,7 @@
 
 let
   ntfyTokenFile = config.sops.secrets.ntfy_token.path;
+  ntfyUrlFile = config.sops.secrets.ntfy_url.path;
 
   # A oneshot service that sends one notification, plus the timer that runs it
   mkNtfyNotifier =
@@ -28,6 +29,7 @@ let
         runtimeInputs = [ pkgs.curl ];
         text = ''
           TOKEN=$(cat "${ntfyTokenFile}")
+          URL=$(cat "${ntfyUrlFile}")
 
           curl \
             -H "Tags: ${tag}" \
@@ -35,7 +37,7 @@ let
             -H "Title: ${title}" \
             -H "Click: ${uri}" \
             -d "Tap to open Obsidian." \
-            https://ntfy.nullspace.lol/misc
+            "$URL/misc"
         '';
       };
     in
@@ -60,7 +62,10 @@ let
     };
 in
 lib.mkMerge [
-  { sops.secrets.ntfy_token.owner = "jason"; }
+  {
+    sops.secrets.ntfy_token.owner = "jason";
+    sops.secrets.ntfy_url.owner = "jason";
+  }
 
   (mkNtfyNotifier {
     name = "obsidian-mood-notifier";

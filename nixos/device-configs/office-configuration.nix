@@ -15,6 +15,7 @@
     ../musnix.nix
     ../nextcloud-tasks.nix
     ../plasma.nix
+    ../private-known-hosts.nix
     ../ssh.nix
     ../steam.nix
     ../sunshine.nix

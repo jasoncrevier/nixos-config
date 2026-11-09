@@ -18,6 +18,7 @@
     ../intel.nix
     #../musnix.nix
     ../nextcloud-tasks.nix
+    ../private-known-hosts.nix
     ../gnome.nix
     ../ssh.nix
     ../steam.nix
