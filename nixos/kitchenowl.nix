@@ -18,8 +18,9 @@
   # SQLite database (copied safely by backups.nix) and uploaded images
   backups.paths = [ "/var/lib/kitchenowl" ];
 
+  # The image runs as uid 1000, not root; tmpfiles also re-applies this owner at boot
   systemd.tmpfiles.rules = [
-    "d /var/lib/kitchenowl 0750 root root -"
+    "d /var/lib/kitchenowl 0750 1000 1000 -"
   ];
 
   # Published on grunt's Tailscale IP only. Podman's port publishing bypasses nixos-fw,
