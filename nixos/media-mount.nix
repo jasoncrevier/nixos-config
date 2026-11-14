@@ -1,13 +1,19 @@
 # Mount the NAS media share at /mnt/Media.
 # Import as (import ../media-mount.nix { readOnly = false; }) to allow writes.
+# Guests may only read media on tower, so writing logs in as tower's jason account
+# (tower_smb_credentials in workstation-secrets.yaml: "username=jason" and "password=..." lines).
 
 {
   readOnly ? true,
 }:
 
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
+  sops.secrets.tower_smb_credentials = lib.mkIf (!readOnly) {
+    sopsFile = ../workstation-secrets.yaml;
+  };
+
   fileSystems."/mnt/Media" = {
     device = "//192.168.3.101/media";
     fsType = "cifs";
@@ -17,10 +23,17 @@
       "x-systemd.idle-timeout=60"
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
-      "guest"
       "uid=1000"
       "gid=100"
     ]
-    ++ lib.optional readOnly "ro";
+    ++ (
+      if readOnly then
+        [
+          "guest"
+          "ro"
+        ]
+      else
+        [ "credentials=${config.sops.secrets.tower_smb_credentials.path}" ]
+    );
   };
 }
