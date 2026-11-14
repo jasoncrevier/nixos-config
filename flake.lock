@@ -282,6 +282,19 @@
         "url": "https://codeberg.org/cmooon/kosync"
       }
     },
+    "linux-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794695989,
+        "narHash": "sha256-zn1QyGYie6YbFXoVUR+2ze2Dmzc3M7miD9eb4kob1PU=",
+        "path": "/home/jason/Nextcloud/Audio plugins/Linux",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/jason/Nextcloud/Audio plugins/Linux",
+        "type": "path"
+      }
+    },
     "musnix": {
       "inputs": {
         "nixpkgs": [
@@ -434,6 +447,7 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "kosync": "kosync",
+        "linux-plugins": "linux-plugins",
         "musnix": "musnix",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",

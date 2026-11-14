@@ -32,6 +32,19 @@
   #~Hostname~
   networking.hostName = "office";
 
+  # Nextcloud syncs to the HDD here; mirror it at ~/Nextcloud so paths match the laptops
+  # (the linux-plugins flake input needs it, and Nix won't follow a symlink there)
+  fileSystems."/home/jason/Nextcloud" = {
+    device = "/mnt/Storage_HDD/Nextcloud";
+    fsType = "none";
+    options = [
+      "bind"
+      "nofail"
+      "x-systemd.requires-mounts-for=/mnt/Storage_HDD"
+      "x-gvfs-hide"
+    ];
+  };
+
   # Realtime kernel for audio work. Left off on the laptops, where it tends to
   # break suspend/resume.
   musnix.kernel.realtime = true;
