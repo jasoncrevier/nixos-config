@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
@@ -15,6 +15,19 @@
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "just-perfection-desktop@just-perfection"
       ];
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "element-desktop.desktop"
+        "firefox.desktop"
+        "code.desktop"
+        "heynote.desktop"
+      ];
+      # Empty layout = app grid sorts alphabetically
+      app-picker-layout = with lib.gvariant;
+        mkEmptyArray (type.arrayOf (type.dictionaryEntryOf type.string type.variant));
+    };
+    "org/gnome/desktop/app-folders" = {
+      folder-children = [ ];
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
