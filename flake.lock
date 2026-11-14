@@ -285,8 +285,8 @@
     "linux-plugins": {
       "flake": false,
       "locked": {
-        "lastModified": 1794695989,
-        "narHash": "sha256-zn1QyGYie6YbFXoVUR+2ze2Dmzc3M7miD9eb4kob1PU=",
+        "lastModified": 1794699244,
+        "narHash": "sha256-f1/+wzcljFRnj6MWYS0+qxCSsJGatKpUt1wrgaHIMiA=",
         "path": "/home/jason/Nextcloud/Audio plugins/Linux",
         "type": "path"
       },

@@ -20,8 +20,8 @@ let
     "Common Files/VST3/ShaperBox 3.vst3"
     "Common Files/VST3/Sonic Charge/Bitspeek.vst3"
     "Common Files/VST3/Sonic Charge/Synplant.vst3"
-    "Steinberg/VSTPlugins/Delay Lama.dll"
   ];
+  # No 32-bit plugins (e.g. Delay Lama): nixpkgs' yabridge ships without yabridge-host-32.exe
 
   # The Wine yabridge runs plugins with (pinned in nixpkgs; newer Wine breaks plugin GUIs).
   # wine.nix's newer Wine stays the default `wine` for everything else.
