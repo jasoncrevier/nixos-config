@@ -53,14 +53,32 @@ in
 
   # Re-bridge after every rebuild, so a yabridge update or a plugin installed since
   # the last sync is picked up, and leftovers from uninstalled plugins are removed
+  # Activation runs in the home-manager-jason service, so its output only reaches the journal;
+  # problems also go to the desktop as a notification
   home.activation.yabridgeSync = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    yabridgeNotify() {
+      DBUS_SESSION_BUS_ADDRESS="''${DBUS_SESSION_BUS_ADDRESS:-unix:path=/run/user/$(id -u)/bus}" \
+        run ${pkgs.libnotify}/bin/notify-send --app-name=yabridge --icon=audio-x-generic "$@" \
+        || true
+    }
+
     PATH="${pkgs.yabridge}/bin:${wine}/bin:$PATH" run --quiet \
       ${pkgs.yabridgectl}/bin/yabridgectl sync --prune --no-verify \
-      || warnEcho "yabridgectl sync failed; run 'yabridgectl sync' to see why"
+      || {
+        warnEcho "yabridgectl sync failed; run 'yabridgectl sync' to see why"
+        yabridgeNotify "yabridge sync failed" "Run 'yabridgectl sync' to see why."
+      }
 
+    missing=()
     for plugin in ${lib.escapeShellArgs windowsPlugins}; do
-      [ -e "${programFiles}/$plugin" ] \
-        || warnEcho "Windows plugin not installed: $plugin (install it with wine-plugins)"
+      if [ ! -e "${programFiles}/$plugin" ]; then
+        warnEcho "Windows plugin not installed: $plugin (install it with wine-plugins)"
+        missing+=("$(basename "$plugin" .vst3)")
+      fi
     done
+    if [ ''${#missing[@]} -gt 0 ]; then
+      yabridgeNotify "Windows plugins not installed" \
+        "$(printf '%s\n' "''${missing[@]}")Install them with wine-plugins."
+    fi
   '';
 }
