@@ -2,7 +2,7 @@
 # (Nextcloud "Audio plugins/Linux"). Every .zip there is unpacked and every .vst3 bundle
 # and .clap file inside it, or loose in the folder, is installed and patched.
 # Add or update a plugin: drop its Linux archive (or bare .vst3/.clap) in the folder,
-# then `nix flake update linux-plugins`. Keep files there non-executable: Nextcloud doesn't
+# then `plugins-update` (also copies it to nix-server for the binary cache). Keep files there non-executable: Nextcloud doesn't
 # sync the exec bit, and the lock's hash includes it, so a stray +x breaks other machines.
 # If the build stops on a missing library, add it to buildInputs.
 

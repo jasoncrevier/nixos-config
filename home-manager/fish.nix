@@ -15,6 +15,9 @@
       # if they all build (see binary-cache-server.nix), then switch to it like any other machine.
       # Also runs weekly on its own; watch a manual run with journalctl -fu fleet-update
       upgrade = "sudo systemctl start fleet-update && update";
+      # Workstations only, after changing ~/Nextcloud/Audio plugins/Linux: lock the new files,
+      # and copy them to nix-server, which can't read that folder (see binary-cache-server.nix)
+      plugins-update = "nix flake update linux-plugins --flake ~/nixos-config && nix flake archive --to ssh-ng://nix-server ~/nixos-config";
       flake-repair = "rm -rf ~/.cache/nix && sudo rm -rf /root/.cache/nix && git -C ~/nixos-config add -AN && nix flake update --refresh --flake ~/nixos-config";
     };
   };

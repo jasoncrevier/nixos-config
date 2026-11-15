@@ -38,9 +38,19 @@ let
       git clone --quiet --depth 1 "https://github.com/${repo}.git" "$work/repo"
       cd "$work/repo"
 
+      # The linux-plugins input is a folder in the workstations' Nextcloud, which nix-server
+      # doesn't have: the update leaves it alone, and the plugins-update alias (fish.nix) copies
+      # each locked version into the store here. The GC root keeps it from being collected.
       if $update; then
         echo "Updating flake.lock"
-        nix flake update
+        mapfile -t inputs < <(jq -r '.nodes.root.inputs | keys[]' flake.lock | grep -vx linux-plugins)
+        nix flake update "''${inputs[@]}"
+      fi
+
+      plugins=$(nix-store --print-fixed-path --recursive sha256 \
+        "$(jq -r '.nodes."linux-plugins".locked.narHash' flake.lock)" source)
+      if ! nix-store --add-root "${stateDir}/linux-plugins" --realise "$plugins" > /dev/null; then
+        echo "linux-plugins $plugins isn't in the store: run plugins-update on a workstation"
       fi
 
       hosts=$(nix eval --json .#nixosConfigurations --apply builtins.attrNames | jq -r '.[]')
