@@ -60,6 +60,13 @@ let
 
       hosts=$(nix eval --json .#nixosConfigurations --apply builtins.attrNames | jq -r '.[]')
 
+      # The disk can't hold every host's old and new builds at once, so let the GC take the
+      # old ones as it needs room. If the update fails, the workstations miss the cache
+      # until the nightly build of main puts them back.
+      if $update; then
+        for host in $hosts; do rm -f "${stateDir}/$host"; done
+      fi
+
       failed=()
       for host in $hosts; do
         echo "Building $host"

@@ -96,6 +96,19 @@
     "wyoming-piper-knight"
   ];
 
+  # Jellyfin's metadata (~14 GB of artwork, fetched again on a rescan) lives on the HDD:
+  # the root SSD needs the room for the weekly flake.lock update's builds
+  fileSystems."/var/lib/jellyfin/metadata" = {
+    device = "/mnt/Main_storage/jellyfin-metadata";
+    fsType = "none";
+    options = [
+      "bind"
+      "nofail"
+      "x-systemd.requires-mounts-for=/mnt/Main_storage"
+    ];
+  };
+  systemd.services.jellyfin.unitConfig.RequiresMountsFor = [ "/var/lib/jellyfin/metadata" ];
+
   #~Hostname~
   networking.hostName = "nix-server";
 
