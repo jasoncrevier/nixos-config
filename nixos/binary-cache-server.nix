@@ -4,7 +4,12 @@
 # host builds with it. The clients' side is binary-cache.nix, and update-notifier.nix tells
 # the workstations when a new build for them is ready.
 
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   repo = "jasoncrevier/nixos-config";
@@ -140,12 +145,16 @@ in
     manifestPort
   ];
 
-  # Garbage-collect during builds instead of failing when the disk fills up:
-  # starts below 10 GB free and stops once 30 GB is free
+  # Garbage-collect during builds instead of failing when the disk fills up: starts below
+  # 30 GB free and stops once 60 GB is free. A lock update holds every host's old and new
+  # builds at once and downloads in bursts, which overran the old 10 GB margin.
   nix.settings = {
-    min-free = 10 * 1024 * 1024 * 1024;
-    max-free = 30 * 1024 * 1024 * 1024;
+    min-free = 30 * 1024 * 1024 * 1024;
+    max-free = 60 * 1024 * 1024 * 1024;
   };
+
+  # Each of nix-server's own generations pins a ~35 GB closure; keep fewer than base.nix does
+  programs.nh.clean.extraArgs = lib.mkForce "--keep 3 --keep-since 7d";
 
   # Its out-links in /var/lib/fleet-prebuild are GC roots, so the latest builds survive nh clean
   users.users.fleet-prebuild = {
