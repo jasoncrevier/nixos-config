@@ -11,19 +11,21 @@ nixos-config
 ├── nixos
 │   └── device-configs
 ├── pkgs
+├── screenshots
 └── scripts
 ```
-- `nixos-config`: Includes the main flake for all the NixOS devices in my fleet, my wallpaper, and all the sub-directories below.
+- `nixos-config`: Includes the main flake for all the NixOS devices in my fleet, my wallpaper, the `sops`-encrypted secrets files (`secrets.yaml`, `*-secrets.yaml`), and all the sub-directories below.
 - `home-manager`: Separate config files for `home-manager`, which runs as part of the system build (a single `nixos-rebuild switch` applies both). A main config file for each device imports any of the other config files from the folder that are relevant to that machine.
 - `misc`: The Konsole colour scheme used by `home-manager/plasma.nix`, and `patch-vst.nix`, a shell for patching prebuilt VST plugins.
 - `nixos`: Shared modules, plus a `<host>-configuration.nix` for each device in `device-configs`. Each one imports its `<host>-hardware-configuration.nix` and any of the shared modules that are relevant to that machine. Every machine imports `base.nix` (time zone, user, `git`, Nix settings, and `nh` for rebuilds and weekly cleanup). Desktop machines import `desktop.nix` instead, which pulls in `base.nix` and adds graphics, Bluetooth, Firefox and other desktop applications. `configuration-template.nix` lists the steps for adding a new machine.
-- `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos.
-- `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules.
+- `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos (Amplitude Soundboard, Bitwig Studio 6), `native-plugins.nix` for prebuilt Linux audio plugins kept in Nextcloud, and the patched source for a Catppuccin-themed `tailscale-systray`.
+- `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules, and `tasks-bridge.py`, a helper for reading and changing the locally mirrored Nextcloud tasks, packaged by `home-manager/tasks.nix`.
 
 ## Usage
 These fish aliases (from `home-manager/fish.nix`) work from any directory:
 - `update`: pull main, then rebuild and switch the current machine (downloading from nix-server's cache where it can).
-- `upgrade` (nix-server only): update all flake inputs and build every machine with them, push the new `flake.lock` to main only if they all build, then `update`. This also runs on its own every Sunday at 2:00, and the workstations get a desktop notification when a new build for them is ready.
+- `upgrade` (nix-server only): update the flake inputs (all but the audio plugins, which `plugins-update` handles) and build every machine with them, push the new `flake.lock` to main only if they all build, then `update`. This also runs on its own every Sunday at 2:00, and the workstations get a desktop notification when a new build for them is ready.
+- `plugins-update` (workstations only): run after changing the native audio plugins in `~/Nextcloud/Audio plugins/Linux`. It locks the new files in `flake.lock` and copies them to nix-server, which can't read that folder.
 - `flake-repair`: clear Nix's caches and re-fetch every flake input, for when an update gets stuck on a bad download.
 
 Other useful commands, run from the repo:
@@ -84,8 +86,8 @@ System:
 
 ### Home server (`nix-server`)
 
-Runs Plasma 6 (Wayland) with Sunshine for streaming, plus the always-on services: Jellyfin, Navidrome, Music Assistant, Karakeep, Ollama + Open WebUI, Wyoming (Whisper/Piper), and Valheim and Project Zomboid game servers. It is also the remote builder for the ThinkPad, Surface and Grunt.
+Runs Plasma 6 (Wayland) with Sunshine for streaming, plus the always-on services: Jellyfin, Navidrome, Music Assistant, Karakeep, Ollama + Open WebUI, Wyoming (Whisper/Piper), and Minecraft, Valheim and Project Zomboid game servers. It is also the remote builder for the ThinkPad, Surface and Grunt, and the binary cache for the whole fleet: it builds every machine's system from main each night, so the others download it instead of building.
 
 ### Grunt
 
-A small headless server (old laptop) running Wallabag and kosync.
+A small headless server (old laptop) running Wallabag, KitchenOwl and kosync.
