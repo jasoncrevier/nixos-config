@@ -23,8 +23,13 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  # i915.enable_psr=0 often fixes the 'black screen after suspend' on Intel Thinkpads
-  boot.kernelParams = [ "i915.enable_psr=0" ];
+  boot.kernelParams = [
+    # i915.enable_psr=0 often fixes the 'black screen after suspend' on Intel Thinkpads
+    "i915.enable_psr=0"
+    # Run the Synaptics touchpad over RMI4/SMBus instead of PS/2 (much less laggy).
+    # The kernel doesn't whitelist this T470's pad (LEN006e), so opt in manually.
+    "psmouse.synaptics_intertouch=1"
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c2d900be-9dc8-4f7d-b1ba-25b8dbabac68";
