@@ -2,6 +2,8 @@
 
 {
   boot.kernelParams = [
+    # Full preemption on the stock kernel (its default is lazy), in place of a realtime kernel
+    "preempt=full"
     "processor.max_cstate=1"
     "usbcore.autosuspend=-1"
   ];

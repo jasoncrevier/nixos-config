@@ -45,10 +45,6 @@
     ];
   };
 
-  # Realtime kernel for audio work. Left off on the laptops, where it tends to
-  # break suspend/resume.
-  musnix.kernel.realtime = true;
-
   # Script to ensure monitor layout in sddm matched plasma
   system.activationScripts.sddmCopyDisplayConfig = {
     text = ''
