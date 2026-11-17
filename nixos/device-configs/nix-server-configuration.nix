@@ -2,6 +2,14 @@
 
 { pkgs, ... }:
 
+let
+  # The remote's Menu key is bound to "Toggle Bigscreen Tasks Overview", but the
+  # home screen never handled that shortcut, so the key did nothing
+  plasma-bigscreen = pkgs.kdePackages.plasma-bigscreen.overrideAttrs (old: {
+    patches = (old.patches or [ ]) ++ [ ../../misc/plasma-bigscreen-tasks-shortcut.patch ];
+  });
+in
+
 {
   imports = [
     ./nix-server-hardware-configuration.nix
@@ -55,27 +63,30 @@
 
   # tv autologins into Plasma Bigscreen, the TV-style Plasma shell
   services.displayManager = {
-    sessionPackages = [ pkgs.kdePackages.plasma-bigscreen ];
+    sessionPackages = [ plasma-bigscreen ];
     defaultSession = "plasma-bigscreen-wayland";
   };
-  environment.systemPackages = [ pkgs.kdePackages.plasma-bigscreen ];
+  environment.systemPackages = [ plasma-bigscreen ];
 
   # Bigscreen's input handler (remote, gamepad and CEC navigation) injects keys through
   # /dev/uinput; the package's udev rule gives the logged-in user access to it
   hardware.uinput.enable = true;
-  services.udev.packages = [ pkgs.kdePackages.plasma-bigscreen ];
+  services.udev.packages = [ plasma-bigscreen ];
 
   # AXGear MS-AIR-DM air mouse (its dongle shows up as "XING WEI 2.4G", 1915:1025).
   # Most buttons already match Bigscreen: OK is Enter, Home is Home Page (home screen),
   # Menu is the Menu key (task overview). Fixes for the rest:
   # - Back sends KEY_BACK, which most apps ignore, so make it Esc
-  # - Power and Sleep would shut down or suspend the server, so they do nothing
+  # - Power (System Control 0x10081) would shut down the server, so it becomes
+  #   Launch (1), which tv's session binds to tv-standby (see nix-server-tv-home.nix)
+  # - Sleep would suspend the server, so it does nothing
+  # hwdb is only applied when a device appears: after changing this, replug the
+  # receiver or run `sudo udevadm trigger --subsystem-match=input --action=change`
   services.udev.extraHwdb = ''
     evdev:input:b0003v1915p1025*
      KEYBOARD_KEY_c0224=esc
-     KEYBOARD_KEY_10081=reserved
+     KEYBOARD_KEY_10081=prog1
      KEYBOARD_KEY_10082=reserved
-     KEYBOARD_KEY_c0030=reserved
      KEYBOARD_KEY_c0032=reserved
   '';
   # Belt and braces: logind ignores power/sleep keys from the remote even if it

@@ -1,0 +1,20 @@
+--- a/containments/homescreen/package/contents/ui/main.qml
++++ b/containments/homescreen/package/contents/ui/main.qml
+@@ -88,6 +88,17 @@
+                 searchWindow.showOverlay();
+             }
+         }
++
++        // Upstream registers the Menu-key "Toggle Bigscreen Tasks Overview" shortcut
++        // but nothing handled it; open the overlay on its task view like openTasks()
++        function onToggleTasksOverlay() {
++            if (homeOverlayWindow.visible) {
++                homeOverlayWindow.hideOverlay();
++            } else {
++                homeOverlayWindow.showOverlay();
++                homeOverlayWindow.openTasks();
++            }
++        }
+     }
+ 
+     Connections {
