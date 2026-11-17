@@ -1,6 +1,6 @@
 # Configuration for my home server
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -47,14 +47,42 @@
   # Sunshine streams the TV session, so start it with tv's desktop
   services.sunshine.autoStart = true;
 
-  # Disable Wayland for SDDM. Relogin puts tv straight back into Big Picture after a logout
+  # Disable Wayland for SDDM. Relogin puts tv straight back into Bigscreen after a logout
   services = {
     displayManager.sddm.wayland.enable = false;
     displayManager.sddm.autoLogin.relogin = true;
   };
 
-  # tv autologins into regular Plasma (Bigscreen was too unreliable)
-  services.displayManager.defaultSession = "plasma";
+  # tv autologins into Plasma Bigscreen, the TV-style Plasma shell
+  services.displayManager = {
+    sessionPackages = [ pkgs.kdePackages.plasma-bigscreen ];
+    defaultSession = "plasma-bigscreen-wayland";
+  };
+  environment.systemPackages = [ pkgs.kdePackages.plasma-bigscreen ];
+
+  # Bigscreen's input handler (remote, gamepad and CEC navigation) injects keys through
+  # /dev/uinput; the package's udev rule gives the logged-in user access to it
+  hardware.uinput.enable = true;
+  services.udev.packages = [ pkgs.kdePackages.plasma-bigscreen ];
+
+  # AXGear MS-AIR-DM air mouse (its dongle shows up as "XING WEI 2.4G", 1915:1025).
+  # Most buttons already match Bigscreen: OK is Enter, Home is Home Page (home screen),
+  # Menu is the Menu key (task overview). Fixes for the rest:
+  # - Back sends KEY_BACK, which most apps ignore, so make it Esc
+  # - Power and Sleep would shut down or suspend the server, so they do nothing
+  services.udev.extraHwdb = ''
+    evdev:input:b0003v1915p1025*
+     KEYBOARD_KEY_c0224=esc
+     KEYBOARD_KEY_10081=reserved
+     KEYBOARD_KEY_10082=reserved
+     KEYBOARD_KEY_c0030=reserved
+     KEYBOARD_KEY_c0032=reserved
+  '';
+  # Belt and braces: logind ignores power/sleep keys from the remote even if it
+  # sends them under some other scancode
+  services.udev.extraRules = ''
+    SUBSYSTEM=="input", KERNEL=="event*", ATTRS{idVendor}=="1915", ATTRS{idProduct}=="1025", TAG-="power-switch"
+  '';
 
   # Remote builds for the machines that offload here (see remote-builder.nix). These keys
   # log in as nix-ssh, which can only run nix-daemon: no shell, no forwarding.
