@@ -10,6 +10,7 @@
   imports = [
     ./backups.nix
     ./podman.nix
+    ./tailnet-bind.nix
   ];
 
   # JWT_SECRET_KEY=<random>
@@ -38,10 +39,9 @@
       "--env-file=${config.sops.secrets.kitchenowl_env.path}"
     ];
   };
+  # Waits for tailscale0's address before binding; Restart is the fallback
+  tailnetBind.services = [ "podman-kitchenowl" ];
   systemd.services."podman-kitchenowl" = {
-    # The bind fails until tailscale0 has its address; Restart retries until it does
-    after = [ "tailscaled.service" ];
-    wants = [ "tailscaled.service" ];
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartSec = 10;

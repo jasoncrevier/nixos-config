@@ -11,6 +11,7 @@
   imports = [
     ./backups.nix
     ./podman.nix
+    ./tailnet-bind.nix
   ];
 
   # SOPS Secret Setup
@@ -146,9 +147,10 @@
       "--env-file=${config.sops.secrets.wallabag_env.path}"
     ];
   };
+  # The tailnet bind waits for tailscale0's address (tailnet-bind.nix), the LAN one for
+  # network-online; Restart is the fallback for both
+  tailnetBind.services = [ "podman-wallabag-wallabag" ];
   systemd.services."podman-wallabag-wallabag" = {
-    # The binds fail until enp0s25 and tailscale0 have their addresses;
-    # Restart retries until they do (same as KitchenOwl)
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
       RestartSec = 10;
@@ -156,12 +158,8 @@
     after = [
       "podman-network-wallabag_default.service"
       "network-online.target"
-      "tailscaled.service"
     ];
-    wants = [
-      "network-online.target"
-      "tailscaled.service"
-    ];
+    wants = [ "network-online.target" ];
     requires = [ "podman-network-wallabag_default.service" ];
     partOf = [ "podman-compose-wallabag-root.target" ];
     wantedBy = [ "podman-compose-wallabag-root.target" ];
