@@ -8,10 +8,10 @@
   services.homebox = {
     enable = true;
     settings = {
-      # Homebox has no first-user exception: with registration off, nobody can sign up.
-      # Create your account, then set this to "false" and redeploy. Sian joins after that
-      # with an invite link (Profile → Invite), which works with registration off.
-      HBOX_OPTIONS_ALLOW_REGISTRATION = "true";
+      # Off since Jason's account exists (2026-11-18). Sian and anyone else join with an
+      # invite link (Profile → Invite), which works with registration off. Rebuilding from
+      # an empty /var/lib/homebox needs this "true" again for the first account.
+      HBOX_OPTIONS_ALLOW_REGISTRATION = "false";
       HBOX_WEB_PORT = "7745";
     };
   };
