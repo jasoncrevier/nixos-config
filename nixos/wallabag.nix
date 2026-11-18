@@ -36,9 +36,12 @@
   };
   users.groups.wallabag = { };
 
-  # Host Directory Provisioning
+  # Host Directory Provisioning. MariaDB runs as uid 999 (mysql) in its container and only
+  # takes its data dir back when it starts. Giving it to wallabag here (tmpfiles re-applies
+  # this on every switch) left MariaDB unable to delete tc.log on its next shutdown, and
+  # it then refused to start on the leftover file (2026-11-15 and 2026-11-18).
   systemd.tmpfiles.rules = [
-    "d /var/lib/wallabag/data 0775 wallabag wallabag -"
+    "d /var/lib/wallabag/data 0770 999 999 -"
     "d /var/lib/wallabag/images 0775 wallabag wallabag -"
     "d /var/lib/wallabag/app-data 0775 wallabag wallabag -"
   ];
