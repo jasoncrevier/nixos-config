@@ -68,6 +68,7 @@ in
   home.packages = [
     steam-bigpicture
     pkgs.jellyfin-desktop
+    pkgs.vacuum-tube
   ];
 
   # Shadows the package's own launcher, which opens the mouse-driven desktop UI,
