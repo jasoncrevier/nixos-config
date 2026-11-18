@@ -130,7 +130,7 @@
       "/var/lib/wallabag/images:/var/www/wallabag/web/assets/images:rw"
       "/var/lib/wallabag/app-data:/var/www/wallabag/data:rw"
     ];
-    # LAN for the Pi's tunnel (wallabag.nullvoid.club → grunt:80), tailnet for
+    # LAN for the Pi's tunnel (its public hostname → grunt:80), tailnet for
     # direct use. Not 0.0.0.0, which netavark would forward on every address.
     ports = [
       "192.168.3.27:80:80/tcp"

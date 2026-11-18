@@ -19,6 +19,7 @@ in
     ../binary-cache-server.nix
     ../desktop.nix
     ../failure-alerts.nix
+    ../immich.nix
     ../jellyfin.nix
     ../karakeep.nix
     ../minecraft.nix
