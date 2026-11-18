@@ -27,13 +27,25 @@ let
     else
       "${pkgs.tilix}/bin/tilix -e ${apply}";
 
+  # notify-send --action blocks until the notification is clicked or closed (on Plasma a
+  # notification that moves to the history never counts as closed), so it runs in its own
+  # transient unit. Inside the check it kept the oneshot 'activating' and the timer stopped.
+  prompt = pkgs.writeShellScript "fleet-update-prompt" ''
+    choice=$(${pkgs.libnotify}/bin/notify-send --app-name=NixOS --icon=system-software-update \
+      --action=update="Update now" \
+      "Update ready" "nix-server has a new build for ${host}.") || exit 0
+    if [ "$choice" = update ]; then
+      ${terminal}
+    fi
+  '';
+
   check = pkgs.writeShellApplication {
     name = "fleet-update-check";
     runtimeInputs = [
       pkgs.coreutils
       pkgs.curl
       pkgs.jq
-      pkgs.libnotify
+      pkgs.systemd
     ];
     text = ''
       # nix-server off or Tailscale down: try again next time
@@ -49,12 +61,10 @@ let
       [ "$(cat "$state" 2>/dev/null)" = "$want" ] && exit 0
       echo "$want" > "$state"
 
-      choice=$(notify-send --app-name=NixOS --icon=system-software-update \
-        --action=update="Update now" \
-        "Update ready" "nix-server has a new build for ${host}.") || exit 0
-      if [ "$choice" = update ]; then
-        ${terminal}
-      fi
+      # One unit per build. An older prompt is left alone: it may be running an update
+      # the user started from it, and its button still updates to the current main.
+      systemd-run --user --collect --quiet \
+        --unit="fleet-update-prompt-$(basename "$want" | cut -c1-12)" ${prompt} || true
     '';
   };
 in
