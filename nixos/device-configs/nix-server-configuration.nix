@@ -22,8 +22,6 @@ in
     ../jellyfin.nix
     ../karakeep.nix
     ../minecraft.nix
-    ../music-assistant.nix
-    ../navidrome.nix
     ../nvidia.nix
     ../plasma.nix
     ../project-zomboid.nix
@@ -36,7 +34,6 @@ in
     ../valheim.nix
     ../wyoming.nix
 
-    ../../scripts/navidrome-likes-to-listenbrainz.nix
     ../../scripts/listenbrainz-export.nix
     ../../scripts/pi-config-pull.nix
   ];
@@ -126,9 +123,6 @@ in
     "karakeep-workers"
     "listenbrainz-export"
     "minecraft-server"
-    "music-assistant"
-    "navidrome"
-    "navidrome-listenbrainz-sync"
     "ollama"
     "open-webui"
     "pi-config-pull"

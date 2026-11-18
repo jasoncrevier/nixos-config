@@ -16,6 +16,9 @@
 
   # openFirewall only opens the stream port (8097), not the web UI
   networking.firewall.allowedTCPPorts = [ 8095 ];
+  # Chromecast discovery is mDNS: the speakers' multicast replies arrive on 5353, which conntrack
+  # doesn't match to the query. nix-server had it open via Avahi; grunt doesn't run Avahi.
+  networking.firewall.allowedUDPPorts = [ 5353 ];
 
   # Settings and library. DynamicUser: /var/lib/music-assistant is a symlink into /var/lib/private.
   backups.paths = [ "/var/lib/private/music-assistant" ];

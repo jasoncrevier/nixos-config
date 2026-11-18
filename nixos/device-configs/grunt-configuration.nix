@@ -16,11 +16,14 @@
     ../homebox.nix
     ../kitchenowl.nix
     ../kosync.nix
+    ../music-assistant.nix
+    ../navidrome.nix
     ../sops.nix
     ../ssh.nix
     ../tailscale.nix
     ../wallabag.nix
 
+    ../../scripts/navidrome-likes-to-listenbrainz.nix
     ../../scripts/obsidian-notifications.nix
   ];
 
@@ -46,6 +49,9 @@
   failureAlerts.services = [
     "homebox"
     "kosync"
+    "music-assistant"
+    "navidrome"
+    "navidrome-listenbrainz-sync"
     "podman-kitchenowl"
     "podman-wallabag-db"
     "podman-wallabag-redis"

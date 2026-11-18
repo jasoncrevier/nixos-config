@@ -1,8 +1,8 @@
 # Nightly export of every ListenBrainz listen and loved/hated track into
 # /var/lib/private/listenbrainz-export, which restic → B2 picks up at 03:00.
 # Listens are merged into the existing file rather than replaced, so a wiped or
-# broken ListenBrainz account can't empty the backup. Sits next to the Navidrome
-# sync because it uses the same token; it doesn't need Navidrome itself.
+# broken ListenBrainz account can't empty the backup. Doesn't need Navidrome, so it
+# stayed on nix-server when Navidrome and its stars sync moved to grunt (2026-11-18).
 { config, pkgs, ... }:
 
 let
@@ -128,6 +128,9 @@ in
   imports = [ ../nixos/backups.nix ];
 
   backups.paths = [ "/var/lib/private/listenbrainz-export" ];
+
+  # Read through LoadCredential, so root-owned is fine (on grunt the stars sync owns its copy)
+  sops.secrets.listenbrainz_token = { };
 
   systemd.services.listenbrainz-export = {
     description = "Export ListenBrainz listens and feedback for the restic backup";
