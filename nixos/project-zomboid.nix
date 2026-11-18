@@ -91,6 +91,8 @@
     extraOptions = [
       "--network-alias=steamcmd"
       "--network=project-zomboid_default"
+      # Shutdown takes ~10s; podman's default 10s timeout SIGKILLs it (exit 137 → failure alert)
+      "--stop-timeout=60"
       # Provides ADMIN_PWD, which the image passes to the server as -adminpassword
       "--env-file=${config.sops.secrets.project-zomboid_admin_pwd.path}"
     ];
