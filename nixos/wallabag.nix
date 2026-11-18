@@ -43,10 +43,9 @@
     "d /var/lib/wallabag/app-data 0775 wallabag wallabag -"
   ];
 
-  # Host Firewall Configuration
-  networking.firewall.allowedTCPPorts = [
-    80
-  ];
+  # No allowedTCPPorts entry: podman (netavark) DNATs published ports before
+  # nixos-fw sees them, so it wouldn't gate anything. The bind addresses on the
+  # wallabag container below are what decide who can reach it.
 
   # Containers. Images need the full registry name (docker.io/...): podman can't
   # pull short names like "redis:8.8-alpine". Upgrade MariaDB one minor version
@@ -127,8 +126,11 @@
       "/var/lib/wallabag/images:/var/www/wallabag/web/assets/images:rw"
       "/var/lib/wallabag/app-data:/var/www/wallabag/data:rw"
     ];
+    # LAN for the Pi's tunnel (wallabag.nullvoid.club → grunt:80), tailnet for
+    # direct use. Not 0.0.0.0, which netavark would forward on every address.
     ports = [
-      "80:80/tcp"
+      "192.168.3.27:80:80/tcp"
+      "100.114.139.101:80:80/tcp"
     ];
     dependsOn = [
       "wallabag-db"
@@ -142,10 +144,21 @@
     ];
   };
   systemd.services."podman-wallabag-wallabag" = {
+    # The binds fail until enp0s25 and tailscale0 have their addresses;
+    # Restart retries until they do (same as KitchenOwl)
     serviceConfig = {
       Restart = lib.mkOverride 90 "always";
+      RestartSec = 10;
     };
-    after = [ "podman-network-wallabag_default.service" ];
+    after = [
+      "podman-network-wallabag_default.service"
+      "network-online.target"
+      "tailscaled.service"
+    ];
+    wants = [
+      "network-online.target"
+      "tailscaled.service"
+    ];
     requires = [ "podman-network-wallabag_default.service" ];
     partOf = [ "podman-compose-wallabag-root.target" ];
     wantedBy = [ "podman-compose-wallabag-root.target" ];

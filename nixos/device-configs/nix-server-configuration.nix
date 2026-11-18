@@ -37,6 +37,8 @@ in
     ../wyoming.nix
 
     ../../scripts/navidrome-likes-to-listenbrainz.nix
+    ../../scripts/listenbrainz-export.nix
+    ../../scripts/pi-config-pull.nix
   ];
 
   # The TV logs in as tv, which has no sudo
@@ -122,12 +124,14 @@ in
     "jellyfin"
     "karakeep-web"
     "karakeep-workers"
+    "listenbrainz-export"
     "minecraft-server"
     "music-assistant"
     "navidrome"
     "navidrome-listenbrainz-sync"
     "ollama"
     "open-webui"
+    "pi-config-pull"
     "podman-project-zomboid"
     "steam@"
     "valheim"

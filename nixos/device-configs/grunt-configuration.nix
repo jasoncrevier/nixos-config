@@ -13,6 +13,7 @@
     ../failure-alerts.nix
     ../remote-builder.nix
     ../binary-cache.nix
+    ../homebox.nix
     ../kitchenowl.nix
     ../kosync.nix
     ../sops.nix
@@ -43,6 +44,7 @@
 
   # ntfy alert when any of these fail (see failure-alerts.nix)
   failureAlerts.services = [
+    "homebox"
     "kosync"
     "podman-kitchenowl"
     "podman-wallabag-db"

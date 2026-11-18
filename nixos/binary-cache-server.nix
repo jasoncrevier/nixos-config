@@ -192,6 +192,10 @@ in
     };
   };
 
+  # Catch up after boot if nix-server was off at the scheduled time
+  systemd.timers.fleet-prebuild.timerConfig.Persistent = true;
+  systemd.timers.fleet-update.timerConfig.Persistent = true;
+
   # ntfy alert when a build fails (see failure-alerts.nix)
   failureAlerts.services = [
     "fleet-prebuild"

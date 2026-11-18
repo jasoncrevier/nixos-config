@@ -39,10 +39,7 @@ let
             FROM media_file mf
             JOIN annotation a ON a.item_id = mf.id
             WHERE a.starred = TRUE
-              AND (
-                    (a.starred_at IS NOT NULL AND a.starred_at BETWEEN ? AND ?)
-                    OR a.starred_at IS NULL
-                  )
+              AND a.starred_at BETWEEN ? AND ?
             ORDER BY mf.artist, mf.title
             """
 
