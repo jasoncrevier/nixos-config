@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   # Enable printing and printer discovery
@@ -14,4 +14,9 @@
   };
 
   hardware.sane.enable = true;
+
+  # Claude desktop app (unofficial Linux build)
+  environment.systemPackages = [
+    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 }

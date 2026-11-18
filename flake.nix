@@ -42,6 +42,11 @@
       url = "github:jacobjdowning/battlenet-umu";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Claude desktop app (unofficial Linux build), installed in nixos/workstation.nix
+    claude-desktop = {
+      url = "github:patrickjaja/claude-desktop-extra";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Native plugin archives, kept in Nextcloud on the workstations (see pkgs/native-plugins.nix)
     linux-plugins = {
       url = "path:/home/jason/Nextcloud/Audio%20plugins/Linux";
