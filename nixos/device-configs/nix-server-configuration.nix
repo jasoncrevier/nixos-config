@@ -37,6 +37,7 @@ in
 
     ../../scripts/listenbrainz-export.nix
     ../../scripts/pi-config-pull.nix
+    ../../scripts/bitwarden-backup-reminder.nix
   ];
 
   # The TV logs in as tv, which has no sudo
@@ -127,6 +128,7 @@ in
     "ollama"
     "open-webui"
     "pi-config-pull"
+    "bitwarden-backup-reminder"
     "podman-project-zomboid"
     "steam@"
     "valheim"

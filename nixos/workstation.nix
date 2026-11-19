@@ -1,6 +1,9 @@
 { pkgs, inputs, ... }:
 
 {
+  # bw-backup: password-protected Bitwarden export → tower (run by hand, monthly)
+  imports = [ ./bitwarden-backup.nix ];
+
   # Enable printing and printer discovery
   services.printing = {
     enable = true;
