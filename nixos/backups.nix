@@ -20,7 +20,8 @@
 # hides the file in B2, so a compromised host can't destroy its own repo. The bucket's lifecycle
 # rule "Keep prior versions for 30 days" removes hidden versions after 30 days. That rule is what
 # frees pruned space, and it's also the window for rolling the bucket back to a point before an
-# attack (with a temporary key that has deleteFiles).
+# attack: on a workstation, `restic-b2-rollback <bucket> <time before the attack>` with a
+# temporary key that has deleteFiles (dry run first, then --apply).
 #
 # On the 1st of each month restic-check-b2 also reads back 5% of the repo's data, which
 # the nightly `restic check` doesn't (that one only checks the repo's structure).

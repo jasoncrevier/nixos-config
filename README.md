@@ -19,7 +19,7 @@ nixos-config
 - `misc`: The Konsole colour scheme used by `home-manager/plasma.nix`, and `patch-vst.nix`, a shell for patching prebuilt VST plugins.
 - `nixos`: Shared modules, plus a `<host>-configuration.nix` for each device in `device-configs`. Each one imports its `<host>-hardware-configuration.nix` and any of the shared modules that are relevant to that machine. Every machine imports `base.nix` (time zone, user, `git`, Nix settings, and `nh` for rebuilds and weekly cleanup). Desktop machines import `desktop.nix` instead, which pulls in `base.nix` and adds graphics, Bluetooth, Firefox and other desktop applications. `configuration-template.nix` lists the steps for adding a new machine.
 - `pkgs`: Derivations for packages that aren't available in the `nixpkgs` repos (Amplitude Soundboard, Bitwig Studio 6), `native-plugins.nix` for prebuilt Linux audio plugins kept in Nextcloud, and the patched source for a Catppuccin-themed `tailscale-systray`.
-- `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules, and `tasks-bridge.py`, a helper for reading and changing the locally mirrored Nextcloud tasks, packaged by `home-manager/tasks.nix`.
+- `scripts`: Small systemd services and timers (notifications, Navidrome → ListenBrainz sync) packaged as NixOS modules, `tasks-bridge.py`, a helper for reading and changing the locally mirrored Nextcloud tasks, packaged by `home-manager/tasks.nix`, and `restic-b2-rollback.py`, which puts a backup bucket on B2 back to how it was at a given time (after an attack), packaged by `home-manager/misc.nix`.
 
 ## Usage
 These fish aliases (from `home-manager/fish.nix`) work from any directory:

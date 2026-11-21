@@ -1,7 +1,15 @@
 { pkgs, ... }:
 
+let
+  # Puts a backup host's B2 bucket back to how it was before an attack (see nixos/backups.nix)
+  restic-b2-rollback = pkgs.writers.writePython3Bin "restic-b2-rollback" {
+    libraries = [ pkgs.python3Packages.boto3 ];
+    flakeIgnore = [ "E501" ];
+  } (builtins.readFile ../scripts/restic-b2-rollback.py);
+in
 {
   home.packages = with pkgs; [
+    restic-b2-rollback
     bitwarden-desktop
     chromium
     (pkgs.feishin.overrideAttrs (oldAttrs: {
