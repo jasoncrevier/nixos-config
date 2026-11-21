@@ -7,6 +7,15 @@
 #   restic_password    the repo password (also keep it in Bitwarden)
 #   restic_b2_env      AWS_ACCESS_KEY_ID=<keyID> and AWS_SECRET_ACCESS_KEY=<applicationKey>,
 #                      from a B2 application key limited to that one bucket
+#   restic_heartbeat_url  only with backups.heartbeat: the Uptime Kuma push URL
+#                      (https://<kuma>/api/push/<token>?status=up&msg=OK)
+#
+# Failed runs alert through failure-alerts.nix. A run that never happens (timer gone, box
+# off) can't alert itself, so with backups.heartbeat each fully successful run (backup,
+# prune, check) pings a Kuma push monitor, and Kuma alerts when the pings stop.
+#
+# On the 1st of each month restic-check-b2 also reads back 5% of the repo's data, which
+# the nightly `restic check` doesn't (that one only checks the repo's structure).
 #
 # SQLite databases under the paths are copied with `sqlite3 .backup` first, so the snapshot
 # never holds a half-written database: the copy is under /var/lib/restic-sqlite/<original path>
@@ -83,6 +92,19 @@ let
       ${dumpSqlite}/bin/restic-dump-sqlite ${lib.escapeShellArgs cfg.paths}
     '';
   };
+
+  # The URL goes to curl on stdin, so the push token never shows up in the process list
+  heartbeat = pkgs.writeShellApplication {
+    name = "restic-heartbeat";
+    runtimeInputs = [ pkgs.curl ];
+    text = ''
+      url=$(cat "${config.sops.secrets.restic_heartbeat_url.path}")
+      printf 'url = "%s"\n' "$url" \
+        | curl --fail --silent --show-error --retry 3 --max-time 30 --output /dev/null --config -
+    '';
+  };
+
+  restic = config.services.restic.backups.b2;
 in
 {
   imports = [ ./failure-alerts.nix ];
@@ -119,12 +141,23 @@ in
       example = [ "music-assistant" ];
       description = "Services stopped while SQLite files are copied (for apps that lock their databases exclusively), then started again before the upload.";
     };
+
+    heartbeat = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Ping the Uptime Kuma push URL in restic_heartbeat_url (in sopsFile) after each successful run, so Kuma notices runs that stop happening.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets = lib.genAttrs [ "restic_repository" "restic_password" "restic_b2_env" ] (_: {
-      inherit (cfg) sopsFile;
-    });
+    sops.secrets = lib.genAttrs (
+      [
+        "restic_repository"
+        "restic_password"
+        "restic_b2_env"
+      ]
+      ++ lib.optional cfg.heartbeat "restic_heartbeat_url"
+    ) (_: { inherit (cfg) sopsFile; });
 
     services.restic.backups.b2 = {
       initialize = true;
@@ -156,6 +189,47 @@ in
       runCheck = true;
     };
 
-    failureAlerts.services = [ "restic-backups-b2" ];
+    # Runs only when every ExecStart step succeeded. The leading "-" keeps a Kuma outage
+    # from marking the backup itself as failed.
+    systemd.services.restic-backups-b2.serviceConfig.ExecStartPost = lib.mkIf cfg.heartbeat [
+      "-${heartbeat}/bin/restic-heartbeat"
+    ];
+
+    # Monthly read-back of 5% of the pack files, picked at random, so over time a damaged
+    # upload or a bucket problem shows up before a restore needs it
+    systemd.services.restic-check-b2 = {
+      description = "Read back a sample of the restic repo's data";
+      wants = [ "network-online.target" ];
+      after = [ "network-online.target" ];
+      environment = {
+        RESTIC_REPOSITORY_FILE = restic.repositoryFile;
+        RESTIC_PASSWORD_FILE = restic.passwordFile;
+        RESTIC_CACHE_DIR = "/var/cache/restic-backups-b2";
+      };
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${lib.getExe restic.package} check --read-data-subset=5%";
+        EnvironmentFile = restic.environmentFile;
+        CacheDirectory = "restic-backups-b2";
+        CacheDirectoryMode = "0700";
+        PrivateTmp = true;
+        Nice = 10;
+        IOSchedulingClass = "idle";
+      };
+    };
+    # Midday on the 1st: clear of the 03:00 backup and nix-server's 04:00 fleet-prebuild
+    systemd.timers.restic-check-b2 = {
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "*-*-01 13:00";
+        RandomizedDelaySec = "30m";
+        Persistent = true;
+      };
+    };
+
+    failureAlerts.services = [
+      "restic-backups-b2"
+      "restic-check-b2"
+    ];
   };
 }

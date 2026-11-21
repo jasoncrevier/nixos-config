@@ -116,6 +116,7 @@ in
   backups = {
     enable = true;
     sopsFile = ../../server-secrets.yaml;
+    heartbeat = true; # needs restic_heartbeat_url in the sops file
   };
 
   # ntfy alert when any of these fail (see failure-alerts.nix)

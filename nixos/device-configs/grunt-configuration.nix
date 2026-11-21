@@ -43,6 +43,7 @@
   backups = {
     enable = true;
     sopsFile = ../../grunt-secrets.yaml;
+    heartbeat = true; # needs restic_heartbeat_url in the sops file
   };
 
   # ntfy alert when any of these fail (see failure-alerts.nix)
