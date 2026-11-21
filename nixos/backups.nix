@@ -6,13 +6,21 @@
 #   restic_repository  s3:https://s3.<region>.backblazeb2.com/<bucket>
 #   restic_password    the repo password (also keep it in Bitwarden)
 #   restic_b2_env      AWS_ACCESS_KEY_ID=<keyID> and AWS_SECRET_ACCESS_KEY=<applicationKey>,
-#                      from a B2 application key limited to that one bucket
+#                      from a B2 application key limited to that one bucket and WITHOUT
+#                      deleteFiles (listBuckets,listFiles,readFiles,writeFiles; the web console
+#                      can't make one, use `b2 key create`)
 #   restic_heartbeat_url  only with backups.heartbeat: the Uptime Kuma push URL
 #                      (https://<kuma>/api/push/<token>?status=up&msg=OK)
 #
 # Failed runs alert through failure-alerts.nix. A run that never happens (timer gone, box
 # off) can't alert itself, so with backups.heartbeat each fully successful run (backup,
 # prune, check) pings a Kuma push monitor, and Kuma alerts when the pings stop.
+#
+# Ransomware: without deleteFiles, every delete restic makes (lock removal, forget, prune) only
+# hides the file in B2, so a compromised host can't destroy its own repo. The bucket's lifecycle
+# rule "Keep prior versions for 30 days" removes hidden versions after 30 days. That rule is what
+# frees pruned space, and it's also the window for rolling the bucket back to a point before an
+# attack (with a temporary key that has deleteFiles).
 #
 # On the 1st of each month restic-check-b2 also reads back 5% of the repo's data, which
 # the nightly `restic check` doesn't (that one only checks the repo's structure).
