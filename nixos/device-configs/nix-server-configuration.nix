@@ -16,6 +16,7 @@ in
     (import ../media-mount.nix { })
 
     ../ai.nix
+    ../backup-watch.nix
     ../binary-cache-server.nix
     ../desktop.nix
     ../failure-alerts.nix
