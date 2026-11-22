@@ -6,17 +6,27 @@
 #                  and Klipper's printer.cfg, its dated copies and Moonraker's database
 #   orangepizero3  ~/cloudflared (compose.yml and the tunnel tokens in .env), and Nginx
 #                  Proxy Manager's /data (minus logs) and /etc/letsencrypt
+#   orangepihole   a Pi-hole v6 Teleporter archive (pihole.toml with the local DNS records,
+#                  gravity.db with lists, groups and clients); not the query log
 #
 # Each Pi's ~/.ssh/authorized_keys pins the key (pi_config_pull_key in server-secrets.yaml)
-# to a fixed read-only tar command, and only from nix-server's tailnet address:
+# to a fixed read-only command, and only from nix-server's tailnet address:
 #
 # octoprint:
 #   from="100.123.35.99",restrict,command="tar -czf - -C /home/jason --exclude=.octoprint/uploads --exclude=.octoprint/timelapse --exclude=.octoprint/logs --exclude=.octoprint/generated .octoprint printer_data/config printer_data/database; test $? -le 1" ssh-ed25519 AAAA… nix-server-pi-config-pull
 # orangepizero3 (the word after the host picks the archive):
 #   from="100.123.35.99",restrict,command="case \"$SSH_ORIGINAL_COMMAND\" in npm) docker exec nginx_proxy_manager tar -czf - -C / --exclude=data/logs data etc/letsencrypt;; *) tar -czf - -C /home/jason cloudflared;; esac; test $? -le 1" ssh-ed25519 AAAA… nix-server-pi-config-pull
+# orangepihole (Pi-hole's files are pihole:pihole 0640, so it goes through sudo; the sudoers
+# rule allows this one script with no arguments, and the script never passes a file to
+# `pihole-FTL --teleporter`, which would import it):
+#   from="100.123.35.99",restrict,command="sudo -n /usr/local/sbin/pihole-teleporter-export" ssh-ed25519 AAAA… nix-server-pi-config-pull
+#   /etc/sudoers.d/pihole-teleporter: jason ALL=(root) NOPASSWD: /usr/local/sbin/pihole-teleporter-export ""
+#   /usr/local/sbin/pihole-teleporter-export: makes the archive in a temp dir, tar.gz's it to stdout
 #
 # `test $? -le 1`: tar exits 1 when a file changes while it reads it (OctoPrint's and NPM's
-# live files), and the archive is still whole. To restore, copy files back from the snapshot.
+# live files), and the archive is still whole. To restore, copy files back from the snapshot;
+# for Pi-hole, import the .zip in its web UI (Settings → Teleporter) or with
+# `sudo pihole-FTL --teleporter <file>`.
 
 {
   config,
@@ -31,12 +41,14 @@ let
     "octoprint 100.68.145.116 config"
     "orangepizero3 100.83.188.65 cloudflared"
     "orangepizero3 100.83.188.65 npm"
+    "orangepihole 100.119.8.122 teleporter"
   ];
 
   # Pinned rather than learned on first connect; the same keys office has in known_hosts
   knownHosts = pkgs.writeText "pi-config-pull-known-hosts" ''
     100.68.145.116 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINBcaZJa/CAi11xqKi6M85TMhdu/Jl4JagFTptmOZ+ia
     100.83.188.65 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBJSe/vALK6bIx8YG0VzPASIqdznaArNiA431Zat8LJ
+    100.119.8.122 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDky/BUk9YiQWPjnIgN+RTIKDMCmofoarKMlKj4pQnP/
   '';
 
   pullScript = pkgs.writeShellApplication {
