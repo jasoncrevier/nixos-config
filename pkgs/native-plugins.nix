@@ -33,26 +33,39 @@
   libxext,
   libxkbcommon,
   libxrandr,
-  fetchzip,
+  fetchurl,
   openssl,
   pango,
   wayland,
 }:
 
 let
-  # PitchNet links against this exact release (versioned symbols), so nixpkgs' onnxruntime won't do
+  # PitchNet links against this exact release (versioned symbols), so nixpkgs' onnxruntime won't do.
+  # From NuGet: github.com/microsoft/onnxruntime went 404 on 2026-11-22, taking its release
+  # tarballs with it. The NuGet package's library is the same build (identical code and symbols).
   onnxruntime-1_19 = stdenv.mkDerivation rec {
     pname = "onnxruntime-bin";
     version = "1.19.2";
-    src = fetchzip {
-      url = "https://github.com/microsoft/onnxruntime/releases/download/v${version}/onnxruntime-linux-x64-${version}.tgz";
-      hash = "sha256-tnOg0KwlPBQl2r/Dli+MwhHB/88e4a/Ird2nidIGwEg=";
+    src = fetchurl {
+      url = "https://api.nuget.org/v3-flatcontainer/microsoft.ml.onnxruntime/${version}/microsoft.ml.onnxruntime.${version}.nupkg";
+      hash = "sha256-+hM8j+YjhEWg3T6ER7qlx9FvQYyqjldsfiU7p3snths=";
     };
-    nativeBuildInputs = [ autoPatchelfHook ];
+    nativeBuildInputs = [
+      autoPatchelfHook
+      unzip
+    ];
     buildInputs = [ stdenv.cc.cc.lib ];
+    unpackPhase = ''
+      unzip -q "$src" 'runtimes/linux-x64/native/*'
+    '';
+    # Same layout as the old GitHub tarball: the real file, plus the soname and dev links
     installPhase = ''
       mkdir -p "$out/lib"
-      cp -P lib/*.so* "$out/lib/"
+      cd runtimes/linux-x64/native
+      cp libonnxruntime.so "$out/lib/libonnxruntime.so.${version}"
+      ln -s "libonnxruntime.so.${version}" "$out/lib/libonnxruntime.so.1"
+      ln -s "libonnxruntime.so.1" "$out/lib/libonnxruntime.so"
+      cp libonnxruntime_providers_shared.so "$out/lib/"
     '';
   };
 in
