@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, options, ... }:
 
 {
   catppuccin = {
@@ -13,13 +13,22 @@
   # Silence Hyprland config warning (triggered by catppuccin module evaluation)
   wayland.windowManager.hyprland.configType = "hyprlang";
 
-  stylix.targets.vscode.enable = false;
+  stylix.targets = lib.mkMerge [
+    {
+      vscode.enable = false;
 
-  # Stylix only auto-enables its Qt target when Home Manager runs as a NixOS module.
-  # It would pick a different Qt style than catppuccin's Kvantum theme and trip
-  # catppuccin's assertion, so leave Qt to catppuccin/the desktop as before.
-  stylix.targets.qt.enable = false;
+      # Stylix only auto-enables its Qt target when Home Manager runs as a NixOS module.
+      # It would pick a different Qt style than catppuccin's Kvantum theme and trip
+      # catppuccin's assertion, so leave Qt to catppuccin/the desktop as before.
+      qt.enable = false;
 
-  # Rofi isn't used, and Stylix's rofi target still sets the renamed programs.rofi.font
-  stylix.targets.rofi.enable = false;
+      # Rofi isn't used, and Stylix's rofi target still sets the renamed programs.rofi.font
+      rofi.enable = false;
+    }
+
+    # Home Manager removed programs.wayprompt (nixpkgs dropped the package), but Stylix's
+    # wayprompt target still sets it, which fails an assertion (nix-community/stylix#2556).
+    # Guarded so this keeps evaluating once Stylix removes the target too.
+    (lib.optionalAttrs (options.stylix.targets ? wayprompt) { wayprompt.enable = false; })
+  ];
 }
