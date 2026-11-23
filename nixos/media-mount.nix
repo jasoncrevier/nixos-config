@@ -36,4 +36,16 @@
         [ "credentials=${config.sops.secrets.tower_smb_credentials.path}" ]
     );
   };
+
+  # While tower reboots, a burst of accesses (Jellyfin retrying playback) fails the mount 5 times
+  # in 10 s; systemd's default start limit then fails the automount for good, and /mnt/Media stays
+  # an empty folder until someone runs `systemctl reset-failed`. Without the limit, each access
+  # just tries again (failing within the 5 s timeout) until tower's share is back.
+  systemd.units."mnt-Media.mount" = {
+    overrideStrategy = "asDropin";
+    text = ''
+      [Unit]
+      StartLimitIntervalSec=0
+    '';
+  };
 }

@@ -60,9 +60,52 @@ in
   # Its PrivateMounts would hide a mount that appears after it starts, so wait for the share
   systemd.services.immich-server.unitConfig.RequiresMountsFor = [ mediaLocation ];
 
+  # When tower reboots, the share comes back but nix-server's handles into it don't: tower exports
+  # a FUSE path (/mnt/user), whose file handles don't survive its reboot, so every access fails
+  # with "Stale file handle" until the share is remounted. Mount options can't prevent that, so
+  # check every few minutes and remount (and restart Immich, which holds the old mount) when stale.
+  # A share that's just unreachable (tower off) hangs instead of erroring, and is left alone.
+  systemd.services.immich-nfs-watchdog = {
+    description = "Remount tower's Immich share when its NFS handle has gone stale";
+    path = [
+      pkgs.coreutils
+      pkgs.util-linux
+      pkgs.systemd
+    ];
+    script = ''
+      if err=$(timeout -s KILL 10 stat -t ${mediaLocation} 2>&1 >/dev/null); then
+        exit 0
+      fi
+      case "$err" in
+        *"Stale file handle"*) ;;
+        *) exit 0 ;; # unreachable or slow: the hard mount recovers by itself
+      esac
+
+      echo "${mediaLocation} is stale (tower rebooted?), remounting"
+      umount -l ${mediaLocation}
+      systemctl restart mnt-immich.mount
+      stat -t ${mediaLocation} >/dev/null
+      systemctl restart immich-server immich-machine-learning
+      echo "Remounted ${mediaLocation} and restarted Immich"
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      TimeoutStartSec = "3min";
+    };
+  };
+
+  systemd.timers.immich-nfs-watchdog = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5min";
+      OnUnitActiveSec = "3min";
+    };
+  };
+
   failureAlerts.services = [
     "immich-server"
     "immich-machine-learning"
+    "immich-nfs-watchdog" # a remount that didn't fix it
   ];
 
   # Database dump for nix-server's restic run (Immich also writes its own nightly dumps into
