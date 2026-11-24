@@ -17,9 +17,18 @@
     restartUnits = [ "minecraft-server.service" ];
   };
 
+  # The server list's MOTD, kept in sops so this public repo doesn't name the domain
+  sops.secrets.minecraft_motd = {
+    owner = "minecraft";
+    restartUnits = [ "minecraft-server.service" ];
+  };
+
   # Runs after the module's preStart, which links whitelist.json to an empty store file
+  # and copies server.properties from the store (with the placeholder MOTD below)
   systemd.services.minecraft-server.preStart = lib.mkAfter ''
     ln -sf ${config.sops.secrets.minecraft_whitelist.path} whitelist.json
+    motd=$(cat ${config.sops.secrets.minecraft_motd.path})
+    sed -i "s|^motd=.*|motd=$motd|" server.properties
   '';
 
   services.minecraft-server = {
@@ -35,7 +44,7 @@
     declarative = true;
     serverProperties = {
       server-port = 25565;
-      motd = "nullvoid.club";
+      motd = "set from the minecraft_motd secret";
       difficulty = "normal";
       gamemode = "survival";
       max-players = 10;

@@ -27,7 +27,6 @@ in
     accounts.nextcloud = {
       remote = {
         type = "caldav";
-        url = "https://nextcloud.nullvoid.club/remote.php/dav";
         userName = "jason";
         passwordCommand = [
           "cat"
@@ -42,6 +41,11 @@ in
 
       vdirsyncer = {
         enable = true;
+        # Read at sync time from the nextcloud_caldav_url secret (nixos/nextcloud-tasks.nix)
+        urlCommand = [
+          "cat"
+          osConfig.sops.secrets.nextcloud_caldav_url.path
+        ];
         # Every list on the server, including ones added later in Tasks.org
         collections = [
           "from a"
