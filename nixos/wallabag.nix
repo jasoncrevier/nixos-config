@@ -130,15 +130,14 @@
       "/var/lib/wallabag/images:/var/www/wallabag/web/assets/images:rw"
       "/var/lib/wallabag/app-data:/var/www/wallabag/data:rw"
     ];
-    # LAN for the Pi's tunnel (its public hostname → grunt), tailnet for direct use.
-    # Not 0.0.0.0, which netavark would forward on every address.
-    # Moving to 8081 so Nginx Proxy Manager can have port 80 (2026-11-24). Port 80 stays
-    # until the tunnel's wallabag route points at grunt:8081; then drop the two :80 lines.
+    # LAN for the Pi's tunnel (its public hostname → grunt:8081), tailnet for direct use.
+    # Not 0.0.0.0, which netavark would forward on every address. Not port 80 either:
+    # podman holds a socket on each published address, and one on <ip>:80 stops Nginx
+    # Proxy Manager (nginx-proxy-manager.nix) binding 0.0.0.0:80, which then takes down
+    # all of its nginx, 443 included (2026-11-24).
     ports = [
       "192.168.3.27:8081:80/tcp"
       "100.114.139.101:8081:80/tcp"
-      "192.168.3.27:80:80/tcp"
-      "100.114.139.101:80:80/tcp"
     ];
     dependsOn = [
       "wallabag-db"
