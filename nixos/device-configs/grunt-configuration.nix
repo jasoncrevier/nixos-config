@@ -18,6 +18,7 @@
     ../kosync.nix
     ../music-assistant.nix
     ../navidrome.nix
+    ../nginx-proxy-manager.nix
     ../sops.nix
     ../ssh.nix
     ../tailscale.nix
@@ -53,6 +54,7 @@
     "music-assistant"
     "navidrome"
     "navidrome-listenbrainz-sync"
+    "podman-nginx-proxy-manager"
     "podman-kitchenowl"
     "podman-wallabag-db"
     "podman-wallabag-redis"

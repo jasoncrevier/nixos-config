@@ -130,9 +130,13 @@
       "/var/lib/wallabag/images:/var/www/wallabag/web/assets/images:rw"
       "/var/lib/wallabag/app-data:/var/www/wallabag/data:rw"
     ];
-    # LAN for the Pi's tunnel (its public hostname → grunt:80), tailnet for
-    # direct use. Not 0.0.0.0, which netavark would forward on every address.
+    # LAN for the Pi's tunnel (its public hostname → grunt), tailnet for direct use.
+    # Not 0.0.0.0, which netavark would forward on every address.
+    # Moving to 8081 so Nginx Proxy Manager can have port 80 (2026-11-24). Port 80 stays
+    # until the tunnel's wallabag route points at grunt:8081; then drop the two :80 lines.
     ports = [
+      "192.168.3.27:8081:80/tcp"
+      "100.114.139.101:8081:80/tcp"
       "192.168.3.27:80:80/tcp"
       "100.114.139.101:80:80/tcp"
     ];
