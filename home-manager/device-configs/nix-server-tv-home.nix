@@ -1,6 +1,11 @@
 # The unprivileged user nix-server logs into on the TV (see nix-server-configuration.nix).
 
-{ pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   steam-bigpicture = pkgs.makeDesktopItem {
@@ -58,6 +63,7 @@ in
 
 {
   imports = [
+    inputs.battlenet-umu.homeModules.default
     ../games.nix
     ../plasma.nix
     ../theme.nix
@@ -70,6 +76,30 @@ in
     pkgs.jellyfin-desktop
     pkgs.vacuum-tube
   ];
+
+  # Battle.net through umu-launcher + Proton-GE, as on office. The prefix is on the
+  # games HDD: WoW Forever alone is ~49 GB. Each game gets a tile in Bigscreen's Games row.
+  programs.battlenet-umu = {
+    enable = true;
+    prefix = "/mnt/Games_HDD/battlenet-umu/prefix";
+    # Setting games replaces the default list, so Battle.net itself stays in it
+    games = [
+      { name = "Battle.net"; }
+      {
+        name = "WoW Forever";
+        path = "Program Files (x86)/World of Warcraft/_forever_/Wow.exe";
+      }
+    ];
+  };
+
+  # The flake's desktop entry has no icon; reuse the one Proton extracts into the prefix
+  xdg.desktopEntries.battle-net-umu = {
+    name = "Battle.net";
+    exec = "battle-net-umu";
+    icon = "${config.programs.battlenet-umu.prefix}/drive_c/proton_shortcuts/icons/256x256/apps/1AC2_Battle.net Launcher.0.png";
+    categories = [ "Game" ];
+    settings.StartupWMClass = "battle.net.exe";
+  };
 
   # Shadows the package's own launcher, which opens the mouse-driven desktop UI,
   # so the one Jellyfin tile opens the remote-friendly TV UI full screen.
