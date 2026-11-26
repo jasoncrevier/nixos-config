@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     gnome-tweaks
     gnomeExtensions.just-perfection
+    gnomeExtensions.nothing-to-say
     gnomeExtensions.pop-shell
     gnomeExtensions.user-themes
   ];
@@ -14,6 +15,7 @@
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "just-perfection-desktop@just-perfection"
+        "nothing-to-say@extensions.gnome.wouter.bolsterl.ee"
       ];
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
@@ -47,6 +49,18 @@
       name = "terminal";
       command = "tilix";
       binding = "<Control><Alt>t";
+    };
+    # Mic: Meta+Mute toggles (built in), Meta+` is push-to-talk (Nothing to say)
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      mic-mute = [ "<Super>XF86AudioMute" ];
+    };
+    "org/gnome/shell/extensions/nothing-to-say" = {
+      keybinding-toggle-mute = [ "<Super>grave" ];
+      keybinding-mode = "push-to-talk";
+    };
+    # Default also has <Super>Above_Tab, which would swallow Meta+`
+    "org/gnome/desktop/wm/keybindings" = {
+      switch-group = [ "<Alt>Above_Tab" ];
     };
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui = "<Shift><Super>s";
