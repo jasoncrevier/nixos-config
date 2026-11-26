@@ -32,8 +32,11 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [
-    10200
-    10300
+  # Tailnet only: Home Assistant is on the tailnet (100.70.144.121), so its Wyoming
+  # integrations use nix-server's Tailscale IP, 100.123.35.99. A native service, so
+  # nixos-fw gates it even though it listens on 0.0.0.0.
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+    10200 # piper
+    10300 # faster-whisper
   ];
 }
