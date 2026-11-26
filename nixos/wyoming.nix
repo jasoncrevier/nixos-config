@@ -16,7 +16,9 @@
     servers.knight = {
       enable = true;
       # see https://github.com/rhasspy/rhasspy3/blob/master/programs/asr/faster-whisper/script/download.py
-      model = "base-int8";
+      # small-int8 instead of base-int8: noticeably fewer misheard commands, still fast on
+      # the GPU (well under 1 GB of VRAM next to Ollama). medium-int8 if it still mishears.
+      model = "small-int8";
       language = "en";
       uri = "tcp://0.0.0.0:10300";
       device = "cuda";
